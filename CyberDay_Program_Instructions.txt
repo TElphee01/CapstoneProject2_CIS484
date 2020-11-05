@@ -1,0 +1,12 @@
+The GitHubbies:
+Tanner Elpheem, Max Vaughn, Anu Rawat, XiYang, Hunter
+
+
+Please start your public facing page: CyberDay_Home.aspx
+
+Try logging as:
+OraB@edu.com
+1111
+
+EventCode: efgh
+ClassCode: 1234
