@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [CyberDayDB]    Script Date: 10/28/2020 12:05:00 PM ******/
+/****** Object:  Database [CyberDayDB]    Script Date: 10/25/2020 12:51:00 AM ******/
 CREATE DATABASE [CyberDayDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
