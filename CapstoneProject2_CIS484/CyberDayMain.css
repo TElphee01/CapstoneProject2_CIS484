@@ -1,10 +1,9 @@
 ﻿/*Githubbies CyberDay main Style Sheet*/
 .background1 {
-    background: -webkit-gradient(linear, left bottom, right top, from(#4800ff), to(#a18cd1));
-    background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-    background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-    background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-    background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);
+    /* To change the CyberDay background theme, please adjust these settings for all browsers.
+           Very nice gradient backgrounds can be made at www. cssgradient.io/      */
+    background: rgb(195,203,246);
+    background: radial-gradient(circle, rgba(195,203,246,1) 0%, rgba(66,0,175,1) 100%);
 }
 
 .font-robo {
