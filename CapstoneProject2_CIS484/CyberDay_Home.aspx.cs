@@ -90,7 +90,7 @@ namespace CapstoneProject2_CIS484
             String sqlQuery = "Select * from ContactRequest";
 
             //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             //create new sqlconnection and connection to database by using connection string from web.config file
             SqlConnection con = new SqlConnection(strcon);
             con.Open();
@@ -157,7 +157,7 @@ namespace CapstoneProject2_CIS484
             //MessageBox.Show(code);
             //Inserting teacher query
             //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             //Inserting teacher query
 
             //Get connection string from web.config file
@@ -324,7 +324,7 @@ namespace CapstoneProject2_CIS484
             contactCode = code;
             instructorCode = code;
             clusterCode = code;
-            SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+            SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
             dbConnection.Open();
             try
             {
@@ -351,7 +351,7 @@ namespace CapstoneProject2_CIS484
                             string qry1 = "Select * from Instructor where InstructorCode ='" + code + "'";
                             string qry2 = "Select * from Cluster where InstructorCode ='" + code + "'";
                             string qry3 = "Select * from Event inner join EventContact on EventContact.EventID = Event.EventID inner join Instructor on Instructor.ContactCode = EventContact.ContactCode where InstructorCode ='" + code + "'";
-                            SqlConnection aa = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection aa = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             aa.Open();
                             SqlCommand instCom = new SqlCommand(qry1, aa);
                             SqlDataReader instReader = instCom.ExecuteReader();
@@ -359,7 +359,7 @@ namespace CapstoneProject2_CIS484
                             {
                                 lblInstructorName.Text = (HttpUtility.HtmlEncode(instReader[1].ToString()));
                             }
-                            SqlConnection bb = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection bb = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             bb.Open();
                             SqlCommand ClusterCom = new SqlCommand(qry2, bb);
                             SqlDataReader ClusterReader = ClusterCom.ExecuteReader();
@@ -367,7 +367,7 @@ namespace CapstoneProject2_CIS484
                             {
                                 lblInstructorClusterAccessCode.Text = (HttpUtility.HtmlEncode(ClusterReader[0].ToString()));
                             }
-                            SqlConnection cc = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection cc = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             cc.Open();
                             SqlCommand EventCom = new SqlCommand(qry3, cc);
                             SqlDataReader EventReader = EventCom.ExecuteReader();
@@ -388,7 +388,7 @@ namespace CapstoneProject2_CIS484
                             string qry1 = "Select * from Event inner join EventVolunteers on EventVolunteers.EventID = Event.EventID where EventVolunteers.VolunteerCode ='" + code + "'";
                             string qry2 = "Select * from Coordinator inner join AccessCode on AccessCode.CoordinatorID = Coordinator.CoordinatorID where AccessCode.Code ='" + code + "'";
                             string qry3 = "Select * from Volunteer where Volunteer.VolunteerCode ='" + code + "'";
-                            SqlConnection dd = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection dd = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             dd.Open();
                             SqlCommand EvCom = new SqlCommand(qry1, dd);
                             SqlDataReader EvReader = EvCom.ExecuteReader();
@@ -398,7 +398,7 @@ namespace CapstoneProject2_CIS484
                                 lblDate.Text = (HttpUtility.HtmlEncode(EvReader[1].ToString()));
                                 lblEventDate2.Text = (HttpUtility.HtmlEncode(EvReader[1].ToString()));
                             }
-                            SqlConnection ee = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection ee = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             ee.Open();
                             SqlCommand CoCom = new SqlCommand(qry2, ee);
                             SqlDataReader CoReader = CoCom.ExecuteReader();
@@ -406,7 +406,7 @@ namespace CapstoneProject2_CIS484
                             {
                                 lblCoordinatorName.Text = (HttpUtility.HtmlEncode(CoReader[1].ToString()));
                             }
-                            SqlConnection ff = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection ff = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             ff.Open();
                             SqlCommand VolCom = new SqlCommand(qry3, ff);
                             SqlDataReader VolReader = VolCom.ExecuteReader();
@@ -425,7 +425,7 @@ namespace CapstoneProject2_CIS484
                             AddInstDiv.Visible = true;
                             lblAccessCodeStatus.Text = "Logged in as Event Contact";
                             string EventinfoQry = "Select * from Organization inner join EventContact on EventContact.OrganizationID = Organization.OrganizationID where EventContact.ContactCode ='" + code + "'";
-                            SqlConnection otherCon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection otherCon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             otherCon.Open();
                             SqlCommand bigCommand = new SqlCommand(EventinfoQry, otherCon);
                             SqlDataReader OrgReader = bigCommand.ExecuteReader();
@@ -448,7 +448,7 @@ namespace CapstoneProject2_CIS484
                             lblAccessCodeStatus.Text = "Logged in as Student. Please Create Your Student Profile!";
                             string EventinfoQry = "Select * from Organization inner join Cluster on Cluster.OrganizationID = Organization.OrganizationID where Cluster.ClusterCode ='" + clusterCode + "'";
 
-                            SqlConnection newcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection newcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             newcon.Open();
                             SqlCommand nameCommand = new SqlCommand(EventinfoQry, newcon);
                             SqlDataReader OrgReader = nameCommand.ExecuteReader();
@@ -463,7 +463,7 @@ namespace CapstoneProject2_CIS484
                             StudentPageDiv.Visible = true;
                             lblAccessCodeStatus.Text = "Logged into Student";
                             string sqlQuery_StudentInfo = "SELECT * FROM STUDENT WHERE StudentCode = '" + code + "'";
-                            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             sqlconnect.Open();
                             SqlCommand StudentStuff = new SqlCommand(sqlQuery_StudentInfo, sqlconnect);
                             SqlDataReader studentReader = StudentStuff.ExecuteReader();
@@ -475,7 +475,7 @@ namespace CapstoneProject2_CIS484
                             }
 
                             string qury2 = "SELECT Instructor.Name FROM Instructor inner join Student on Student.OrganizationID = Instructor.OrganizationID where Student.StudentCode = '" + code + "'";
-                            SqlConnection sqlconnect2 = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection sqlconnect2 = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             sqlconnect2.Open();
                             SqlCommand SInstStuff = new SqlCommand(qury2, sqlconnect2);
                             SqlDataReader SInstReader = SInstStuff.ExecuteReader();
@@ -485,7 +485,7 @@ namespace CapstoneProject2_CIS484
                             }
 
                             string sqlQueryFindOrganizationName = "SELECT Organization.Name FROM Organization inner join Student on Student.OrganizationID = Organization.OrganizationID where Student.StudentCode = '" + code + "'";
-                            SqlConnection sqlconnect3 = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+                            SqlConnection sqlconnect3 = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
                             sqlconnect3.Open();
                             SqlCommand OrgName = new SqlCommand(sqlQueryFindOrganizationName, sqlconnect3);
                             SqlDataReader OrgNameReader = OrgName.ExecuteReader();
@@ -521,7 +521,7 @@ namespace CapstoneProject2_CIS484
             if (dup == false && ContactRequestNameText.Text != "" && ContactRequestPhoneText.Text != "" && OrganizationTypeList.SelectedIndex > -1 && ContactRequestEmailText.Text != "")
             {
                 //If filled out and non duplicate it inserts into object
-                string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+                string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
                 SqlConnection connection = new SqlConnection(strcon);
                 SqlCommand cmd;
                 int sub;
@@ -598,7 +598,7 @@ namespace CapstoneProject2_CIS484
         {
             string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
 
-            string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             //Inserting teacher query
 
             //Get connection string from web.config file
@@ -635,7 +635,7 @@ namespace CapstoneProject2_CIS484
             //instructorCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             //MessageBox.Show(instructorCode.ToString(), "Code 2 for instructor: ");
 
-            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
             sqlconnect.Open();
 
             // Necessary information for insert statements
@@ -751,7 +751,7 @@ namespace CapstoneProject2_CIS484
 
         protected void InsertClusterCode()
         {
-            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
             sqlconnect.Open();
             clusterCode5 = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             String sqlqryyy = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
@@ -787,7 +787,7 @@ namespace CapstoneProject2_CIS484
             studentCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             lblStudentAccessCodeinput.Text = studentCode;
 
-            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString);
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
             sqlconnect.Open();
 
             // Find necessary information
@@ -924,7 +924,7 @@ namespace CapstoneProject2_CIS484
         {
             //Inserting teacher query
             //Get connection string from web.config file
-            string ct = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            string ct = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             SqlConnection con = new SqlConnection(ct);
 
             //Inserting Coordinator query
@@ -1014,7 +1014,7 @@ namespace CapstoneProject2_CIS484
             //DateTime Date1 = new DateTime();
             ////Inserting teacher query
             ////Get connection string from web.config file
-            //string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            //string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             ////Inserting teacher query
 
             ////Get connection string from web.config file
@@ -1134,7 +1134,7 @@ namespace CapstoneProject2_CIS484
             DateTime Date1 = new DateTime();
             //Inserting teacher query
             //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
             //Inserting teacher query
 
             //Get connection string from web.config file

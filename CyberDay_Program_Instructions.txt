@@ -1,6 +1,5 @@
 The GitHubbies:
-Tanner Elpheem, Max Vaughn, Anu Rawat, XiYang, Hunter
-
+Tanner Elpheem, Max Vaughn, Anu Rawat, XiYang, Hunter.
 
 Please start your public facing page: CyberDay_Home.aspx
 

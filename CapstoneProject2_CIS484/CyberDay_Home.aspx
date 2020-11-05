@@ -447,7 +447,7 @@
                 <asp:SqlDataSource runat="server"
                     ID="RequestListDataSource"
                     DataSourceMode="DataReader"
-                    ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+                    ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
                     SelectCommand="SELECT RequestID, ContactName FROM ContactRequest" />
 
                 <asp:Button runat="server" ID="AddEvent" OnClick="addEvent_Click" Text="Approve" CausesValidation="False" UseSubmitBehavior="true" />
@@ -469,7 +469,7 @@
 
                         <asp:SqlDataSource ID="EventdisplayDb" runat="server"
                             DataSourceMode="DataReader"
-                            ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+                            ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
                             SelectCommand="SELECT E.EventID, E.Name as 'Event Name', Date, O.Name as 'Organization Name', Type, C.Name as 'Contact Name', C.ContactCode from Event E inner join EventContact C on E.EventID=C.EventID inner join Organization O on C.OrganizationID = O.OrganizationID Order by E.EventID ASC" />
 
                         <asp:GridView runat="server" ID="GvEventdisplay" DataSourceID="EventdisplayDb" OnRowDataBound="GvEventdisplay_RowDataBound" OnSelectedIndexChanged="GvEventdisplay_SelectedIndexChanged">
@@ -773,7 +773,7 @@
             </asp:GridView>
         </fieldset>--%>
         <asp:SqlDataSource ID="InstructorAccessCodeDataSource" runat="server"
-            ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+            ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
             SelectCommand=""></asp:SqlDataSource>
 
         <asp:Table runat="server">
@@ -840,7 +840,7 @@
         </fieldset>
 
         <asp:SqlDataSource ID="StudentDataSource" runat="server"
-            ConnectionString="<%$ ConnectionStrings:CyberDayMaster %>"
+            ConnectionString="<%$ ConnectionStrings:CyberDayDB %>"
             SelectCommand="">
             <SelectParameters>
             </SelectParameters>
@@ -1003,7 +1003,7 @@
                     runat="server"
                     ID="sqlsrcInstructor"
                     DataSourceMode="DataReader"
-                    ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+                    ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
                     SelectCommand="" />
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -1106,7 +1106,7 @@
                 runat="server"
                 ID="SqlDataSource1"
                 DataSourceMode="DataReader"
-                ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+                ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
                 SelectCommand="" />--%>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -1179,7 +1179,7 @@
                                                     runat="server"
                                                     ID="sqlsrcStudentEvent"
                                                     DataSourceMode="DataReader"
-                                                    ConnectionString="<%$ ConnectionStrings:CyberDayMaster%>"
+                                                    ConnectionString="<%$ ConnectionStrings:CyberDayDB%>"
                                                     SelectCommand="" />
                                             </div>
                                         </div>

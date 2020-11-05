@@ -1,4 +1,4 @@
-USE [CyberDayMaster]
+USE [CyberDayDB]
 GO
 SET IDENTITY_INSERT [dbo].[Coordinator] ON 
 GO
@@ -107,7 +107,7 @@ SET IDENTITY_INSERT [dbo].[Organization] ON
 GO
 INSERT [dbo].[Organization] ([OrganizationID], [Name], [Type], [ContactCode]) VALUES (1, N'Johnson Middle School', N'School', N'abcd')
 
-USE [CyberDayMaster]
+USE [CyberDayDB]
 GO
 SET IDENTITY_INSERT [dbo].[Coordinator] ON 
 GO
