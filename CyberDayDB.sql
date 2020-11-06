@@ -89,12 +89,57 @@ CREATE TABLE [dbo].[EventCode](
 	[EventCode] [varchar](10) NOT NULL,
 	[EventURL] [varchar](50) NULL,
 	[EventID] [int] NULL,
-	[CoordinatorID] [int] NULL,
-	[VolunteerID] [varchar](50) NULL,
-	[InstructorID] [varchar](50) NULL
+	[CoordinatorCode] [varchar](10) NOT NULL,
+	[VolunteerCode] [varchar](10) NOT NULL,
+	[InstructorCode] [varchar](10) NULL
 	 CONSTRAINT [PK_EventCode] PRIMARY KEY CLUSTERED 
 (
 	[EventCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CoordinatorCode]    Script Date: 11/03/2020 12:15:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CoordinatorCode](
+	[CoordinatorCode] [varchar](10) NOT NULL,
+	[CodeCreationInfo] [varchar](50) NULL,
+	[CoordinatorID] [int] NOT NULL,
+	 CONSTRAINT [PK_CoordinatorCode] PRIMARY KEY CLUSTERED 
+(
+	[CoordinatorCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[VolunteerCode]    Script Date: 11/03/2020 12:15:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VolunteerCode](
+	[VolunteerCode] [varchar](10) NOT NULL,
+	[CodeCreationInfo] [varchar](50) NULL,
+	[VolunteerID] [varchar](10) NOT NULL,
+	 CONSTRAINT [PK_VolunteerCode] PRIMARY KEY CLUSTERED 
+(
+	[VolunteerCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[InstructorCode]    Script Date: 11/03/2020 12:15:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InstructorCode](
+	[InstructorCode] [varchar](10) NOT NULL,
+	[CodeCreationInfo] [varchar](50) NULL,
+	[VolunteerID] [varchar](10) NOT NULL,
+	 CONSTRAINT [PK_InstructorCode] PRIMARY KEY CLUSTERED 
+(
+	[InstructorCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -106,7 +151,7 @@ GO
 CREATE TABLE [dbo].[ClassCode](
 	[ClassCode] [varchar](50) NOT NULL,
 	[CodeCreationInfo] [TIMESTAMP] NULL,
-	[InstructorID] [varchar](50) NULL,
+	[InstructorID] [varchar](10) NULL,
  CONSTRAINT [PK_ClassCode] PRIMARY KEY CLUSTERED 
 (
 	[ClassCode] ASC
@@ -123,7 +168,7 @@ CREATE TABLE [dbo].[Coordinator](
 	[Name] [varchar](50) NULL,
 	[Email] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
-	[EventCode] [varchar](10) NULL,
+	[CoordinatorCode] [varchar](10) NULL,
  CONSTRAINT [PK_Coordinator] PRIMARY KEY CLUSTERED 
 (
 	[CoordinatorID] ASC
@@ -166,12 +211,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Instructor](
-	[InstructorID] [varchar](50) NOT NULL,
+	[InstructorID] [varchar](10) NOT NULL,
 	[Name] [varchar](50) NULL,
-	[OrganizationID] [int] NULL,
 	[Email] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
-	[EventCode] [varchar](10) NULL,
+	[InstructorCode] [varchar](10) NULL,
  CONSTRAINT [PK_Instructor] PRIMARY KEY CLUSTERED 
 (
 	[InstructorID] ASC
@@ -251,12 +295,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Volunteer](
-	[VolunteerID] [varchar](50),
+	[VolunteerID] [varchar](10),
 	[Name] [varchar](50) NULL,
 	[Role] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
 	[Email] [varchar](50) NULL,
-	[EventCode] [varchar](10) NULL,
+	[VolunteerCode] [varchar](10) NULL,
  CONSTRAINT [PK_Volunteer] PRIMARY KEY CLUSTERED 
 (
 	[VolunteerID] ASC
@@ -270,22 +314,22 @@ GO
 ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Event]
 GO
 
-ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Coordinator] FOREIGN KEY([CoordinatorID])
-REFERENCES [dbo].[Coordinator] ([CoordinatorID])
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_CoordinatorCode] FOREIGN KEY([CoordinatorCode])
+REFERENCES [dbo].[CoordinatorCode] ([CoordinatorCode])
 GO
-ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Coordinator]
-GO
-
-ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Volunteer] FOREIGN KEY([VolunteerID])
-REFERENCES [dbo].[Volunteer] ([VolunteerID])
-GO
-ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Volunteer]
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_CoordinatorCode]
 GO
 
-ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Instructor] FOREIGN KEY([InstructorID])
-REFERENCES [dbo].[Instructor] ([InstructorID])
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_VolunteerCode] FOREIGN KEY([VolunteerCode])
+REFERENCES [dbo].[VolunteerCode] ([VolunteerCode])
 GO
-ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Instructor]
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_VolunteerCode]
+GO
+
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_InstructorCode] FOREIGN KEY([InstructorCode])
+REFERENCES [dbo].[InstructorCode] ([InstructorCode])
+GO
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_InstructorCode]
 GO
 
 /*ClassCode Foreign keys */
@@ -296,10 +340,10 @@ ALTER TABLE [dbo].[ClassCode] CHECK CONSTRAINT [FK_ClassCode_InstructorID]
 GO
 
 /* Instructor Foreign key*/
-ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_Organization] FOREIGN KEY([OrganizationID])
-REFERENCES [dbo].[Organization] ([OrganizationID])
+ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_InstructorCode] FOREIGN KEY([InstructorCode])
+REFERENCES [dbo].[InstructorCode] ([InstructorCode])
 GO
-ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_Organization]
+ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_InstructorCode]
 GO  
 
 ALTER TABLE [dbo].[ParentApproval]  WITH CHECK ADD  CONSTRAINT [FK_ParentApproval_Parent] FOREIGN KEY([ParentID])
@@ -322,11 +366,18 @@ GO
 ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Organization]
 GO
 
-/*Coordinator Foriegn key */
-ALTER TABLE [dbo].[Coordinator]  WITH CHECK ADD  CONSTRAINT [FK_Coordinator_EventCode] FOREIGN KEY([EventCode])
-REFERENCES [dbo].[EventCode] ([EventCode])
+/*CoordinatorCpde Foriegn key */
+ALTER TABLE [dbo].[CoordinatorCode]  WITH CHECK ADD  CONSTRAINT [FK_CoordinatorCode_Coordinator] FOREIGN KEY([CoordinatorID])
+REFERENCES [dbo].[Coordinator] ([CoordinatorID])
 GO
-ALTER TABLE [dbo].[Coordinator] CHECK CONSTRAINT [FK_Coordinator_EventCode]
+ALTER TABLE [dbo].[CoordinatorCode] CHECK CONSTRAINT [FK_CoordinatorCode_Coordinator]
+GO
+
+/*VolunteerCode Foriegn key */
+ALTER TABLE [dbo].[VolunteerCode]  WITH CHECK ADD  CONSTRAINT [FK_VolunteerCode_Coordinator] FOREIGN KEY([VolunteerID])
+REFERENCES [dbo].[Volunteer] ([VolunteerID])
+GO
+ALTER TABLE [dbo].[VolunteerCode] CHECK CONSTRAINT [FK_VolunteerCode_Coordinator]
 GO
 
 /*StudentUpload Forign key*/
