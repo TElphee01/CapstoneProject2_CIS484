@@ -98,7 +98,7 @@ namespace CapstoneProject2_CIS484
             string Username = HttpUtility.HtmlEncode(defaultFormEmail.Text);
             string pass = HttpUtility.HtmlEncode(defaultFormPass.Text);
             string type = "Select UserLoginType from Coordinator where Username = " + Username;
-            SqlConnection CDMConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString);
+            SqlConnection CDMConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TestCyberDayDB"].ConnectionString);
             SqlCommand loginCommand = new SqlCommand();
             loginCommand.Connection = CDMConnection;
             CDMConnection.Open();
