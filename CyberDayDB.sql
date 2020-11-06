@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [CyberDayDB]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Database [CyberDayDB]    Script Date: 11/03/2020 12:15:00 PM ******/
 CREATE DATABASE [CyberDayDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [CyberDayDB] SET QUERY_STORE = OFF
 GO
 USE [CyberDayDB]
 GO
-/****** Object:  Table [dbo].[EventCode]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[EventCode]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -91,14 +91,14 @@ CREATE TABLE [dbo].[EventCode](
 	[EventID] [int] NULL,
 	[CoordinatorID] [int] NULL,
 	[VolunteerID] [varchar](50) NULL,
-	[InstructorID] [varchar](50) NULL,
- CONSTRAINT [PK_EventCode] PRIMARY KEY CLUSTERED 
+	[InstructorID] [varchar](50) NULL
+	 CONSTRAINT [PK_EventCode] PRIMARY KEY CLUSTERED 
 (
 	[EventCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClassCode]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[ClassCode]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +113,7 @@ CREATE TABLE [dbo].[ClassCode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Coordinator]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Coordinator]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -130,7 +130,7 @@ CREATE TABLE [dbo].[Coordinator](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Event]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Event]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,14 +140,14 @@ CREATE TABLE [dbo].[Event](
 	[Date] [datetime] NULL,
 	[Name] [varchar](50) NULL,
 	[Room] [int] NULL,
-	[OrganizationID] [int] NULL
+	[OrganizationID] [int] NULL,
  CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
 (
 	[EventID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Subevent]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Subevent]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -160,7 +160,7 @@ CREATE TABLE [dbo].[Subevent](
 	[Room] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Instructor]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Instructor]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -178,7 +178,7 @@ CREATE TABLE [dbo].[Instructor](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Organization]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Organization]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,13 +187,14 @@ CREATE TABLE [dbo].[Organization](
 	[OrganizationID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NULL,
 	[Type] [varchar](50) NULL,
+	[ContactPerson] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Organization] PRIMARY KEY CLUSTERED 
 (
 	[OrganizationID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Parent]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Parent]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +213,7 @@ CREATE TABLE [dbo].[Parent](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ParentApproval]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[ParentApproval]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -229,7 +230,7 @@ CREATE TABLE [dbo].[ParentApproval](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[StudentUpload]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[StudentUpload]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,13 +245,13 @@ CREATE TABLE [dbo].[StudentUpload](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Volunteer]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Volunteer]    Script Date: 11/03/2020 12:15:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Volunteer](
-	[VolunteerID] [varchar](50) NOT NULL,
+	[VolunteerID] [varchar](50),
 	[Name] [varchar](50) NULL,
 	[Role] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
@@ -299,21 +300,7 @@ ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_Organi
 REFERENCES [dbo].[Organization] ([OrganizationID])
 GO
 ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_Organization]
-GO
-
-ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_EventCode] FOREIGN KEY([EventCode])
-REFERENCES [dbo].[EventCode] ([EventCode])
-GO
-ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_EventCode]
-GO
-
-                  
-/*ParentApproval Foreign Keys */
-ALTER TABLE [dbo].[ParentApproval]  WITH CHECK ADD  CONSTRAINT [FK_ParentApproval_ClassCode] FOREIGN KEY([ClassCode])
-REFERENCES [dbo].[ClassCode] ([ClassCode])
-GO
-ALTER TABLE [dbo].[ParentApproval] CHECK CONSTRAINT [FK_ParentApproval_ClassCode]
-GO
+GO  
 
 ALTER TABLE [dbo].[ParentApproval]  WITH CHECK ADD  CONSTRAINT [FK_ParentApproval_Parent] FOREIGN KEY([ParentID])
 REFERENCES [dbo].[Parent] ([ParentID])
@@ -342,20 +329,18 @@ GO
 ALTER TABLE [dbo].[Coordinator] CHECK CONSTRAINT [FK_Coordinator_EventCode]
 GO
 
-/*Volunteer Forign key*/
-ALTER TABLE [dbo].[Volunteer]  WITH CHECK ADD  CONSTRAINT [FK_Volunteer_EventCode] FOREIGN KEY([EventCode])
-REFERENCES [dbo].[EventCode] ([EventCode])
-GO
-ALTER TABLE [dbo].[Volunteer] CHECK CONSTRAINT [FK_Volunteer_EventCode]
-GO
-
 /*StudentUpload Forign key*/
 ALTER TABLE [dbo].[StudentUpload]  WITH CHECK ADD  CONSTRAINT [FK_StudentUpload_Parent] FOREIGN KEY([ParentID])
 REFERENCES [dbo].[Parent] ([ParentID])
 GO
 ALTER TABLE [dbo].[StudentUpload] CHECK CONSTRAINT [FK_StudentUpload_Parent]
 GO
-
+/*ParentApproval Foreign Keys */
+ALTER TABLE [dbo].[ParentApproval]  WITH CHECK ADD  CONSTRAINT [FK_ParentApproval_ClassCode] FOREIGN KEY([ClassCode])
+REFERENCES [dbo].[ClassCode] ([ClassCode])
+GO
+ALTER TABLE [dbo].[ParentApproval] CHECK CONSTRAINT [FK_ParentApproval_ClassCode]
+GO
 /*Subevent Forign key*/
 ALTER TABLE [dbo].[Subevent]  WITH CHECK ADD  CONSTRAINT [FK_Subevent_Event] FOREIGN KEY([EventID])
 REFERENCES [dbo].[Event] ([EventID])
