@@ -1280,17 +1280,15 @@ namespace CapstoneProject2_CIS484
 
         protected void sendEmailToCoordinator()
         {
-            SmtpClient c = new SmtpClient("smtp.gmail.com", 587);
-            MailAddress add = new System.Net.Mail.MailAddress("telpheemail@aol.com");
+            SmtpClient smtpClient = new SmtpClient();//Deta
+
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(add);
+            msg.To.Add("elpheeti@dukes.jmu.edu");
             msg.From = new MailAddress("CyberCityAdmin@gmail.com");//Enter Admin Email here! 
             msg.IsBodyHtml = true;
-            msg.Subject = "TestEmail";
-            msg.Body = "Cool it works! Nice";
-            c.Credentials = new System.Net.NetworkCredential("SamSmith25d@gmail.com", "pass");
-            c.EnableSsl = true;
-            c.Send(msg);
+            msg.Subject = "CyberCity: CyberDay Access code used!";
+            msg.Body = "Cyber City Administrator, The Access Code for CyberDay has been captured";
+            smtpClient.Send(msg);
         }
     }
 }
