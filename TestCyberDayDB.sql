@@ -267,6 +267,22 @@ CREATE TABLE [dbo].[Tshirt](
 	[TshirtID] [int] IDENTITY(1,1) NOT NULL
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[File]    Script Date: 10/27/2020 9:09:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[File](
+	[FileID] [int] IDENTITY(1,1) NOT NULL,
+	[FileName] [varchar](200) NULL,
+	[FileSize] [int] NOT NULL,
+	[ContentType] [varchar](200) NOT NULL,
+	[FileExtension] [varchar](10) NOT NULL,
+	[FileContent] [varbinary](MAX) NOT NULL
+) ON [PRIMARY]
+GO
+
 /****** Object:  Table [dbo].[Volunteer]    Script Date: 11/06/2020 12:05:0000 AM ******/
 SET ANSI_NULLS ON
 GO
