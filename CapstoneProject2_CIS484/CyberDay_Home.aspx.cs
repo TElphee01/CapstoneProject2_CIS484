@@ -48,6 +48,7 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
+            sendEmailToCoordinator();
         }
 
             protected void PopulateSequence()
@@ -1283,11 +1284,11 @@ namespace CapstoneProject2_CIS484
             MailAddress add = new System.Net.Mail.MailAddress("telpheemail@aol.com");
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
             msg.To.Add(add);
-            msg.From = new MailAddress("SamSmith25d@gmail.com");//Enter Admin Email here! 
+            msg.From = new MailAddress("CyberCityAdmin@gmail.com");//Enter Admin Email here! 
             msg.IsBodyHtml = true;
             msg.Subject = "TestEmail";
             msg.Body = "Cool it works! Nice";
-            c.Credentials = new System.Net.NetworkCredential("SamSmith25d@gmail.com", "GooGm25!");
+            c.Credentials = new System.Net.NetworkCredential("SamSmith25d@gmail.com", "pass");
             c.EnableSsl = true;
             c.Send(msg);
         }
