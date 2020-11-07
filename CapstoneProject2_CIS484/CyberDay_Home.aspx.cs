@@ -782,6 +782,7 @@ namespace CapstoneProject2_CIS484
             {
                 cmd_p11.CommandType = CommandType.Text;
                 cmd_p11.ExecuteNonQuery();
+                //Email_CodeCaptured_Coordinator();
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -1235,7 +1236,6 @@ namespace CapstoneProject2_CIS484
                     {
                         while (reader.Read())
                         {
-
                             newFile.FileID = Convert.ToInt32(reader["FileID"]);
                             newFile.FileName = reader["FileName"].ToString();
                             newFile.FileSize = Convert.ToInt32(reader["FileSize"]);
@@ -1277,5 +1277,50 @@ namespace CapstoneProject2_CIS484
                 }
             }
         }
+        protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes["style"] = "cursor:pointer";
+            }
+        }
+        //private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+        //private static String sendToEmailAddress =  "elpheeti@dukes.jmu.edu";
+
+        //protected void SendEmail(object sender, EventArgs e)
+        //{   
+        //    SmtpClient smtpClient = new SmtpClient();
+        //    System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+        //    smtpClient.Send(emailItems);
+        //}
+
+        //protected void EmailTemplateCreation()
+        //{
+        //    //Get connection string from web.config file
+        //    string strcon = ConfigurationManager.ConnectionStrings["TestCyberDayDB"].ConnectionString;
+        //    //create new sqlconnection and connection to database by using connection string from web.config file
+        //    SqlConnection con = new SqlConnection(strcon);
+
+        //    string sqlQuery2 = "select Name from Instructor";
+        //    SqlDataAdapter sqlAdapter2 = new SqlDataAdapter(sqlQuery2, con);
+
+        //    var emailItems = new EmailTemplate();
+
+        //    using (SqlCommand command = new SqlCommand(sqlQuery2, con))
+        //    {
+        //        using (SqlDataReader reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                //Read info into List
+        //                emailItems.toAddress = sendToEmailAddress;
+        //                emailItems.subject = "CyberDayEnrollment successful";
+        //                emailItems.body = "This is a test";
+        //            }
+        //        }
+        //    }
+        //    SendEmail(emailItems);
+        //}
     }
 }
