@@ -11,7 +11,8 @@ using System.Globalization;
 using System.Web.Configuration;
 using System.Windows.Forms;
 using System.Drawing;
-
+using System.Web.Mail;
+using System.Net.Mail;
 
 namespace CapstoneProject2_CIS484
 {
@@ -49,7 +50,7 @@ namespace CapstoneProject2_CIS484
             PopulateSequence();
         }
 
-        protected void PopulateSequence()
+            protected void PopulateSequence()
         {
             submissionDataTable.Clear();
             AddRowsToGrid();
@@ -1274,6 +1275,21 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
+        }
+
+        protected void sendEmailToCoordinator()
+        {
+            SmtpClient c = new SmtpClient("smtp.gmail.com", 587);
+            MailAddress add = new System.Net.Mail.MailAddress("telpheemail@aol.com");
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(add);
+            msg.From = new MailAddress("SamSmith25d@gmail.com");//Enter Admin Email here! 
+            msg.IsBodyHtml = true;
+            msg.Subject = "TestEmail";
+            msg.Body = "Cool it works! Nice";
+            c.Credentials = new System.Net.NetworkCredential("SamSmith25d@gmail.com", "GooGm25!");
+            c.EnableSsl = true;
+            c.Send(msg);
         }
     }
 }

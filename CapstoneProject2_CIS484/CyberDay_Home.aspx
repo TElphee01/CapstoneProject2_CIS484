@@ -127,6 +127,8 @@
             <div class="panel">
                 <div class="answer">
                     <div class="form-group">
+                        <div>
+                        </div>
                         <%--            <h2 style="text-align: center">Want your organization to join a cyber day? Submit a request here</h2>--%>
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
