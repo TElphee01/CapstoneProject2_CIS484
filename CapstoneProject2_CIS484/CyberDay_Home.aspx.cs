@@ -26,6 +26,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Web.UI.WebControls;
 using System.Text;
+using CIS484Solution1;
 using System.IO;
 
 namespace CapstoneProject2_CIS484
@@ -1143,7 +1144,7 @@ namespace CapstoneProject2_CIS484
             string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             String sqlQuery = "SELECT * from [File]";
-            List<File> allFiles = new List<File>();
+            List<CIS484Solution1.File> allFiles = new List<CIS484Solution1.File>();
 
             con.Open();
             using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
@@ -1152,7 +1153,7 @@ namespace CapstoneProject2_CIS484
                 {
                     while (reader.Read())
                     {
-                        File newFile = new File()
+                        CIS484Solution1.File newFile = new CIS484Solution1.File()
                         {
                             FileID = Convert.ToInt32(reader["FileID"]),
                             FileName = reader["FileName"].ToString(),
@@ -1181,7 +1182,7 @@ namespace CapstoneProject2_CIS484
                 string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
                 SqlConnection con = new SqlConnection(strcon);
                 String sqlQuery = "INSERT INTO [File](FileName,FileSize,ContentType,FileExtension,FileContent) VALUES(@param1,@param2,@param3,@param4,@param5)";
-                List<File> allFiles = new List<File>();
+                List<CIS484Solution1.File> allFiles = new List<CIS484Solution1.File>();
 
 
                 con.Open();
@@ -1230,7 +1231,7 @@ namespace CapstoneProject2_CIS484
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                 {
 
-                    File newFile = new File();
+                    CIS484Solution1.File newFile = new CIS484Solution1.File();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
