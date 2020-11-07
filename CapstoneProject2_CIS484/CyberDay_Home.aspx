@@ -841,6 +841,41 @@
             </asp:GridView>
         </fieldset>
 
+           <%--FILE UPLOAD-------------------------------------------------------------------------------------------------------%>
+             <h3>File Upload / Download from/to Database using ASP.NET</h3>
+    <div>
+        <table>
+            <tr>
+                <td>Select File : </td>
+                <td>
+                    <asp:FileUpload ID="FileUpload1" runat="server" /></td>
+                <td>
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" /></td>
+            </tr>
+        </table>
+        <br />
+        <div>
+            <%-- Add a Datalist for show uploaded files --%>
+            <asp:DataList ID="FileList" runat="server" RepeatColumns="4" RepeatDirection="Horizontal" OnItemCommand="FileList_ItemCommand">
+                <ItemTemplate>
+                    <table>
+                        <tr>
+                            <td><%#Eval("FileName","File Name : {0}") %></td>
+                        </tr>
+                        <tr>
+                            <td><%#String.Format("{0:0.00}",Convert.ToDecimal(Eval("FileSize"))/1024)%> KB</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument=<%#Eval("FileID") %>>Download</asp:LinkButton></td>
+                        </tr>
+                    </table>
+                </ItemTemplate>
+            </asp:DataList>
+        </div>
+    </div>
+<%--END OF FILE UPLOAD--------------------------------------------------------------------------------%>
+
         <asp:SqlDataSource ID="StudentDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:TestCyberDayDB %>"
             SelectCommand="">

@@ -1,18 +1,32 @@
-﻿using System;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Web;
+//using System.Web.UI;
+//using System.Web.UI.WebControls;
+//using System.Configuration;
+//using System.Data;
+//using System.Data.SqlClient;
+//using System.Globalization;
+//using System.Web.Configuration;
+//using System.Windows.Forms;
+//using System.Drawing;
+//using System.Web.Mail;
+//using System.Net.Mail;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Web;
 using System.Web.Configuration;
+using System.Web.UI;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Web.Mail;
-using System.Net.Mail;
+using System.Web.UI.WebControls;
+using System.Text;
+using System.IO;
 
 namespace CapstoneProject2_CIS484
 {
@@ -34,6 +48,10 @@ namespace CapstoneProject2_CIS484
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                PopulateUploadedFiles();
+            }
             //ScriptManager.RegisterStartupScript(
             //    UpdatePanel1,
             //    this.GetType(),
@@ -50,7 +68,7 @@ namespace CapstoneProject2_CIS484
             PopulateSequence();
         }
 
-            protected void PopulateSequence()
+        protected void PopulateSequence()
         {
             submissionDataTable.Clear();
             AddRowsToGrid();
@@ -1120,155 +1138,144 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
-
-        protected void GvEventdisplay_SelectedIndexChanged(object sender, EventArgs e)
+        private void PopulateUploadedFiles()
         {
-            //Queries Relevant to home page, fetching event info student info and more
-
-            string EventID = GvEventdisplay.SelectedRow.Cells[0].Text;
-            string OrgName = "";
-            string OrgType = "";
-            string EventName = "";
-            string ContactName = "";
-            string Phone = "";
-            string Email = "";
-            string ContactCode = "";
-            DateTime Date1 = new DateTime();
-            //Inserting teacher query
-            //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["TestCyberDayDB"].ConnectionString;
-            //Inserting teacher query
-
-            //Get connection string from web.config file
-            //create new sqlconnection and connection to database by using connection string from web.config file
+            string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
-            String sqlQuery4 = "select C.ContactCode as ContactCode, C.Name as ContactName, format(E.Date, 'MM/dd/yyyy') as Date, O.Name as OrgName, O.Type as OrgType, E.Name as EventName" +
-            " from EventContact C" +
-            " inner join Organization O on O.OrganizationID = C.OrganizationID" +
-            " inner join Event E on C.EventID = E.EventID" +
-            " where C.EventID = '" + EventID + "'";
-            SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
+            String sqlQuery = "SELECT * from [File]";
+            List<File> allFiles = new List<File>();
 
             con.Open();
-            try
+            using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
             {
-                SqlDataReader reader = cmd4.ExecuteReader();
-                //MessageBox.Show(EventID, "helloo");
-                while (reader.Read())
-                {
-                    ContactCode = reader[0].ToString();
-                    ContactName = reader[1].ToString();
-                    Date1 = Convert.ToDateTime(reader[2]);
-                    OrgName = reader[3].ToString();
-                    OrgType = reader[4].ToString();
-                    EventName = reader[5].ToString();
-                }
-                reader.Close();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Select Error in EventContact:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery4, con);
-            DataSet ds = new DataSet();
-
-            sqlAdapter.Fill(ds);
-
-            //EventInfoTable.DataSource = ds;
-            //EventInfoTable.DataBind();
-
-            String sqlQuery1 = "select S.Name from Student S inner join Instructor I on S.InstructorCode = I.InstructorCode" +
-            " where I.ContactCode = '" + ContactCode + "';";
-            SqlDataAdapter sqlAdapter1 = new SqlDataAdapter(sqlQuery1, con);
-
-            //Fill table with data
-            DataTable dt = new DataTable();
-            sqlAdapter1.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                StudentListBox.DataSource = dt;
-                StudentListBox.DataTextField = "Name";
-                StudentListBox.DataBind();
-            }
-
-            string sqlQuery2 = "select Name from Instructor where ContactCode = '" + ContactCode + "'";
-            SqlDataAdapter sqlAdapter2 = new SqlDataAdapter(sqlQuery2, con);
-
-            var items = new List<string>();
-
-            using (SqlCommand command = new SqlCommand(sqlQuery2, con))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //Read info into List
-                        items.Add(reader.GetString(0));
+                        File newFile = new File()
+                        {
+                            FileID = Convert.ToInt32(reader["FileID"]),
+                            FileName = reader["FileName"].ToString(),
+                            FileSize = Convert.ToInt32(reader["FileSize"]),
+                            ContentType = reader["ContentType"].ToString(),
+                            FileExtension = reader["FileExtension"].ToString(),
+                            FileContent = Encoding.ASCII.GetBytes(reader["FileContent"].ToString())
+                        };
+                        allFiles.Add(newFile);
                     }
                 }
-            }
-            InstructorRepeater.DataSource = items;
-            InstructorRepeater.DataBind();
-            //MessageBox.Show(items[0]);
-
-            string sqlQuery3 = "select V.VolunteerCode, V.Name from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode where E.EventID = '" + EventID + "'";
-            var items1 = new List<string>();
-
-            using (SqlCommand command = new SqlCommand(sqlQuery3, con))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        //Read info into List
-                        items1.Add(reader.GetString(1));
-                    }
-                }
-            }
-            VolunteerRepeater.DataSource = items1;
-            VolunteerRepeater.DataBind();
-
-            con.Close();
-
-            string mag = "Row Info: " + EventID + " " + EventName + " " + Date1 + " " + OrgName + " " + OrgName + " " + ContactName + " " + ContactCode;
-            foreach (GridViewRow row in GvEventdisplay.Rows)
-            {
-                if (row.RowIndex == GvEventdisplay.SelectedIndex)
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    row.ToolTip = string.Empty;
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    row.ToolTip = "Click to select this row.";
-                }
+                FileList.DataSource = allFiles;
+                FileList.DataBind();
             }
         }
 
-        protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnUpload_Click(object sender, EventArgs e)
         {
-            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
-
-            foreach (GridViewRow row in ContactSubmissionGrid.Rows)
+            // Code for Upload file to database
+            if (FileUpload1.HasFile)
             {
-                if (row.RowIndex == ContactSubmissionGrid.SelectedIndex)
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    row.ToolTip = string.Empty;
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    row.ToolTip = "Click to select this row.";
-                }
-            }
+                HttpPostedFile file = FileUpload1.PostedFile;
+                BinaryReader br = new BinaryReader(file.InputStream);
+                byte[] buffer = br.ReadBytes(file.ContentLength);
 
-            MessageBox.Show(RequestID);
+                string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+                String sqlQuery = "INSERT INTO [File](FileName,FileSize,ContentType,FileExtension,FileContent) VALUES(@param1,@param2,@param3,@param4,@param5)";
+                List<File> allFiles = new List<File>();
+
+
+                con.Open();
+
+                //Int32 lastId = 0;
+                //string lastIdSql = "SELECT TOP 1 FileID FROM [File] ORDER BY FileID DESC";
+                //using (SqlCommand cmd = new SqlCommand(lastIdSql, con))
+                //{
+                //    if (cmd.ExecuteScalar() == null)
+                //    {
+                //        lastId = 1;
+                //    }
+                //    else
+                //    {
+                //        lastId = (Int32)cmd.ExecuteScalar();
+                //        lastId += 1;
+                //    }
+                //}
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+                {
+                    cmd.Parameters.Add("@param1", SqlDbType.VarChar, 200).Value = file.FileName;
+                    cmd.Parameters.Add("@param2", SqlDbType.Int).Value = file.ContentLength;
+                    cmd.Parameters.Add("@param3", SqlDbType.VarChar, 200).Value = file.ContentType;
+                    cmd.Parameters.Add("@param4", SqlDbType.VarChar, 10).Value = Path.GetExtension(file.FileName);
+                    cmd.Parameters.Add("@param5", SqlDbType.VarBinary).Value = buffer;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                }
+
+                PopulateUploadedFiles();
+            }
         }
 
+        protected void FileList_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (e.CommandName == "Download")
+            {
+                int fileID = Convert.ToInt32(e.CommandArgument);
+
+                string strcon = ConfigurationManager.ConnectionStrings["CyberDayMaster"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+                String sqlQuery = "SELECT * from [File] WHERE FileID =" + fileID;
+
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+                {
+
+                    File newFile = new File();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            newFile.FileID = Convert.ToInt32(reader["FileID"]);
+                            newFile.FileName = reader["FileName"].ToString();
+                            newFile.FileSize = Convert.ToInt32(reader["FileSize"]);
+                            newFile.ContentType = reader["ContentType"].ToString();
+                            newFile.FileExtension = reader["FileExtension"].ToString();
+                            newFile.FileContent = (byte[])reader["FileContent"];
+                        }
+
+                        if (newFile.FileID > 0)
+                        {
+                            byte[] fileData = newFile.FileContent;
+                            Response.AddHeader("Content-type", newFile.ContentType);
+                            Response.AddHeader("Content-Disposition", "attachment; filename=" + newFile.FileName);
+
+                            byte[] dataBlock = new byte[0x1000];
+                            long fileSize;
+                            int bytesRead;
+                            long totalsBytesRead = 0;
+
+                            using (Stream st = new MemoryStream(fileData))
+                            {
+                                fileSize = st.Length;
+                                while (totalsBytesRead < fileSize)
+                                {
+                                    if (Response.IsClientConnected)
+                                    {
+                                        bytesRead = st.Read(dataBlock, 0, dataBlock.Length);
+                                        Response.OutputStream.Write(dataBlock, 0, bytesRead);
+
+                                        Response.Flush();
+                                        totalsBytesRead += bytesRead;
+                                    }
+                                }
+                            }
+                            Response.End();
+                        }
+
+                    }
+                }
+            }
+        }
         protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
