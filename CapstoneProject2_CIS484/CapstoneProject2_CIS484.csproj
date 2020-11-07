@@ -208,6 +208,7 @@
     <Compile Include="CyberDay_Home.aspx.designer.cs">
       <DependentUpon>CyberDay_Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmailTemplate.cs" />
     <Compile Include="PasswordHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
