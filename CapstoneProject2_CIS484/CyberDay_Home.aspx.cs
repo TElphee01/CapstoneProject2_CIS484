@@ -48,7 +48,6 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
-            sendEmailToCoordinator();
         }
 
             protected void PopulateSequence()
@@ -764,6 +763,7 @@ namespace CapstoneProject2_CIS484
             {
                 cmd_p11.CommandType = CommandType.Text;
                 cmd_p11.ExecuteNonQuery();
+                //Email_CodeCaptured_Coordinator();
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -1277,18 +1277,42 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
+        //private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+        //private static String sendToEmailAddress =  "elpheeti@dukes.jmu.edu";
 
-        protected void sendEmailToCoordinator()
-        {
-            SmtpClient smtpClient = new SmtpClient();//Deta
+        //protected void SendEmail(object sender, EventArgs e)
+        //{   
+        //    SmtpClient smtpClient = new SmtpClient();
+        //    System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+        //    smtpClient.Send(emailItems);
+        //}
 
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add("elpheeti@dukes.jmu.edu");
-            msg.From = new MailAddress("CyberCityAdmin@gmail.com");//Enter Admin Email here! 
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity: CyberDay Access code used!";
-            msg.Body = "Cyber City Administrator, The Access Code for CyberDay has been captured";
-            smtpClient.Send(msg);
-        }
+        //protected void EmailTemplateCreation()
+        //{
+        //    //Get connection string from web.config file
+        //    string strcon = ConfigurationManager.ConnectionStrings["TestCyberDayDB"].ConnectionString;
+        //    //create new sqlconnection and connection to database by using connection string from web.config file
+        //    SqlConnection con = new SqlConnection(strcon);
+
+        //    string sqlQuery2 = "select Name from Instructor";
+        //    SqlDataAdapter sqlAdapter2 = new SqlDataAdapter(sqlQuery2, con);
+
+        //    var emailItems = new EmailTemplate();
+
+        //    using (SqlCommand command = new SqlCommand(sqlQuery2, con))
+        //    {
+        //        using (SqlDataReader reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                //Read info into List
+        //                emailItems.toAddress = sendToEmailAddress;
+        //                emailItems.subject = "CyberDayEnrollment successful";
+        //                emailItems.body = "This is a test";
+        //            }
+        //        }
+        //    }
+        //    SendEmail(emailItems);
+        //}
     }
 }
