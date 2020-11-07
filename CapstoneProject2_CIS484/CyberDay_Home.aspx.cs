@@ -55,6 +55,7 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
+            //Updates
         }
 
         protected void PopulateSequence()
