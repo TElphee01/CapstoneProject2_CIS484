@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CIS484Solution1
+namespace CapstoneProject2_CIS484
 {
     using System;
     using System.Collections.Generic;

@@ -14,7 +14,6 @@ using System.Drawing;
 using System.Web.Mail;
 using System.Net.Mail;
 using System.Text;
-using CIS484Solution1;
 using System.IO;
 
 namespace CapstoneProject2_CIS484
@@ -55,7 +54,6 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
-            //Updates
         }
 
         protected void PopulateSequence()
@@ -1134,7 +1132,7 @@ namespace CapstoneProject2_CIS484
             DateTime Date1 = new DateTime();
             //Inserting teacher query
             //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
             //Inserting teacher query
 
             //Get connection string from web.config file
@@ -1259,7 +1257,7 @@ namespace CapstoneProject2_CIS484
             string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             String sqlQuery = "SELECT * from [File]";
-            List<CIS484Solution1.File> allFiles = new List<CIS484Solution1.File>();
+            List<File> allFiles = new List<File>();
 
             con.Open();
             using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
@@ -1268,7 +1266,7 @@ namespace CapstoneProject2_CIS484
                 {
                     while (reader.Read())
                     {
-                        CIS484Solution1.File newFile = new CIS484Solution1.File()
+                        File newFile = new File()
                         {
                             FileID = Convert.ToInt32(reader["FileID"]),
                             FileName = reader["FileName"].ToString(),
@@ -1297,7 +1295,7 @@ namespace CapstoneProject2_CIS484
                 string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
                 SqlConnection con = new SqlConnection(strcon);
                 String sqlQuery = "INSERT INTO [File](FileName,FileSize,ContentType,FileExtension,FileContent) VALUES(@param1,@param2,@param3,@param4,@param5)";
-                List<CIS484Solution1.File> allFiles = new List<CIS484Solution1.File>();
+                List<File> allFiles = new List<File>();
 
 
                 con.Open();
@@ -1338,7 +1336,7 @@ namespace CapstoneProject2_CIS484
             {
                 int fileID = Convert.ToInt32(e.CommandArgument);
 
-                string strcon = ConfigurationManager.ConnectionStrings["CyberDayDB"].ConnectionString;
+                string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
                 SqlConnection con = new SqlConnection(strcon);
                 String sqlQuery = "SELECT * from [File] WHERE FileID =" + fileID;
 
@@ -1346,7 +1344,7 @@ namespace CapstoneProject2_CIS484
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                 {
 
-                    CIS484Solution1.File newFile = new CIS484Solution1.File();
+                    File newFile = new File();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -1400,43 +1398,52 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
-        //private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
-        //private static String sendToEmailAddress =  "elpheeti@dukes.jmu.edu";
+        
+        //SMTP information in WebConfig file MUST MATCH coordinator email address.
+        public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+        public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
 
-        //protected void SendEmail(object sender, EventArgs e)
-        //{   
-        //    SmtpClient smtpClient = new SmtpClient();
-        //    System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-        //    smtpClient.Send(emailItems);
-        //}
+        protected void Email_Coordinator_CodeUsed()
+        {
+            SmtpClient smtpClient = new SmtpClient();
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(sendToEmailAddress);
+            msg.IsBodyHtml = true;
+            msg.Subject = "CyberCity: CyberDay Access code used!";
+            msg.Body = "Cyber City Coordinator, " + coordinatorEmailAddress + ". The Access Code for CyberDay has been captured";
+            smtpClient.Send(msg);
+        }
 
-        //protected void EmailTemplateCreation()
-        //{
-        //    //Get connection string from web.config file
-        //    string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-        //    //create new sqlconnection and connection to database by using connection string from web.config file
-        //    SqlConnection con = new SqlConnection(strcon);
+        protected void EmailTemplateCreation()
+        {
+            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+            SqlConnection con = new SqlConnection(strcon);
+            String sqlQuery = "SELECT * from [EMAIL]";
+            List<File> allEmails = new List<File>();
 
-        //    string sqlQuery2 = "select Name from Instructor";
-        //    SqlDataAdapter sqlAdapter2 = new SqlDataAdapter(sqlQuery2, con);
-
-        //    var emailItems = new EmailTemplate();
-
-        //    using (SqlCommand command = new SqlCommand(sqlQuery2, con))
-        //    {
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                //Read info into List
-        //                emailItems.toAddress = sendToEmailAddress;
-        //                emailItems.subject = "CyberDayEnrollment successful";
-        //                emailItems.body = "This is a test";
-        //            }
-        //        }
-        //    }
-        //    SendEmail(emailItems);
-        //}
+            con.Open();
+            using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+            {
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        File newFile = new File()
+                        {
+                            FileID = Convert.ToInt32(reader["FileID"]),
+                            FileName = reader["FileName"].ToString(),
+                            FileSize = Convert.ToInt32(reader["FileSize"]),
+                            ContentType = reader["ContentType"].ToString(),
+                            FileExtension = reader["FileExtension"].ToString(),
+                            FileContent = Encoding.ASCII.GetBytes(reader["FileContent"].ToString())
+                        };
+                        allEmails.Add(newFile);
+                    }
+                }
+                FileList.DataSource = allEmails;
+                FileList.DataBind();
+            }
+        }
 
         protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1455,7 +1462,6 @@ namespace CapstoneProject2_CIS484
                     row.ToolTip = "Click to select this row.";
                 }
             }
-
             MessageBox.Show(RequestID);
         }
     }
