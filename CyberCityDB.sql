@@ -100,30 +100,10 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Cluster](
-	[ClusterCode] [varchar](50) NULL,
+CREATE TABLE [dbo].[ClassCode](
+	[ClassCode] [varchar](50) NULL,
 	[InstructorCode] [varchar](50) NULL,
 	[OrganizationID] [int] NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ContactRequest]    Script Date: 11/06/2020 12:05:0000 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ContactRequest](
-	[RequestID] [int] IDENTITY(1,1) NOT NULL,
-	[ContactName] [varchar](50) NULL,
-	[Phone] [bigint] NULL,
-	[Email] [varchar](50) NULL,
-	[OrganizationName] [varchar](50) NULL,
-	[OrganizationType] [varchar](50) NULL,
-	[DateRequest] [date] NULL,
-	[EventNameRequest] [varchar](50) NULL,
- CONSTRAINT [PK_ContactRequest] PRIMARY KEY CLUSTERED 
-(
-	[RequestID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Coordinator]    Script Date: 11/06/2020 12:05:0000 AM ******/
@@ -181,24 +161,6 @@ CREATE TABLE [dbo].[EventActivities](
 	[Time] [time](7) NULL,
 	[Room] [int] NULL,
 	[ActivityGuideID] [int] NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[EventContact]    Script Date: 11/06/2020 12:05:0000 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[EventContact](
-	[EventID] [int] NULL,
-	[ContactCode] [varchar](50) NOT NULL,
-	[Name] [varchar](50) NULL,
-	[OrganizationID] [int] NULL,
-	[Phone] [bigint] NULL,
-	[Email] [varchar](50) NULL,
- CONSTRAINT [PK_EventContact] PRIMARY KEY CLUSTERED 
-(
-	[ContactCode] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[EventVolunteers]    Script Date: 11/06/2020 12:05:0000 AM ******/
@@ -306,15 +268,15 @@ REFERENCES [dbo].[Coordinator] ([CoordinatorID])
 GO
 ALTER TABLE [dbo].[AccessCode] CHECK CONSTRAINT [FK_AccessCode_Coordinator]
 GO
-ALTER TABLE [dbo].[Cluster]  WITH CHECK ADD  CONSTRAINT [FK_Cluster_AccessCode] FOREIGN KEY([ClusterCode])
+ALTER TABLE [dbo].[ClassCode]  WITH CHECK ADD  CONSTRAINT [FK_ClassCode_AccessCode] FOREIGN KEY([ClassCode])
 REFERENCES [dbo].[AccessCode] ([Code])
 GO
-ALTER TABLE [dbo].[Cluster] CHECK CONSTRAINT [FK_Cluster_AccessCode]
+ALTER TABLE [dbo].[ClassCode] CHECK CONSTRAINT [FK_ClassCode_AccessCode]
 GO
-ALTER TABLE [dbo].[Cluster]  WITH CHECK ADD  CONSTRAINT [FK_Cluster_Instructor] FOREIGN KEY([InstructorCode])
+ALTER TABLE [dbo].[ClassCode]  WITH CHECK ADD  CONSTRAINT [FK_ClassCode_Instructor] FOREIGN KEY([InstructorCode])
 REFERENCES [dbo].[Instructor] ([InstructorCode])
 GO
-ALTER TABLE [dbo].[Cluster] CHECK CONSTRAINT [FK_Cluster_Instructor]
+ALTER TABLE [dbo].[ClassCode] CHECK CONSTRAINT [FK_ClassCode_Instructor]
 GO
 ALTER TABLE [dbo].[CoordinatorAuth]  WITH CHECK ADD  CONSTRAINT [FK_CoordinatorAuth_Coordinator] FOREIGN KEY([CoordinatorID])
 REFERENCES [dbo].[Coordinator] ([CoordinatorID])
@@ -326,16 +288,6 @@ REFERENCES [dbo].[Event] ([EventID])
 GO
 ALTER TABLE [dbo].[EventActivities] CHECK CONSTRAINT [FK_EventActivities_Event]
 GO
-ALTER TABLE [dbo].[EventContact]  WITH CHECK ADD  CONSTRAINT [FK_EventContact_AccessCode] FOREIGN KEY([ContactCode])
-REFERENCES [dbo].[AccessCode] ([Code])
-GO
-ALTER TABLE [dbo].[EventContact] CHECK CONSTRAINT [FK_EventContact_AccessCode]
-GO
-ALTER TABLE [dbo].[EventContact]  WITH CHECK ADD  CONSTRAINT [FK_EventContact_Event] FOREIGN KEY([EventID])
-REFERENCES [dbo].[Event] ([EventID])
-GO
-ALTER TABLE [dbo].[EventContact] CHECK CONSTRAINT [FK_EventContact_Event]
-GO
 ALTER TABLE [dbo].[EventVolunteers]  WITH CHECK ADD  CONSTRAINT [FK_EventVolunteers_Event] FOREIGN KEY([EventID])
 REFERENCES [dbo].[Event] ([EventID])
 GO
@@ -346,20 +298,10 @@ REFERENCES [dbo].[Volunteer] ([VolunteerCode])
 GO
 ALTER TABLE [dbo].[EventVolunteers] CHECK CONSTRAINT [FK_EventVolunteers_Volunteer]
 GO
-ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_EventContact] FOREIGN KEY([ContactCode])
-REFERENCES [dbo].[EventContact] ([ContactCode])
-GO
-ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_EventContact]
-GO
 ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_Organization] FOREIGN KEY([OrganizationID])
 REFERENCES [dbo].[Organization] ([OrganizationID])
 GO
 ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_Organization]
-GO
-ALTER TABLE [dbo].[Organization]  WITH CHECK ADD  CONSTRAINT [FK_Organization_EventContact] FOREIGN KEY([ContactCode])
-REFERENCES [dbo].[EventContact] ([ContactCode])
-GO
-ALTER TABLE [dbo].[Organization] CHECK CONSTRAINT [FK_Organization_EventContact]
 GO
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Instructor] FOREIGN KEY([InstructorCode])
 REFERENCES [dbo].[Instructor] ([InstructorCode])
