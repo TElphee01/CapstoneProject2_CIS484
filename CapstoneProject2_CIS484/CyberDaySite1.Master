@@ -6,10 +6,10 @@
 <head runat="server">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <meta name="keywords" content="" />
-    <title>Cyber Day: GitHubbies</title>
+    <meta name="description" content="CyberCity!" />
+    <meta name="author" content="CyberCity Dev team" />
+    <meta name="keywords" content="Cyber City" />
+    <title>Cyber City! GitHubbies</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -242,7 +242,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Macro Menu for overarching personnel type selection-->
 
                         <div class="text-center">
                             <div class="messagealert" id="alert_container">

@@ -1,4 +1,5 @@
-﻿USE [TestCyberDayDB]
+﻿--This code shows errors but inserts as needed. To be safe, please run twice. 
+USE [CyberCityDB]
 GO
 SET IDENTITY_INSERT [dbo].[Coordinator] ON 
 GO
