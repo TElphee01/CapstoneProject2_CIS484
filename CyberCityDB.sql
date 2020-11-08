@@ -8,7 +8,7 @@ CREATE DATABASE [CyberCityDB]
  LOG ON 
 ( NAME = N'CyberCityDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\CyberCityDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
-GO
+GO 
 ALTER DATABASE [CyberCityDB] SET COMPATIBILITY_LEVEL = 150
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -106,11 +106,26 @@ CREATE TABLE [dbo].[ClassCode](
 	[OrganizationID] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Coordinator]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[EventCode]    Script Date: 10/25/2020 12:51:00 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE TABLE [dbo].[EventCode](
+	[EventCode] [varchar](50) NOT NULL,
+	[EventID] [int] NULL,
+	[VolunteerCode] [varchar](50) NULL,
+ CONSTRAINT [PK_EventCode] PRIMARY KEY CLUSTERED 
+(
+	[EventCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Table [dbo].[Coordinator]    Script Date: 11/06/2020 12:05:0000 AM ******/
 CREATE TABLE [dbo].[Coordinator](
 	[CoordinatorID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NULL,
@@ -143,6 +158,8 @@ CREATE TABLE [dbo].[Event](
 	[Date] [datetime] NULL,
 	[Name] [varchar](50) NULL,
 	[Room] [int] NULL,
+	[ContactName] [varchar](50) NULL,
+	[EventCode] [varchar](50) NULL,
  CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
 (
 	[EventID] ASC
@@ -169,8 +186,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[EventVolunteers](
+	[VolunteerID] [int] IDENTITY(1,1) NOT NULL,
 	[VolunteerCode] [varchar](50) NULL,
-	[EventID] [int] NULL
+	[EventCode] [varchar](50) NULL,
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Instructor]    Script Date: 11/06/2020 12:05:0000 AM ******/
@@ -254,7 +272,6 @@ CREATE TABLE [dbo].[Volunteer](
 	[VolunteerCode] [varchar](50) NOT NULL,
 	[Name] [varchar](50) NULL,
 	[Role] [varchar](50) NULL,
-	[OrganizationID] [int] NULL,
 	[Phone] [bigint] NULL,
 	[Email] [varchar](50) NULL,
  CONSTRAINT [PK_Volunteer] PRIMARY KEY CLUSTERED 
@@ -288,20 +305,15 @@ REFERENCES [dbo].[Event] ([EventID])
 GO
 ALTER TABLE [dbo].[EventActivities] CHECK CONSTRAINT [FK_EventActivities_Event]
 GO
-ALTER TABLE [dbo].[EventVolunteers]  WITH CHECK ADD  CONSTRAINT [FK_EventVolunteers_Event] FOREIGN KEY([EventID])
-REFERENCES [dbo].[Event] ([EventID])
+ALTER TABLE [dbo].[EventVolunteers]  WITH CHECK ADD  CONSTRAINT [FK_EventVolunteers_EventCode] FOREIGN KEY([EventCode])
+REFERENCES [dbo].[EventCode] ([EventCode])
 GO
-ALTER TABLE [dbo].[EventVolunteers] CHECK CONSTRAINT [FK_EventVolunteers_Event]
+ALTER TABLE [dbo].[EventVolunteers] CHECK CONSTRAINT [FK_EventVolunteers_EventCode]
 GO
 ALTER TABLE [dbo].[EventVolunteers]  WITH CHECK ADD  CONSTRAINT [FK_EventVolunteers_Volunteer] FOREIGN KEY([VolunteerCode])
 REFERENCES [dbo].[Volunteer] ([VolunteerCode])
 GO
 ALTER TABLE [dbo].[EventVolunteers] CHECK CONSTRAINT [FK_EventVolunteers_Volunteer]
-GO
-ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_Organization] FOREIGN KEY([OrganizationID])
-REFERENCES [dbo].[Organization] ([OrganizationID])
-GO
-ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_Organization]
 GO
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Instructor] FOREIGN KEY([InstructorCode])
 REFERENCES [dbo].[Instructor] ([InstructorCode])
@@ -318,11 +330,14 @@ REFERENCES [dbo].[AccessCode] ([Code])
 GO
 ALTER TABLE [dbo].[Volunteer] CHECK CONSTRAINT [FK_Volunteer_AccessCode]
 GO
-ALTER TABLE [dbo].[Volunteer]  WITH CHECK ADD  CONSTRAINT [FK_Volunteer_Organization] FOREIGN KEY([OrganizationID])
-REFERENCES [dbo].[Organization] ([OrganizationID])
+
+/*EventCode Foreign keys*/
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Event] FOREIGN KEY([EventID])
+REFERENCES [dbo].[Event] ([EventID])
 GO
-ALTER TABLE [dbo].[Volunteer] CHECK CONSTRAINT [FK_Volunteer_Organization]
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Event]
 GO
+
 USE [master]
 GO
 ALTER DATABASE [CyberCityDB] SET  READ_WRITE 
