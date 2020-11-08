@@ -54,7 +54,6 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
-            //Updates
         }
 
         protected void PopulateSequence()
@@ -1399,14 +1398,19 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
-        private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
-        private static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
+        
+        //SMTP information in WebConfig file MUST MATCH coordinator email address.
+        public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+        public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
 
-        protected void SendEmail(object sender, EventArgs e)
+        protected void Email_Coordinator_CodeUsed()
         {
-            EmailTemplateCreation();
             SmtpClient smtpClient = new SmtpClient();
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(sendToEmailAddress);
+            msg.IsBodyHtml = true;
+            msg.Subject = "CyberCity: CyberDay Access code used!";
+            msg.Body = "Cyber City Coordinator, " + coordinatorEmailAddress + ". The Access Code for CyberDay has been captured";
             smtpClient.Send(msg);
         }
 
