@@ -73,28 +73,28 @@ namespace CapstoneProject2_CIS484
             System.Data.DataColumn tColumn = null;
             // TABLE COLUMNS.
 
-            tColumn = new System.Data.DataColumn("RequestID", Type.GetType("System.String"));
+            tColumn = new System.Data.DataColumn("EventID", Type.GetType("System.String"));
             submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Name", Type.GetType("System.String"));
+            tColumn = new System.Data.DataColumn("Event Name", Type.GetType("System.String"));
             submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Phone", System.Type.GetType("System.String"));
+            tColumn = new System.Data.DataColumn("Contact Name", System.Type.GetType("System.String"));
             submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Email", System.Type.GetType("System.String"));
+            tColumn = new System.Data.DataColumn("EventCode", System.Type.GetType("System.String"));
             submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Org Name", System.Type.GetType("System.String"));
-            submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Org Type", System.Type.GetType("System.String"));
-            submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Date Request", System.Type.GetType("System.String"));
-            submissionDataTable.Columns.Add(tColumn);
-            tColumn = new System.Data.DataColumn("Event Name", System.Type.GetType("System.String"));
-            submissionDataTable.Columns.Add(tColumn);
+            //tColumn = new System.Data.DataColumn("Org Name", System.Type.GetType("System.String"));
+            //submissionDataTable.Columns.Add(tColumn);
+            //tColumn = new System.Data.DataColumn("Org Type", System.Type.GetType("System.String"));
+            //submissionDataTable.Columns.Add(tColumn);
+            //tColumn = new System.Data.DataColumn("Date Request", System.Type.GetType("System.String"));
+            //submissionDataTable.Columns.Add(tColumn);
+            //tColumn = new System.Data.DataColumn("Event Name", System.Type.GetType("System.String"));
+            //submissionDataTable.Columns.Add(tColumn);
         }
 
         private void AddRowsToGrid()
         {
             //Queries Relevant to home page, fetching event info student info and more
-            String sqlQuery = "Select * from ContactRequest";
+            String sqlQuery = "Select * from Event";
 
             //Get connection string from web.config file
             string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
@@ -1463,6 +1463,36 @@ namespace CapstoneProject2_CIS484
                 }
             }
             MessageBox.Show(RequestID);
+        }
+
+        protected void btnSubmitCode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnUpdateInstructorInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnReset_Instructor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnUpdateVolunteerInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRegisterStudent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRegisterStudentReset_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
