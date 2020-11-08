@@ -184,7 +184,7 @@ CREATE TABLE [dbo].[Instructor](
 	[OrganizationID] [int] NULL,
 	[Email] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
-	[ContactCode] [varchar](50) NULL,
+	[EventCode] [varchar](50) NULL,
  CONSTRAINT [PK_Instructor] PRIMARY KEY CLUSTERED 
 (
 	[InstructorCode] ASC
@@ -200,7 +200,7 @@ CREATE TABLE [dbo].[Organization](
 	[OrganizationID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NULL,
 	[Type] [varchar](50) NULL,
-	[ContactCode] [varchar](50) NULL,
+	[EventCode] [varchar](50) NULL,
  CONSTRAINT [PK_Organization] PRIMARY KEY CLUSTERED 
 (
 	[OrganizationID] ASC
