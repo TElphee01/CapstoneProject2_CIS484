@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/CyberDaySite1.Master" AutoEventWireup="true" CodeBehind="CyberDay_Home.aspx.cs" Inherits="CapstoneProject2_CIS484.CyberDay_Home" %>
 <asp:Content ID="HomepageContent" ContentPlaceHolderID="HomePlaceHolder" runat="server">
+
+ 
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -49,17 +51,36 @@
     </script>
     <div class="container" style="width: 100%; margin-left: 20px; margin-top: 20px; margin-right: 20px;">
         <div class="form-group">
-            <h2 style="text-align: center">Welcome to Cyber Day 2021</h2>
+            <h2 style="text-align: center" >Welcome to Cyber Day 2021</h2>
+             <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblAccessCode" runat="server" Text="Parents,Teachers and Volunteers please Enter your access code given here: " Font-Bold Font-Size="Larger"></asp:Label>
+                        <asp:Label ID="lblAccessCodeStatus" runat="server" Text=""></asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <br />
+                        <asp:TextBox ID="txtAccessCodeEntry" BorderStyle="Double" runat="server" Width="100" MaxLength="300" ></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button ID="btnAccessCodeEntry" runat="server" Text="Confirm" CausesValidation="false" UseSubmitBehavior="false" OnClick="btnAccessCodeEntry_Click" Width="100" />
+                        <p>(please navigate to the "USER" on the top pain after hitting Confirm to view more information)</p>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
-                    <img src="./images/Picture1.jpg" style="width: 100%">
+                    <img src="./images/Picture2.jpg" style="width: 100%">
                     <div class="text">Share your excitement in the field of computer information systems and cultivate the interests of young people in future business/technology related careers</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 4</div>
-                    <img src="./images/Picture2.jpg" style="width: 100%">
+                    <img src="./images/Picture1.jpg" style="width: 100%">
                     <div class="text">You will learn to develop advanced competencies and diagnostic skills to correct software problems</div>
                 </div>
 
@@ -85,26 +106,28 @@
                 <span class="dot" onclick="currentSlide(3)"></span>
                 <span class="dot" onclick="currentSlide(4)"></span>
             </div>
-            <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
+           <%-- <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Label ID="lblAccessCode" runat="server" Text="Have an Access code?"></asp:Label>
+                        <asp:Label ID="lblAccessCode" runat="server" Text="If you are a Parent, Teacher or Volunteer, Please Enter your access code given here: " Font-Bold Font-Size="Larger"></asp:Label>
                         <asp:Label ID="lblAccessCodeStatus" runat="server" Text=""></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="txtAccessCodeEntry" BorderStyle="Double" runat="server"></asp:TextBox>
+                        <br />
+                        <asp:TextBox ID="txtAccessCodeEntry" BorderStyle="Double" runat="server" Width="100" MaxLength="300" ></asp:TextBox>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button ID="btnAccessCodeEntry" runat="server" Text="Confirm" CausesValidation="false" UseSubmitBehavior="false" OnClick="btnAccessCodeEntry_Click" />
+                        <asp:Button ID="btnAccessCodeEntry" runat="server" Text="Confirm" CausesValidation="false" UseSubmitBehavior="false" OnClick="btnAccessCodeEntry_Click" Width="100" />
+                        <p>(please navigate to the "USER" on the top pain after hitting Confirm to view more information)</p>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </div>
+        </div>--%>
         <br />
         <br />
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Ics5sqhAVm8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Ics5sqhAVm8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen"></iframe>
         <br />
         <br />
         <div id="accordion-div">
@@ -842,7 +865,7 @@
         </fieldset>
 
            <%--FILE UPLOAD-------------------------------------------------------------------------------------------------------%>
-             <h3>File Upload / Download from/to Database using ASP.NET</h3>
+             <h3>Please upload any necessary files needed to attend the event (ex:photo waiver)</h3>
     <div>
         <table>
             <tr>
