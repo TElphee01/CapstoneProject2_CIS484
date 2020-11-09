@@ -21,7 +21,7 @@ INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'2222',
 GO
 INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'5678', N'Instructor', 2)
 GO
-INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'abcd', N'EventCode', 1)
+INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'5555', N'EventCode', 1)
 GO
 INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'efgh', N'Instructor', 1)
 GO
@@ -35,7 +35,7 @@ INSERT [dbo].[Event] ([EventID], [Date], [Name], [ContactName],[EventCode]) VALU
 GO
 SET IDENTITY_INSERT [dbo].[Event] OFF
 GO
-INSERT [dbo].EventCode ([EventCode], [EventID], [VolunteerID]) VALUES (N'1234', 1, 1)
+INSERT [dbo].EventCode ([EventCode], [EventID], [VolunteerID]) VALUES (N'5555', 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[Organization] ON 
 GO
