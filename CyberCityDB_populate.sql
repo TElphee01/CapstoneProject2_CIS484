@@ -35,7 +35,7 @@ SET IDENTITY_INSERT [dbo].[Event] OFF
 GO
 INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (2, N'1234', N'Clark Kent', 2, 5555588, N'kent@me.org')
 GO
-INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (1, N'abcd', N'Bruce Wayne', 1, 5555555, N'wayne@me.org')
+INSERT [dbo].EventCode ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (1, N'abcd', N'Bruce Wayne', 1, 5555555, N'wayne@me.org')
 GO
 SET IDENTITY_INSERT [dbo].[Organization] ON 
 GO
@@ -99,9 +99,9 @@ INSERT [dbo].[Event] ([EventID], [Date], [Name], [Room]) VALUES (2, CAST(N'2020-
 GO
 SET IDENTITY_INSERT [dbo].[Event] OFF
 GO
-INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (2, N'1234', N'Clark Kent', 2, 5555588, N'kent@me.org')
+INSERT [dbo].[EventCode] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (2, N'1234', N'Clark Kent', 2, 5555588, N'kent@me.org')
 GO
-INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (1, N'abcd', N'Bruce Wayne', 1, 5555555, N'wayne@me.org')
+INSERT [dbo].[EventCode] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (1, N'abcd', N'Bruce Wayne', 1, 5555555, N'wayne@me.org')
 GO
 SET IDENTITY_INSERT [dbo].[Organization] ON 
 GO
@@ -141,9 +141,9 @@ INSERT [dbo].[Event] ([EventID], [Date], [Name], [Room]) VALUES (2, CAST(N'2020-
 GO
 SET IDENTITY_INSERT [dbo].[Event] OFF
 GO
-INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (2, N'1234', N'Clark Kent', 2, 5555588, N'kent@me.org')
+INSERT [dbo].[EventCode] ([EventCode], [EventID], [Volunteer]) VALUES (N'1234', 1, N'Clark Kent', 2)
 GO
-INSERT [dbo].[EventContact] ([EventID], [ContactCode], [Name], [OrganizationID], [Phone], [Email]) VALUES (1, N'abcd', N'Bruce Wayne', 1, 5555555, N'wayne@me.org')
+INSERT [dbo].[EventCode] ([EventCode], [EventID], [Volunteer]) VALUES ( N'abcd', 2, N'Bruce Wayne', 1,)
 GO
 SET IDENTITY_INSERT [dbo].[Organization] ON 
 GO
