@@ -11,7 +11,6 @@ using System.Globalization;
 using System.Web.Configuration;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Web.Mail;
 using System.Net.Mail;
 using System.Text;
 using System.IO;
@@ -56,6 +55,7 @@ namespace CapstoneProject2_CIS484
             //    true);
             CreateGrid();
             PopulateSequence();
+            Email_Instructor_EventCreated();
         }
 
         protected void PopulateSequence()
@@ -1262,47 +1262,41 @@ namespace CapstoneProject2_CIS484
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
         public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
+        //public static String sendToEmailAddress = "maxwell.vaughan.mv@gmail.com";
 
-        protected void Email_Coordinator_CodeUsed()
+
+        protected void Email_Instructor_EventCreated()
         {
             SmtpClient smtpClient = new SmtpClient();
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
             msg.To.Add(sendToEmailAddress);
             msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity: CyberDay Access code used!";
-            msg.Body = "Cyber City Coordinator, " + coordinatorEmailAddress + ". The Access Code for CyberDay has been captured";
+            msg.Subject = "Your invited to a CyberCity event";
+            msg.Body = "Cyber City Coordinator, " + coordinatorEmailAddress + " has invited you to a Cyber City event! " +
+               "The Access Code Instructors will need: " + MasterAccessCode.GetHashCode() + "  <br/>" +
+                "The Class Code Volunteers and Parents will need: " + clusterCode.GetHashCode() + " <br />" +
+                "Please encourage parents to create an account in order to sign photo release forms early. <br/>"+
+                "<br />" +
+                "<br />" +
+                "Please Do Not Reply to this auto generated email.";
             smtpClient.Send(msg);
         }
 
-        protected void EmailTemplateCreation()
+        protected void Email_Volunteer_EventCreated()
         {
-            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-            SqlConnection con = new SqlConnection(strcon);
-            String sqlQuery = "SELECT * from [EMAIL]";
-            List<File> allEmails = new List<File>();
-
-            con.Open();
-            using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
-            {
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        File newFile = new File()
-                        {
-                            FileID = Convert.ToInt32(reader["FileID"]),
-                            FileName = reader["FileName"].ToString(),
-                            FileSize = Convert.ToInt32(reader["FileSize"]),
-                            ContentType = reader["ContentType"].ToString(),
-                            FileExtension = reader["FileExtension"].ToString(),
-                            FileContent = Encoding.ASCII.GetBytes(reader["FileContent"].ToString())
-                        };
-                        allEmails.Add(newFile);
-                    }
-                }
-                FileList.DataSource = allEmails;
-                FileList.DataBind();
-            }
+            SmtpClient smtpClient = new SmtpClient();
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(sendToEmailAddress);
+            msg.IsBodyHtml = true;
+            msg.Subject = "Your invited to a CyberCity event";
+            msg.Body = "Cyber City Coordinator, " + coordinatorEmailAddress + " has invited you to a Cyber City event! " +
+               "The Access Code you will need to access the system: " + MasterAccessCode.GetHashCode() + "  <br/>" +
+                "The Class Code you need to distribute to Parents: " + clusterCode.GetHashCode() + " <br />" +
+                "Please encourage parents to create an account in order to sign photo release forms early. <br/>" +
+                "<br />" +
+                "<br />" +
+                "Please Do Not Reply to this auto generated email.";
+            smtpClient.Send(msg);
         }
 
         protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
