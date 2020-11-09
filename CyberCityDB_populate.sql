@@ -25,6 +25,10 @@ INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'abcd',
 GO
 INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'efgh', N'Instructor', 1)
 GO
+INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'7788', N'ClassCode', 1)
+GO
+INSERT [dbo].[AccessCode] ([Code], [UserType], [CoordinatorID]) VALUES (N'9911', N'ClassCode', 1)
+GO
 SET IDENTITY_INSERT [dbo].[Event] ON 
 GO
 INSERT [dbo].[Event] ([EventID], [Date], [Name], [ContactName],[EventCode]) VALUES (1, CAST(N'2020-10-29T00:00:00.000' AS DateTime), N'CyberDay', 'Jim Jefferies','5555')
@@ -45,13 +49,13 @@ INSERT [dbo].[Instructor] ([InstructorCode], [Name], [OrganizationID], [Email], 
 GO
 INSERT [dbo].[Instructor] ([InstructorCode], [Name], [OrganizationID], [Email], [Phone], [EventCode]) VALUES (N'efgh', N'Peter Parker', 1, N'Parker@me.org', 5554444, N'5555')
 GO
-INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'1111', N'efgh', 1)
+INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'7788', N'efgh', 1)
 GO
-INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'1010', N'5678', 2)
+INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'9911', N'5678', 2)
 GO
-INSERT [dbo].[Volunteer] ([VolunteerCode], [Name], [Role], [Phone], [Email], [MealTicket]) VALUES (N'1111', N'Mary Lamb', N'Student', 5552233, N'Lamb@me.org', 'yes')
+INSERT [dbo].[Volunteer] ([VolunteerCode], [Name], [Role], [Phone], [Email], [MealTicket]) VALUES (N'2222', N'Mary Lamb', N'Student', 5552233, N'Lamb@me.org', 'yes')
 GO
-INSERT [dbo].[Volunteer] ([VolunteerCode], [Name], [Role], [Phone], [Email], [MealTicket]) VALUES (N'1010', N'Mary Circus', N'Student', 5552233, N'Lamb@me.org', 'yes')
+INSERT [dbo].[Volunteer] ([VolunteerCode], [Name], [Role], [Phone], [Email], [MealTicket]) VALUES (N'0987', N'Mary Circus', N'Student', 5552233, N'Lamb@me.org', 'yes')
 GO
 INSERT [dbo].[CoordinatorAuth] ([CoordinatorID], [Username], [Password]) VALUES (1, N'James', N'1111')
 GO
