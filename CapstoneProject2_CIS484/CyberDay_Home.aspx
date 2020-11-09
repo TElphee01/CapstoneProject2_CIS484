@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/CyberDaySite1.Master" AutoEventWireup="true" CodeBehind="CyberDay_Home.aspx.cs" Inherits="CapstoneProject2_CIS484.CyberDay_Home" %>
+
 <asp:Content ID="HomepageContent" ContentPlaceHolderID="HomePlaceHolder" runat="server">
     <script>
         var slideIndex = 1;
@@ -472,7 +473,7 @@
                         <asp:SqlDataSource ID="EventdisplayDb" runat="server"
                             DataSourceMode="DataReader"
                             ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-                            SelectCommand="SELECT E.EventID, E.Name as 'Event Name', Date, O.Name as 'Organization Name', Type, C.Name as 'Contact Name', C.ContactCode from Event E inner join EventContact C on E.EventID=C.EventID inner join Organization O on C.OrganizationID = O.OrganizationID Order by E.EventID ASC" />
+                            SelectCommand="SELECT E.EventID, E.Name as 'Event Name', E.ContactName as 'Contact Name', E.EventCode as 'Event Code', Date, O.Name as 'Organization Name', Type from Event E inner join Organization O on E.EventCode = O.EventCode Order by E.EventID ASC" />
 
                         <asp:GridView runat="server" ID="GvEventdisplay" DataSourceID="EventdisplayDb" OnRowDataBound="GvEventdisplay_RowDataBound" OnSelectedIndexChanged="GvEventdisplay_SelectedIndexChanged">
                             <HeaderStyle BackColor="#989898" ForeColor="white" />
@@ -841,40 +842,40 @@
             </asp:GridView>
         </fieldset>
 
-           <%--FILE UPLOAD-------------------------------------------------------------------------------------------------------%>
-             <h3>File Upload / Download from/to Database using ASP.NET</h3>
-    <div>
-        <table>
-            <tr>
-                <td>Select File : </td>
-                <td>
-                    <asp:FileUpload ID="FileUpload1" runat="server" /></td>
-                <td>
-                    <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" /></td>
-            </tr>
-        </table>
-        <br />
+        <%--FILE UPLOAD-------------------------------------------------------------------------------------------------------%>
+        <h3>File Upload / Download from/to Database using ASP.NET</h3>
         <div>
-            <%-- Add a Datalist for show uploaded files --%>
-            <asp:DataList ID="FileList" runat="server" RepeatColumns="4" RepeatDirection="Horizontal" OnItemCommand="FileList_ItemCommand">
-                <ItemTemplate>
-                    <table>
-                        <tr>
-                            <td><%#Eval("FileName","File Name : {0}") %></td>
-                        </tr>
-                        <tr>
-                            <td><%#String.Format("{0:0.00}",Convert.ToDecimal(Eval("FileSize"))/1024)%> KB</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument=<%#Eval("FileID") %>>Download</asp:LinkButton></td>
-                        </tr>
-                    </table>
-                </ItemTemplate>
-            </asp:DataList>
+            <table>
+                <tr>
+                    <td>Select File : </td>
+                    <td>
+                        <asp:FileUpload ID="FileUpload1" runat="server" /></td>
+                    <td>
+                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" /></td>
+                </tr>
+            </table>
+            <br />
+            <div>
+                <%-- Add a Datalist for show uploaded files --%>
+                <asp:DataList ID="FileList" runat="server" RepeatColumns="4" RepeatDirection="Horizontal" OnItemCommand="FileList_ItemCommand">
+                    <ItemTemplate>
+                        <table>
+                            <tr>
+                                <td><%#Eval("FileName","File Name : {0}") %></td>
+                            </tr>
+                            <tr>
+                                <td><%#String.Format("{0:0.00}",Convert.ToDecimal(Eval("FileSize"))/1024)%> KB</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument='<%#Eval("FileID") %>'>Download</asp:LinkButton></td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
         </div>
-    </div>
-<%--END OF FILE UPLOAD--------------------------------------------------------------------------------%>
+        <%--END OF FILE UPLOAD--------------------------------------------------------------------------------%>
 
         <asp:SqlDataSource ID="StudentDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:CyberCityDB %>"
@@ -1152,9 +1153,9 @@
 <asp:Content ID="StudentPage" ContentPlaceHolderID="StudentPage" runat="server">
     <div runat="server" id="StudentPageDiv" style="margin-top: 40px; display: none" visible="false">
         <script type="text/javascript">
-        $(document).ready(function () {
-            $(".js-example-basic-single").select2();
-        });
+            $(document).ready(function () {
+                $(".js-example-basic-single").select2();
+            });
         </script>
         <div style="margin-top: 40px;">
             <div class="container-fluid">

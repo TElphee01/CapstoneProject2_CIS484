@@ -53,18 +53,18 @@ namespace CapstoneProject2_CIS484
             //    "$(document).ready(function() { $('.js-example-basic-single').select2();  $('.grid').masonry({ itemSelector: '.grid-item', columnWidth: 160,  gutter: 20   }); $(document).ready(function () {$('#manBt').click(function() {$('#manPan1').slideToggle('slow');});});});",
             //    true);
             CreateGrid();
-            PopulateSequence();
+            //PopulateSequence();
         }
 
-        protected void PopulateSequence()
-        {
-            submissionDataTable.Clear();
-            AddRowsToGrid();
+        //protected void PopulateSequence()
+        //{
+        //    submissionDataTable.Clear();
+        //    AddRowsToGrid();
 
-            // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
-            ContactSubmissionGrid.DataSource = submissionDataTable;
-            ContactSubmissionGrid.DataBind();
-        }
+        //    // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
+        //    ContactSubmissionGrid.DataSource = submissionDataTable;
+        //    ContactSubmissionGrid.DataBind();
+        //}
 
         private void CreateGrid()
         {
@@ -91,44 +91,44 @@ namespace CapstoneProject2_CIS484
             submissionDataTable.Columns.Add(tColumn);
         }
 
-        private void AddRowsToGrid()
-        {
-            //Queries Relevant to home page, fetching event info student info and more
-            String sqlQuery = "Select * from ContactRequest";
+        //private void AddRowsToGrid()
+        //{
+        //    //Queries Relevant to home page, fetching event info student info and more
+        //    String sqlQuery = "Select * from ContactRequest";
 
-            //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-            //create new sqlconnection and connection to database by using connection string from web.config file
-            SqlConnection con = new SqlConnection(strcon);
-            con.Open();
-            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery, con);
-            int count = 1;
-            using (SqlCommand command = new SqlCommand(sqlQuery, con))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        //TableCell btnCell = new TableCell();
-                        //TableCell btnCell2 = new TableCell();
+        //    //Get connection string from web.config file
+        //    string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+        //    //create new sqlconnection and connection to database by using connection string from web.config file
+        //    SqlConnection con = new SqlConnection(strcon);
+        //    con.Open();
+        //    SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery, con);
+        //    int count = 1;
+        //    using (SqlCommand command = new SqlCommand(sqlQuery, con))
+        //    {
+        //        using (SqlDataReader reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                //TableCell btnCell = new TableCell();
+        //                //TableCell btnCell2 = new TableCell();
 
-                        //Button addEvent = new Button();
-                        //addEvent.ID = "AddEvent" + count;
-                        //addEvent.Text = "Add";
-                        ////addEvent.OnClientClick();
-                        //btnCell.Controls.Add(addEvent);
-                        //Button deleteEvent = new Button();
-                        //deleteEvent.ID = "DeleteEvent" + count;
-                        //deleteEvent.Text = "Delete";
-                        ////deleteEvent.OnClientClick();
-                        //btnCell2.Controls.Add(deleteEvent);
+        //                //Button addEvent = new Button();
+        //                //addEvent.ID = "AddEvent" + count;
+        //                //addEvent.Text = "Add";
+        //                ////addEvent.OnClientClick();
+        //                //btnCell.Controls.Add(addEvent);
+        //                //Button deleteEvent = new Button();
+        //                //deleteEvent.ID = "DeleteEvent" + count;
+        //                //deleteEvent.Text = "Delete";
+        //                ////deleteEvent.OnClientClick();
+        //                //btnCell2.Controls.Add(deleteEvent);
 
-                        //count++;
-                        submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]);
-                    }
-                }
-            }
-        }
+        //                //count++;
+        //                submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]);
+        //            }
+        //        }
+        //    }
+        //}
 
         //protected void GridView_RowDataBound(object sender,
         //    System.Web.UI.WebControls.GridViewRowEventArgs e)
@@ -309,7 +309,7 @@ namespace CapstoneProject2_CIS484
             }
 
             con.Close();
-            PopulateSequence();
+            //PopulateSequence();
             RequestListDDLUpdate.Update();
         }
 
@@ -581,7 +581,7 @@ namespace CapstoneProject2_CIS484
                 MessageBox.Show("Oops", "All fields must be filled");
             }
 
-            PopulateSequence();
+            //PopulateSequence();
             RequestListDDLUpdate.Update();
         }
 
@@ -627,7 +627,7 @@ namespace CapstoneProject2_CIS484
                 msg += ex.Message;
                 throw new Exception(msg);
             }
-            PopulateSequence();
+            //PopulateSequence();
             RequestListDDLUpdate.Update();
         }
 
@@ -1398,7 +1398,7 @@ namespace CapstoneProject2_CIS484
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
-        
+
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
         public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
