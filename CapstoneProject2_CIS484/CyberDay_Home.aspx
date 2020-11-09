@@ -741,7 +741,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="InstructorView" ContentPlaceHolderID="InstructorView" runat="server">
-    <div runat="server" id="InstDiv" style="margin-top: 40px;" visible="true">
+    <div runat="server" id="InstDiv" style="margin-top: 40px;" visible="false">
         <asp:Table runat="server">
             <asp:TableRow>
                 <asp:TableCell RowSpan="2">
@@ -798,14 +798,8 @@
                                     <div class="w-100"></div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <asp:Label ID="lblFirstName_Instructor" CssClass="label" runat="server" Text="First Name"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbFirstName_Instructor" runat="server" required="true" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblLastName_Instructor" CssClass="label" runat="server" Text="Last Name"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbLastName_Instructor" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                            <asp:Label ID="lblName_Instructor" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbName_Instructor" runat="server" required="true" />
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
@@ -841,14 +835,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <asp:Label ID="lblFirstName_Volunteer" CssClass="label" runat="server" Text="First Name"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbFirstName_Volunteer" runat="server" required="true" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblLastName_Volunteer" CssClass="label" runat="server" Text="Last Name"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbLastName_Volunteer" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                            <asp:Label ID="lblName_Volunteer" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbName_Volunteer" runat="server" required="true" />
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
@@ -891,14 +879,8 @@
                                     <div class="w-100"></div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <asp:Label ID="lblFirstName_Student" CssClass="label" runat="server" Text="First Name:"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbFirstName_Student" runat="server" required="true" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblLastName_Student" CssClass="label" runat="server" Text="Last Name:"></asp:Label>
-                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbLastName_Student" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                            <asp:Label ID="lblName_Student" CssClass="label" runat="server" Text="Name:"></asp:Label>
+                                            <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbName_Student" runat="server" required="true" ValidateRequestMode="Inherit" />
                                         </div>
                                     </div>
                                     <div class="w-100"></div>

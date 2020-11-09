@@ -618,40 +618,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblOrganization_Show;
 
         /// <summary>
-        /// lblFirstName_Instructor control.
+        /// lblName_Instructor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName_Instructor;
+        protected global::System.Web.UI.WebControls.Label lblName_Instructor;
 
         /// <summary>
-        /// tbFirstName_Instructor control.
+        /// tbName_Instructor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFirstName_Instructor;
-
-        /// <summary>
-        /// lblLastName_Instructor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastName_Instructor;
-
-        /// <summary>
-        /// tbLastName_Instructor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLastName_Instructor;
+        protected global::System.Web.UI.WebControls.TextBox tbName_Instructor;
 
         /// <summary>
         /// lblEmail_Instructor control.
@@ -717,40 +699,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.UpdatePanel UpdatePanelVolunteerView;
 
         /// <summary>
-        /// lblFirstName_Volunteer control.
+        /// lblName_Volunteer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName_Volunteer;
+        protected global::System.Web.UI.WebControls.Label lblName_Volunteer;
 
         /// <summary>
-        /// tbFirstName_Volunteer control.
+        /// tbName_Volunteer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFirstName_Volunteer;
-
-        /// <summary>
-        /// lblLastName_Volunteer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastName_Volunteer;
-
-        /// <summary>
-        /// tbLastName_Volunteer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLastName_Volunteer;
+        protected global::System.Web.UI.WebControls.TextBox tbName_Volunteer;
 
         /// <summary>
         /// lblEmail_Volunteer control.
@@ -834,40 +798,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblOrganization_Student_Show;
 
         /// <summary>
-        /// lblFirstName_Student control.
+        /// lblName_Student control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName_Student;
+        protected global::System.Web.UI.WebControls.Label lblName_Student;
 
         /// <summary>
-        /// tbFirstName_Student control.
+        /// tbName_Student control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFirstName_Student;
-
-        /// <summary>
-        /// lblLastName_Student control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastName_Student;
-
-        /// <summary>
-        /// tbLastName_Student control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLastName_Student;
+        protected global::System.Web.UI.WebControls.TextBox tbName_Student;
 
         /// <summary>
         /// lblNotes_Student control.
