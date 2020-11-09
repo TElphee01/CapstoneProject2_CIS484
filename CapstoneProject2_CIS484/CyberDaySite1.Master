@@ -128,10 +128,9 @@
             $(".js-example-basic-single").select2();
         });
     </script>
-    <div class="page-wrapper background1 p-t-200 p-b-200 font-poppins">
-        <div class="wrapper wrapper--w680"" >
-            <div class="container container--w500"
-             <div class="card card-7">
+    <div class="page-wrapper background1 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w750">
+            <div class="card card-4">
                 <div class="card-body">
                     <!-- My Heading and my Name included in the Title and in the body-->
                     <div class="row">
