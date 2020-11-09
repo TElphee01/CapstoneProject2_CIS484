@@ -27,6 +27,8 @@ namespace CapstoneProject2_CIS484
         public static AccessCode MasterAccessCodeCluster = new AccessCode();
         public static int CoordinatorID = CyberDaySite1.CoordinatorID;
         public static string contactCode = "";
+        public static string volunteerCode = "";
+        public static string StudentCode = "";
         public static string instructorCode = "";
         public static string clusterCode = "";
         public static string clusterCode5 = "";
@@ -124,7 +126,7 @@ namespace CapstoneProject2_CIS484
                         //btnCell2.Controls.Add(deleteEvent);
 
                         //count++;
-                        submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]);
+                       // submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
                     }
                 }
             }
@@ -361,6 +363,13 @@ namespace CapstoneProject2_CIS484
                         {
                             InstDiv.Attributes.Add("style", "margin-top: 40px; display = normal");
                             InstDiv.Visible = true;
+                            sqlsrcEventInfo.SelectCommand = "SELECT TOP(1000) Name, Date, ContactName as 'Event Contact' from EVENT where Event.EventCode ='" + code + "'";
+                            sqlsrcEventInfo.DataBind();
+                            grdviewEventInfo.DataBind();
+                            sqlsrcEventActivities.SelectCommand = "SELECT TOP(1000) ActivityName as 'Activity Name', Time, Room from EVENTACTIVITIES inner join Event on EventActivities.EventID = Event.EventID where Event.EventCode = '" + code + "'";
+                            sqlsrcEventActivities.DataBind();
+                            grdviewEventActivities.DataBind();
+
                         }
 
 
@@ -1331,6 +1340,8 @@ namespace CapstoneProject2_CIS484
             string type = "";
             contactCode = code;
             instructorCode = code;
+            volunteerCode = code;
+            StudentCode = code;
             clusterCode = code;
             SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             dbConnection.Open();
@@ -1364,13 +1375,16 @@ namespace CapstoneProject2_CIS484
                                 tbPhone_Instructor.Text = (HttpUtility.HtmlEncode(instReader[4].ToString()));
                             }
                             SqlConnection bb = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
-                            aa.Open();
+                            bb.Open();
                             SqlCommand instorg = new SqlCommand(qry2, bb);
                             SqlDataReader orgReader = instorg.ExecuteReader();
                             while (orgReader.Read())
                             {
                                lblOrganization_Show.Text = (HttpUtility.HtmlEncode(orgReader[1].ToString()));
                             }
+                            sqlsrcViewStudents.ConnectionString = "SELECT Name, Age, Notes, MealTicket as 'Meal Ticket Confirmation' from Student where Student.InstructorCode = '" + code + "'";
+                            sqlsrcViewStudents.DataBind();
+                            
 
                         }
                         else if (type.Equals("Volunteer"))
@@ -1404,7 +1418,7 @@ namespace CapstoneProject2_CIS484
                             {
                                 tbName_Student.Text = (HttpUtility.HtmlEncode(studentReader[1].ToString()));
                                 tbNotes_Student.Text = (HttpUtility.HtmlEncode(studentReader[3].ToString()));
-                                //tbAge_Student.Text = (HttpUtility.HtmlEncode(studentReader[3].ToString()));
+                                tbAge_Student.Text = (HttpUtility.HtmlEncode(studentReader[2].ToString()));
                             }
                             SqlConnection sqlcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
                             sqlcon.Open();
@@ -1412,7 +1426,7 @@ namespace CapstoneProject2_CIS484
                             SqlDataReader orgReader = orgCom.ExecuteReader();
                             while (orgReader.Read())
                             {
-                                lblOrganization_Student_Show.Text = (HttpUtility.HtmlEncode(orgReader[1].ToString()));
+                                //lblOrganization_Student_Show.Text = (HttpUtility.HtmlEncode(orgReader[1].ToString()));
                             }
                         }
                     }
@@ -1429,31 +1443,118 @@ namespace CapstoneProject2_CIS484
                 dbConnection.Close();
             }
         }
-    
+
 
         protected void btnUpdateInstructorInfo_Click(object sender, EventArgs e)
         {
+            // NEED INSTRUCTOR CODE TO BE STATIC HERE 
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
 
+            String sqlQuery_UpdateInstructor = "UPDATE Instructor SET Name = @Name, Email = @Email, Phone = @Phone WHERE InstructorCode = @InstructorCode";
+
+            SqlCommand cmd_UpdateInstructor = new SqlCommand(sqlQuery_UpdateInstructor, sqlconnect);
+            cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Name", tbName_Instructor.Text));
+            cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Email", tbEmail_Instructor.Text));
+            cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Phone", tbPhone_Instructor.Text));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
+
+
+            try
+            {
+                cmd_UpdateInstructor.CommandType = CommandType.Text;
+                cmd_UpdateInstructor.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Update Info Error into Teacher";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
         }
 
         protected void btnReset_Instructor_Click(object sender, EventArgs e)
         {
-
+            tbName_Instructor.Text = "";
+            tbEmail_Instructor.Text = "";
+            tbPhone_Instructor.Text = "";
         }
 
         protected void btnUpdateVolunteerInfo_Click(object sender, EventArgs e)
         {
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
 
+            String sqlQuery_UpdateVolunteer = "UPDATE Volunteer SET Name = @Name, Email = @Email, Phone = @Phone WHERE VolunteerCode = @VolunteerCode";
+
+            SqlCommand cmd_UpdateVolunteer = new SqlCommand(sqlQuery_UpdateVolunteer, sqlconnect);
+            cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Name", tbName_Volunteer.Text));
+            cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Email", tbEmail_Volunteer.Text));
+            cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Phone", tbPhone_Volunteer.Text));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@VolunteerCode", volunteerCode));
+
+
+            try
+            {
+                cmd_UpdateVolunteer.CommandType = CommandType.Text;
+                cmd_UpdateVolunteer.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Update Info Error into Volunteer";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
         }
 
-        protected void btnRegisterStudent_Click(object sender, EventArgs e)
-        {
 
+        protected void btnClearStudent_Click(object sender, EventArgs e)
+        {
+            tbName_Student.Text = "";
+            tbNotes_Student.Text = "";
+            tbAge_Student.Text = "";
+            rbtnMeal_No.Checked = false;
+            rbtnMeal_Yes.Checked = false;
         }
 
-        protected void btnRegisterStudentReset_Click(object sender, EventArgs e)
+        protected void btnUpdateStudent_Click(object sender, EventArgs e)
         {
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
 
+            string mealConfirmation = "";
+
+            String sqlQuery_UpdateStudent= "UPDATE Student SET Name = @Name, Age = @Age, Notes = @Notes, MealTicket = @MealTicket WHERE StudentCode = @StudentCode";
+
+            if (rbtnMeal_No.Checked == true)
+            {
+                mealConfirmation = "no";
+            }
+            if (rbtnMeal_Yes.Checked == true)
+            {
+                mealConfirmation = "yes";
+            }
+
+
+            SqlCommand cmd_UpdateStudent = new SqlCommand(sqlQuery_UpdateStudent, sqlconnect);
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@Name", tbName_Student.Text));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@Age", tbAge_Student.Text));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@Notes", tbNotes_Student.Text));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@MealTicket", mealConfirmation.ToString()));
+            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@StudentCode", StudentCode));
+
+
+            try
+            {
+                cmd_UpdateStudent.CommandType = CommandType.Text;
+                cmd_UpdateStudent.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Update Info Error into Student";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
         }
     }
 }

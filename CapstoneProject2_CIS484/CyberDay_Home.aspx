@@ -89,11 +89,16 @@
             <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Label ID="lblAccessCode" runat="server" Text="Have an Access code?"></asp:Label>
-                        <asp:Label ID="lblAccessCodeStatus" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lblAccessCode" runat="server" Text="Have an EventCode or ClassCode? Enter Here!"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox ID="txtAccessCodeEntry" BorderStyle="Double" runat="server"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="Label8" runat="server" Text="When you submit, Click on the User Tab Above!"></asp:Label>
+                        <asp:Label ID="lblAccessCodeStatus" runat="server" Text=""></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
@@ -744,14 +749,14 @@
     <div runat="server" id="InstDiv" style="margin-top: 40px;" visible="false">
         <asp:Table runat="server">
             <asp:TableRow>
-                <asp:TableCell RowSpan="2">
-                    <asp:Label ID="lblWelcomeEventPage" runat="server" Text="Welcome!"></asp:Label>
+                <asp:TableCell RowSpan="1">
+                    <asp:Label ID="lblWelcomeEventPage" runat="server" Text="Welcome!" Font-Size="XX-Large"></asp:Label>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell>
+                <asp:TableCell RowSpan="2">
                     <fieldset>
-                        <legend>Event Information:</legend>
+                        <legend><b>Event Information:</b></legend>
                         <asp:GridView
                             runat="server"
                             ID="grdviewEventInfo"
@@ -763,7 +768,7 @@
             <asp:TableRow>
                 <asp:TableCell>
                     <fieldset>
-                        <legend>Event Activities:</legend>
+                        <legend><b>Event Activities:</b></legend>
                         <asp:GridView
                             runat="server"
                             ID="grdviewEventActivities"
@@ -772,13 +777,13 @@
                     </fieldset>
                 </asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow>
+            <asp:TableRow RowSpan="1">
                 <asp:TableCell>
-                    <asp:Label ID="lblEnterAccessCode" runat="server" Text="Please enter your instructor/volunteer code: "></asp:Label>
-                    <asp:TextBox ID="tbAccessCode" runat="server"></asp:TextBox>
+                    <asp:Label ID="lblEnterAccessCode" runat="server" Text="Please enter your instructor/student/volunteer code:" Font-Size="Larger" Font-Bold="true"></asp:Label>
+                    <asp:TextBox ID="tbAcCssClass="input--style-4" ValidationGroup="StudentInput"cessCode" runat="server" CssClass="input--style-4" ValidationGroup="StudentInput" required="true"></asp:TextBox>
                 </asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow>
+            <asp:TableRow RowSpan="1">
                 <asp:TableCell>
                     <asp:Button runat="server" Text="SUBMIT" ID="btnSubmitCode" OnClick="btnSubmitCode_Click" />
                 </asp:TableCell>
@@ -893,7 +898,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <asp:Label ID="lblAge_Student" CssClass="label" runat="server" Text="Notes"></asp:Label>
+                                            <asp:Label ID="lblAge_Student" CssClass="label" runat="server" Text="Age"></asp:Label>
                                             <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbAge_Student" runat="server" required="true" ValidateRequestMode="Inherit" />
                                         </div>
                                     </div>
@@ -925,10 +930,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm text-left">
-                                        <asp:Button ID="btnRegisterStudent" runat="server" OnClick="btnRegisterStudent_Click" Text="Sign Up Student" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                                        <asp:Button ID="btnUpdateStudent" runat="server" OnClick="btnUpdateStudent_Click" Text="Sign Up Student" Style="margin-left: 0%;" CssClass="btn btn-primary" />
                                     </div>
                                     <div class="col-sm text-right">
-                                        <asp:Button ID="btnRegisterStudentReset" runat="server" OnClick="btnRegisterStudentReset_Click" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                                        <asp:Button ID="btnClearStudent" runat="server" OnClick="btnClearStudent_Click" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
                                     </div>
                                 </div>
                             </div>

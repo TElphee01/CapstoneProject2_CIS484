@@ -24,15 +24,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblAccessCode;
 
         /// <summary>
-        /// lblAccessCodeStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAccessCodeStatus;
-
-        /// <summary>
         /// txtAccessCodeEntry control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,24 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAccessCodeEntry;
+
+        /// <summary>
+        /// Label8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+
+        /// <summary>
+        /// lblAccessCodeStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAccessCodeStatus;
 
         /// <summary>
         /// btnAccessCodeEntry control.
@@ -564,15 +573,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblEnterAccessCode;
 
         /// <summary>
-        /// tbAccessCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbAccessCode;
-
-        /// <summary>
         /// btnSubmitCode control.
         /// </summary>
         /// <remarks>
@@ -897,22 +897,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_No;
 
         /// <summary>
-        /// btnRegisterStudent control.
+        /// btnUpdateStudent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegisterStudent;
+        protected global::System.Web.UI.WebControls.Button btnUpdateStudent;
 
         /// <summary>
-        /// btnRegisterStudentReset control.
+        /// btnClearStudent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegisterStudentReset;
+        protected global::System.Web.UI.WebControls.Button btnClearStudent;
 
         /// <summary>
         /// sqlsrcEventInfo control.
