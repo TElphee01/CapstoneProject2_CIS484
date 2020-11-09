@@ -802,7 +802,7 @@
             <asp:TableRow RowSpan="1">
                 <asp:TableCell>
                     <asp:Label ID="lblEnterAccessCode" runat="server" Text="Please enter your instructor/student/volunteer code:" Font-Size="Larger" Font-Bold="true"></asp:Label>
-                    <asp:TextBox ID="tbAcCssClass="input--style-4" ValidationGroup="StudentInput"cessCode" runat="server" CssClass="input--style-4" ValidationGroup="StudentInput" required="true"></asp:TextBox>
+                    <%--<asp:TextBox ID="tbAcCssClass" input--style-4 " ValidationGroup="StudentInput"cessCode" runat="server" CssClass="input--style-4" ValidationGroup="StudentInput" required="true"></asp:TextBox>--%>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow RowSpan="1">
