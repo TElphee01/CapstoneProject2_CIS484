@@ -93,41 +93,40 @@ namespace CapstoneProject2_CIS484
 
         private void AddRowsToGrid()
         {
-            //Queries Relevant to home page, fetching event info student info and more
-            String sqlQuery = "Select * from ContactRequest";
+            ////Queries Relevant to home page, fetching event info student info and more
+            //String sqlQuery = "Select * from ContactRequest";
 
-            //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-            //create new sqlconnection and connection to database by using connection string from web.config file
-            SqlConnection con = new SqlConnection(strcon);
-            con.Open();
-            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery, con);
-            int count = 1;
-            using (SqlCommand command = new SqlCommand(sqlQuery, con))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        //TableCell btnCell = new TableCell();
-                        //TableCell btnCell2 = new TableCell();
+            ////Get connection string from web.config file
+            //string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+            ////create new sqlconnection and connection to database by using connection string from web.config file
+            //SqlConnection con = new SqlConnection(strcon);
+            //con.Open();
+            //SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery, con);
+            //int count = 1;
+            //using (SqlCommand command = new SqlCommand(sqlQuery, con))
+            //{
+            //    using (SqlDataReader reader = command.ExecuteReader())
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            //TableCell btnCell = new TableCell();
+            //            //TableCell btnCell2 = new TableCell();
 
-                        //Button addEvent = new Button();
-                        //addEvent.ID = "AddEvent" + count;
-                        //addEvent.Text = "Add";
-                        ////addEvent.OnClientClick();
-                        //btnCell.Controls.Add(addEvent);
-                        //Button deleteEvent = new Button();
-                        //deleteEvent.ID = "DeleteEvent" + count;
-                        //deleteEvent.Text = "Delete";
-                        ////deleteEvent.OnClientClick();
-                        //btnCell2.Controls.Add(deleteEvent);
+            //            //Button addEvent = new Button();
+            //            //addEvent.ID = "AddEvent" + count;
+            //            //addEvent.Text = "Add";
+            //            ////addEvent.OnClientClick();
+            //            //btnCell.Controls.Add(addEvent);
+            //            //Button deleteEvent = new Button();
+            //            //deleteEvent.ID = "DeleteEvent" + count;
+            //            //deleteEvent.Text = "Delete";
+            //            ////deleteEvent.OnClientClick();
+            //            //btnCell2.Controls.Add(deleteEvent);
 
-                        //count++;
-                        submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]);
-                    }
-                }
-            }
+            //            //count++;
+            //            submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7]);
+            //        }
+            //    }
         }
 
         //protected void GridView_RowDataBound(object sender,
