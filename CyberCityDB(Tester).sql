@@ -194,7 +194,6 @@ GO
 CREATE TABLE [dbo].[Instructor](
 	[InstructorCode] [varchar](50) NOT NULL,
 	[Name] [varchar](50) NULL,
-	[OrganizationID] [int] NULL,
 	[Email] [varchar](50) NULL,
 	[Phone] [bigint] NULL,
 	[EventCode] [varchar](50) NULL,
@@ -232,25 +231,11 @@ CREATE TABLE [dbo].[Student](
 	[MealTicket] [varchar](50) NULL,
 	[InstructorCode] [varchar](50) NULL,
 	[Notes] [varchar](50) NULL,
+	[TshirtSize] [varchar](50) NULL,
 	[OrganizationID] [int] NULL,
  CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
 (
 	[StudentCode] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-/****** Object:  Table [dbo].[Tshirt]    Script Date: 11/06/2020 12:05:0000 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Tshirt](
-	[TshirtID] [int],
-	[Size] [varchar](50) NULL,
-	[StudentCode] [varchar](50) NULL,
- CONSTRAINT [PK_Tshirt] PRIMARY KEY CLUSTERED 
-(
-	[TshirtID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -330,12 +315,6 @@ ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Organization
 REFERENCES [dbo].[Organization] ([OrganizationID])
 GO
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Organization]
-GO
-
-ALTER TABLE [dbo].[Tshirt]  WITH CHECK ADD  CONSTRAINT [FK_Tshirt_Student] FOREIGN KEY([StudentCode])
-REFERENCES [dbo].[Student] ([StudentCode])
-GO
-ALTER TABLE [dbo].[Tshirt] CHECK CONSTRAINT [FK_Tshirt_Student]
 GO
 
 ALTER TABLE [dbo].[File]  WITH CHECK ADD  CONSTRAINT [FK_File_Student] FOREIGN KEY([StudentCode])
