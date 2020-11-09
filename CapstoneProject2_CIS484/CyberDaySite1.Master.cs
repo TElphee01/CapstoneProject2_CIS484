@@ -104,56 +104,38 @@ namespace CapstoneProject2_CIS484
             CDMConnection.Open();
             System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();
             findPass.Connection = CDMConnection;
-            findPass.CommandText = "Select CoordinatorID,Password from CoordinatorAuth where Username = @Username";
+            findPass.CommandText = "Select Password from CoordinatorAuth where Username = @Username";
             findPass.Parameters.Add(new SqlParameter("@Username", Username));
 
             SqlDataReader reader = findPass.ExecuteReader();
-            try
+            if (reader.HasRows)
             {
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    string storeHash = reader["Password"].ToString();
+
+                    if (PasswordHash.ValidatePassword(pass, storeHash))
                     {
-                        string storedHash = reader["Password"].ToString();
-                        if (PasswordHash.ValidatePassword(defaultFormPass.Text, storedHash))
-                        {
-                            UserLoginEmail = Username;
-                            UserLoginName = Username;
-                            CoordinatorID = int.Parse(reader["CoordinatorID"].ToString());
-
-                            ShowMessage("Logged in successfully as " + UserLoginName.Trim() + " Role: Coordinator! " + UserLoginType, MessageType.Success);
-
-                            if (UserLoginEmail != null)
-                            {
-                                //MasterMenu.Items[3].Text = HttpUtility.HtmlEncode((UserLoginName.Trim()).Trim());
-                            }
-                            else
-                            {
-                                ShowMessage("Still Null!" + reader.GetString(2), MessageType.Warning);
-                            }
-                            // LoginForm.InnerHtml = "LogOut";
-                            LoginDiv.Style.Add("display", "none");
-                            LogoutDiv.Style.Add("display", "block");
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), System.Guid.NewGuid().ToString(), "ShowMessage('Wrong Password!','Warning');", true);
-                        }
+                        UserLoginName = Username;
+                        ShowMessage("Logged in successfully as " + UserLoginName.Trim() + " Role: Coordinator! " + UserLoginType, MessageType.Success);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Password is wrong!");
                     }
                 }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), System.Guid.NewGuid().ToString(), "ShowMessage('Couldn't Find That Email!','Warning');", true);
-                }
             }
-            finally
+            else 
             {
+                MessageBox.Show("Usename is wrong!");
+            }
+
                 //dbConnection.Close();
                 CDMConnection.Close();
                 MasterMenu.Items.RemoveAt(1);
                 System.Web.UI.WebControls.MenuItem myItem = new System.Web.UI.WebControls.MenuItem("CoordinatorView", "2");
                 MasterMenu.Items.AddAt(1, myItem);
-            }
+            
             //ShowMessage("Heard! " + Username, MessageType.Info);
         }
 
