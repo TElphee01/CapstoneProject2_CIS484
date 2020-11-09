@@ -368,7 +368,7 @@ namespace CapstoneProject2_CIS484
                             grdviewEventInfo.DataBind();
                             sqlsrcEventActivities.SelectCommand = "SELECT TOP(1000) ActivityName as 'Activity Name', Time, Room from EVENTACTIVITIES inner join Event on EventActivities.EventID = Event.EventID where Event.EventCode = '" + code + "'";
                             sqlsrcEventActivities.DataBind();
-                            grdviewEventActivities.DataBind();
+                            GridView1.DataBind();
 
                         }
 
@@ -1447,6 +1447,7 @@ namespace CapstoneProject2_CIS484
 
         protected void btnUpdateInstructorInfo_Click(object sender, EventArgs e)
         {
+            lblSuccessPopup.Visible = true; 
             // NEED INSTRUCTOR CODE TO BE STATIC HERE 
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
@@ -1457,7 +1458,7 @@ namespace CapstoneProject2_CIS484
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Name", tbName_Instructor.Text));
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Email", tbEmail_Instructor.Text));
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Phone", tbPhone_Instructor.Text));
-            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
+            cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
 
 
             try
@@ -1482,6 +1483,8 @@ namespace CapstoneProject2_CIS484
 
         protected void btnUpdateVolunteerInfo_Click(object sender, EventArgs e)
         {
+            Label16.Visible = true;
+
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
 
@@ -1491,7 +1494,7 @@ namespace CapstoneProject2_CIS484
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Name", tbName_Volunteer.Text));
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Email", tbEmail_Volunteer.Text));
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Phone", tbPhone_Volunteer.Text));
-            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@VolunteerCode", volunteerCode));
+            cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@VolunteerCode", volunteerCode));
 
 
             try
@@ -1519,6 +1522,8 @@ namespace CapstoneProject2_CIS484
 
         protected void btnUpdateStudent_Click(object sender, EventArgs e)
         {
+            Label17.Visible = true;
+
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
 
