@@ -775,8 +775,8 @@
                     <asp:Label ID="lblWelcomeEventPage" runat="server" Text="Welcome!" Font-Size="XX-Large"></asp:Label>
                 </asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell RowSpan="2">
+            <asp:TableRow RowSpan="2">
+                <asp:TableCell>
                     <fieldset>
                         <legend><b>Event Information:</b></legend>
                         <asp:GridView
@@ -786,26 +786,26 @@
                         </asp:GridView>
                     </fieldset>
                 </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
                 <asp:TableCell>
                     <fieldset>
                         <legend><b>Event Activities:</b></legend>
                         <asp:GridView
                             runat="server"
-                            ID="grdviewEventActivities"
+                            ID="GridView1"
                             DataSourceID="sqlsrcEventActivities">
                         </asp:GridView>
                     </fieldset>
                 </asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow RowSpan="1">
+            <asp:TableRow>
                 <asp:TableCell>
+                    <br />
+                    <br />
                     <asp:Label ID="lblEnterAccessCode" runat="server" Text="Please enter your instructor/student/volunteer code:" Font-Size="Larger" Font-Bold="true"></asp:Label>
-                    <%--<asp:TextBox ID="tbAcCssClass" input--style-4 " ValidationGroup="StudentInput"cessCode" runat="server" CssClass="input--style-4" ValidationGroup="StudentInput" required="true"></asp:TextBox>--%>
+                    <asp:TextBox ID="tbAccessCode" runat="server" CssClass="input--style-4" ValidationGroup="StudentInput" required="true"></asp:TextBox>
                 </asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow RowSpan="1">
+            <asp:TableRow>
                 <asp:TableCell>
                     <asp:Button runat="server" Text="SUBMIT" ID="btnSubmitCode" OnClick="btnSubmitCode_Click" />
                 </asp:TableCell>
@@ -816,6 +816,11 @@
                         <ContentTemplate>
                             <div style="margin-top: 40px;">
                                 <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <b>PLEASE EDIT YOUR PERSONAL INFORMATION BELOW: </b>
+                                        </div>
+                                    </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <asp:Label ID="lblOrganization" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
@@ -849,6 +854,7 @@
                                 <div class="row">
                                     <div class="col-sm text-center">
                                         <asp:Button ID="btnUpdateInstructorInfo" runat="server" Text="Update Info" Style="margin-left: 0%;" CssClass="btn btn-primary" OnClick="btnUpdateInstructorInfo_Click" />
+                                        <asp:Label ID="lblSuccessPopup" runat="server" Text="Your information has been successfuly updated!" Font-Bold="true" Font-Size="Large"  Visible="false"/>
                                     </div>
                                 </div>
                             </div>
@@ -886,6 +892,8 @@
                                 <div class="row">
                                     <div class="col-sm text-center">
                                         <asp:Button ID="btnUpdateVolunteerInfo" runat="server" Text="Update Info" Style="margin-left: 0%;" CssClass="btn btn-primary" OnClick="btnUpdateVolunteerInfo_Click" />
+                                        <asp:Label ID="Label16" runat="server" Text="Your information has been successfuly updated!" Font-Bold="true" Font-Size="Large"  Visible="false"/>
+
                                     </div>
                                 </div>
                             </div>
@@ -952,14 +960,15 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm text-left">
-                                        <asp:Button ID="btnUpdateStudent" runat="server" OnClick="btnUpdateStudent_Click" Text="Sign Up Student" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                                        <asp:Button ID="btnUpdateStudent" runat="server" OnClick="btnUpdateStudent_Click" Text="Update Info" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                                        <asp:Label ID="Label17" runat="server" Text="Your information has been successfuly updated!" Font-Bold="true" Font-Size="Large"  Visible="false"/>
+
                                     </div>
                                     <div class="col-sm text-right">
                                         <asp:Button ID="btnClearStudent" runat="server" OnClick="btnClearStudent_Click" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
                                     </div>
                                 </div>
                             </div>
-                            <b>ATTACH FILES HERE:</b>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </asp:TableCell>
@@ -969,12 +978,12 @@
             ID="sqlsrcEventInfo"
             runat="server"
             ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-            SelectCommand="SELECT Name, Date, ContactName as 'Event Contact' from EVENT"></asp:SqlDataSource>
+            SelectCommand=""></asp:SqlDataSource>
         <asp:SqlDataSource
             ID="sqlsrcEventActivities"
             runat="server"
             ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-            SelectCommand="SELECT ActivityName as 'Activity Name', Time, Room from EVENTACTIVITIES"></asp:SqlDataSource>
+            SelectCommand=""></asp:SqlDataSource>
         <asp:SqlDataSource
             ID="sqlsrcViewStudents"
             runat="server"
@@ -994,38 +1003,6 @@
             <AlternatingRowStyle BackColor="LightGray" />
             <EditRowStyle BackColor="LightCyan" />
         </asp:DetailsView>--%>
-
-
-
-
-        <asp:Table runat="server">
-            <asp:TableRow>
-                <asp:TableCell RowSpan="2">
-                    <asp:Label ID="lblIinstructorClusterAccessCode_Label" runat="server" Text="Cluster Access code:"></asp:Label>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblInstructorClusterAccessCode" runat="server" Text=""></asp:Label>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblInstructorEvent_Label" runat="server" Text="Event:"></asp:Label>
-                </asp:TableCell>
-                <asp:TableCell>
-                    <asp:Label ID="lblInstructorEvent" runat="server" Text=""></asp:Label>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblInstructorDate_Label" runat="server" Text="Date:"></asp:Label>
-                </asp:TableCell>
-                <asp:TableCell>
-                    <asp:Label ID="lblInstructorDate" runat="server" Text=""></asp:Label>
-                </asp:TableCell>
-            </asp:TableRow>
-        </asp:Table>
 
         <%-- <asp:ListView runat="server" ID="InstructorAccessCodeListView"
         DataSourceID="StudentDataSource"
@@ -1052,14 +1029,6 @@
           </div>
         </ItemTemplate>
       </asp:ListView>--%>
-        <fieldset>
-            <legend>View Students:</legend>
-            <asp:GridView
-                runat="server"
-                ID="InstructorAccessCodeListView"
-                DataSourceID="StudentDataSource">
-            </asp:GridView>
-        </fieldset>
         <%--FILE UPLOAD-------------------------------------------------------------------------------------------------------%>
         <h3>File Upload / Download from/to Database using ASP.NET</h3>
         <div>

@@ -546,13 +546,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.GridView grdviewEventInfo;
 
         /// <summary>
-        /// grdviewEventActivities control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdviewEventActivities;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
         /// lblEnterAccessCode control.
@@ -562,6 +562,15 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEnterAccessCode;
+
+        /// <summary>
+        /// tbAccessCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAccessCode;
 
         /// <summary>
         /// btnSubmitCode control.
@@ -672,6 +681,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button btnUpdateInstructorInfo;
 
         /// <summary>
+        /// lblSuccessPopup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuccessPopup;
+
+        /// <summary>
         /// VolunteerViewInfo control.
         /// </summary>
         /// <remarks>
@@ -751,6 +769,15 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdateVolunteerInfo;
+
+        /// <summary>
+        /// Label16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label16;
 
         /// <summary>
         /// ParentRegisterAndAttach control.
@@ -897,6 +924,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button btnUpdateStudent;
 
         /// <summary>
+        /// Label17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label17;
+
+        /// <summary>
         /// btnClearStudent control.
         /// </summary>
         /// <remarks>
@@ -931,69 +967,6 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcViewStudents;
-
-        /// <summary>
-        /// lblIinstructorClusterAccessCode_Label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIinstructorClusterAccessCode_Label;
-
-        /// <summary>
-        /// lblInstructorClusterAccessCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInstructorClusterAccessCode;
-
-        /// <summary>
-        /// lblInstructorEvent_Label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInstructorEvent_Label;
-
-        /// <summary>
-        /// lblInstructorEvent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInstructorEvent;
-
-        /// <summary>
-        /// lblInstructorDate_Label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInstructorDate_Label;
-
-        /// <summary>
-        /// lblInstructorDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInstructorDate;
-
-        /// <summary>
-        /// InstructorAccessCodeListView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView InstructorAccessCodeListView;
 
         /// <summary>
         /// FileUpload1 control.
