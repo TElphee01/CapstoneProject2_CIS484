@@ -1451,7 +1451,7 @@ namespace CapstoneProject2_CIS484
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Name", tbName_Instructor.Text));
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Email", tbEmail_Instructor.Text));
             cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@Phone", tbPhone_Instructor.Text));
-            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
+            cmd_UpdateInstructor.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
 
 
             try
@@ -1485,7 +1485,7 @@ namespace CapstoneProject2_CIS484
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Name", tbName_Volunteer.Text));
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Email", tbEmail_Volunteer.Text));
             cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@Phone", tbPhone_Volunteer.Text));
-            cmd_UpdateStudent.Parameters.Add(new SqlParameter("@VolunteerCode", volunteerCode));
+            cmd_UpdateVolunteer.Parameters.Add(new SqlParameter("@VolunteerCode", volunteerCode));
 
 
             try
