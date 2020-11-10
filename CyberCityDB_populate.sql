@@ -63,21 +63,21 @@ INSERT [dbo].[CoordinatorAuth] ([CoordinatorID], [Username], [Password]) VALUES 
 GO
 SET IDENTITY_INSERT [dbo].[EventActivities] ON 
 GO
-INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (1, 1, N'JavaScript', CAST(N'09:00:00' AS Time), 200, 1)
+INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (N'1', 1, N'JavaScript', CAST(N'09:00:00' AS Time), 200, 1)
 GO
-INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (1, 2, N'Database Management', CAST(N'11:00:00' AS Time), 211, 1)
+INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (N'1', 2, N'Database Management', CAST(N'11:00:00' AS Time), 211, 1)
 GO
-INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (2, 3, N'Python', CAST(N'09:00:00' AS Time), 212, 2)
+INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (N'1', 3, N'Python', CAST(N'09:00:00' AS Time), 212, 2)
 GO
-INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (2, 4, N'Visual Studio', CAST(N'11:00:00' AS Time), 222, 2)
+INSERT [dbo].[EventActivities] ([EventID], [ActivityID], [ActivityName], [Time], [Room], [ActivityGuideID]) VALUES (N'1', 4, N'Visual Studio', CAST(N'11:00:00' AS Time), 222, 2)
 GO
 SET IDENTITY_INSERT [dbo].[EventActivities] OFF
 GO
 SET IDENTITY_INSERT [dbo].[EventVolunteers] ON 
 GO
-INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALUES (1,N'1111', N'1234')
+INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALUES (1,N'2222', N'5555')
 GO
-INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALUES (1,N'1111', N'1234')
+INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALUES (2,N'0987', N'5555')
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1111', N'Max Vaughan',12, 'yes',  N'efgh', N'Sharp Cookie', 1)
 GO
