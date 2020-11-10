@@ -1491,76 +1491,94 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl StudentSignUpDiv;
 
         /// <summary>
-        /// UpdatePanel4 control.
+        /// UpdatePanelStudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelStudentSignup;
 
         /// <summary>
-        /// Label7 control.
+        /// lblOrganization_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label lblOrganization_StudentSignup;
 
         /// <summary>
-        /// Label10 control.
+        /// lblOrganization_StudentSignup_Show control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.WebControls.Label lblOrganization_StudentSignup_Show;
 
         /// <summary>
-        /// Label11 control.
+        /// lblName_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
+        protected global::System.Web.UI.WebControls.Label lblName_StudentSignup;
 
         /// <summary>
-        /// Student_tbFirstName control.
+        /// tbName_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Student_tbFirstName;
+        protected global::System.Web.UI.WebControls.TextBox tbName_StudentSignup;
 
         /// <summary>
-        /// Label12 control.
+        /// lblNotes_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
+        protected global::System.Web.UI.WebControls.Label lblNotes_StudentSignup;
 
         /// <summary>
-        /// Student_tbLastName control.
+        /// tbNotes_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Student_tbLastName;
+        protected global::System.Web.UI.WebControls.TextBox tbNotes_StudentSignup;
 
         /// <summary>
-        /// Label13 control.
+        /// lblAge_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
+        protected global::System.Web.UI.WebControls.Label lblAge_StudentSignup;
+
+        /// <summary>
+        /// tbAge_StudentSignup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAge_StudentSignup;
+
+        /// <summary>
+        /// lblShirtSize_StudentSignup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblShirtSize_StudentSignup;
 
         /// <summary>
         /// ddlStudentSize control.
@@ -1572,40 +1590,31 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.DropDownList ddlStudentSize;
 
         /// <summary>
-        /// Label14 control.
+        /// lblMealTicket_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label14;
+        protected global::System.Web.UI.WebControls.Label lblMealTicket_StudentSignup;
 
         /// <summary>
-        /// ddlStudentColor control.
+        /// rbtnMeal_Yes_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStudentColor;
+        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_Yes_StudentSignup;
 
         /// <summary>
-        /// Label15 control.
+        /// rbtnMeal_No_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// Student_tbNotes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Student_tbNotes;
+        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_No_StudentSignup;
 
         /// <summary>
         /// btnStudentSignUp control.
@@ -1626,22 +1635,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button btnStudentSignUpReset;
 
         /// <summary>
-        /// lblStudentAccessCode control.
+        /// lblSucessStudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentAccessCode;
-
-        /// <summary>
-        /// lblStudentAccessCodeinput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentAccessCodeinput;
+        protected global::System.Web.UI.WebControls.Label lblSucessStudentSignup;
 
         /// <summary>
         /// StudentPageDiv control.
