@@ -1216,35 +1216,39 @@
 <asp:Content ID="StudentSignUp" ContentPlaceHolderID="StudentSignUp" runat="server">
     <div runat="server" id="StudentSignUpDiv" style="margin-top: 40px; display: none" visible="false">
 
-        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+        <asp:UpdatePanel ID="UpdatePanelStudentSignup" runat="server">
             <ContentTemplate>
                 <div style="margin-top: 40px;">
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label7" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
-                                <asp:Label ID="Label10" CssClass="label" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="lblOrganization_StudentSignup" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="lblOrganization_StudentSignup_Show" CssClass="label" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
                         <div class="w-100"></div>
-
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label11" CssClass="label" runat="server" Text="First Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Student_tbFirstName" runat="server" required="true" />
+                                <asp:Label ID="lblName_StudentSignup" CssClass="label" runat="server" Text="Name:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbName_StudentSignup" runat="server" required="true" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label12" CssClass="label" runat="server" Text="Last Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Student_tbLastName" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                <asp:Label ID="lblNotes_StudentSignup" CssClass="label" runat="server" Text="Notes:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbNotes_StudentSignup" runat="server" required="true" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblAge_StudentSignup" CssClass="label" runat="server" Text="Age:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbAge_StudentSignup" runat="server" required="true" ValidateRequestMode="Inherit" />                               
                             </div>
                         </div>
                         <div class="w-100"></div>
-
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label13" CssClass="label" runat="server" Text="T-Shirt Size"></asp:Label>
+                                <asp:Label ID="lblShirtSize_StudentSignup" CssClass="label" runat="server" Text="T-Shirt Size:"></asp:Label>
                                 <asp:DropDownList
                                     ID="ddlStudentSize"
                                     runat="server"
@@ -1258,23 +1262,9 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label14" CssClass="label" runat="server" Text="T-Shirt Color"></asp:Label>
-                                <asp:DropDownList
-                                    ID="ddlStudentColor"
-                                    runat="server"
-                                    CssClass="js-example-basic-single"
-                                    Width="50%">
-                                    <asp:ListItem Value="Red" />
-                                    <asp:ListItem Value="Blue" />
-                                    <asp:ListItem Value="Green" />
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="Label15" CssClass="label" runat="server" Text="Notes"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Student_tbNotes" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                <asp:Label ID="lblMealTicket_StudentSignup" CssClass="label" runat="server" Text="Would you like to sign up for Lunch?"></asp:Label>
+                                <asp:RadioButton ID="rbtnMeal_Yes_StudentSignup" runat="server" Text="Yes" />
+                                <asp:RadioButton ID="rbtnMeal_No_StudentSignup" runat="server" Text="No" />
                             </div>
                         </div>
                         <div class="w-100"></div>
@@ -1283,18 +1273,20 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm text-left">
-                            <asp:Button ID="btnStudentSignUp" runat="server" OnClick="btnStudentSignUp_Click" Text="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                            <asp:Button ID="btnStudentSignUp" runat="server" OnClick="btnStudentSignUp_Click" Text ="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
                         </div>
                         <div class="col-sm text-right">
                             <asp:Button ID="btnStudentSignUpReset" runat="server" OnClick="btnStudentSignUpReset_Click" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <asp:Label ID="lblStudentAccessCode" CssClass="label" runat="server" Text="Student Access Code: "></asp:Label>
-                        <asp:Label ID="lblStudentAccessCodeinput" CssClass="label" runat="server" Text=""></asp:Label>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <asp:Label ID="lblSucessStudentSignup" runat="server" Text="Success. Student is now signed up for Cyber Day!" Font-Bold="true" Visible="false"></asp:Label>
+                        </div>
                     </div>
+                    <div class="w-100"></div>
                 </div>
 
                 <%--<div class="col" />

@@ -24,12 +24,12 @@ namespace CapstoneProject2_CIS484
         private System.Data.DataTable submissionDataTable = new System.Data.DataTable();
         public static int count = 1;
         public static AccessCode MasterAccessCode = new AccessCode();
-        public static AccessCode MasterAccessCodeCluster = new AccessCode();
         public static int CoordinatorID = CyberDaySite1.CoordinatorID;
         public static string contactCode = "";
         public static string volunteerCode = "";
         public static string StudentCode = "";
         public static string instructorCode = "";
+        public static string ClassCode = "";
         public static string clusterCode = "";
         public static string clusterCode5 = "";
         public static string instructorCode5x = "";
@@ -326,7 +326,7 @@ namespace CapstoneProject2_CIS484
             string type = "";
             contactCode = code;
             instructorCode = code;
-            clusterCode = code;
+            ClassCode = code;
             SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             dbConnection.Open();
             try
@@ -348,16 +348,15 @@ namespace CapstoneProject2_CIS484
                             StudentSignUpDiv.Attributes.Add("style", "margin-top: 40px; display = normal");
                             StudentSignUpDiv.Visible = true;
                             lblAccessCodeStatus.Text = "Logged in as Student. Please Create Your Student Profile!";
-                            string EventinfoQry = "Select * from Organization inner join Cluster on Cluster.OrganizationID = Organization.OrganizationID where Cluster.ClusterCode ='" + clusterCode + "'";
 
-                            SqlConnection newcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
-                            newcon.Open();
-                            SqlCommand nameCommand = new SqlCommand(EventinfoQry, newcon);
-                            SqlDataReader OrgReader = nameCommand.ExecuteReader();
-                            while (OrgReader.Read())
-                            {
-                                Label10.Text = (HttpUtility.HtmlEncode(OrgReader[1].ToString()));
-                            }
+                            //SqlConnection newcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+                            //newcon.Open();
+                            //SqlCommand nameCommand = new SqlCommand(EventinfoQry, newcon);
+                            //SqlDataReader OrgReader = nameCommand.ExecuteReader();
+                            //while (OrgReader.Read())
+                            //{
+                            //   // Label10.Text = (HttpUtility.HtmlEncode(OrgReader[1].ToString()));
+                            //}
                         }
                         else if (type.Equals("EventCode"))
                         {
@@ -650,142 +649,237 @@ namespace CapstoneProject2_CIS484
 
         protected void btnStudentSignUp_Click(object sender, EventArgs e)
         {
-            // Generate Cluster and Instructor Codes
+            //// Generate Cluster and Instructor Codes
             string studentCode = "";
+            int CoordinatorID = 1; // Need as Static Variable
+            int organizationID=1;
+            string instructorCode = "";
+            string mealConfirmation = ""; 
+
             studentCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
-            lblStudentAccessCodeinput.Text = studentCode;
 
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
 
             // Find necessary information
-            string sqlQuery101 = "SELECT InstructorCode, OrganizationID FROM Cluster WHERE ClusterCode = '" + clusterCode + "'";
-            SqlCommand cmd101 = new SqlCommand(sqlQuery101, sqlconnect);
-            string Int_Code = "";
-            string orgID = "";
+            string sqlQuery_FindStudentInfo = "SELECT * FROM ClassCode WHERE ClassCode = @ClassCode";
+            SqlCommand cmd_FindStudentInfo = new SqlCommand(sqlQuery_FindStudentInfo, sqlconnect);
+            cmd_FindStudentInfo.Parameters.Add(new SqlParameter("@ClassCode", ClassCode));
 
             try
             {
-                SqlDataReader reader = cmd101.ExecuteReader();
-
+                SqlDataReader reader = cmd_FindStudentInfo.ExecuteReader(); 
+                
                 while (reader.Read())
                 {
-                    Int_Code = reader[0].ToString();
-                    orgID = reader[1].ToString();
+                    instructorCode = reader[1].ToString();
+                    organizationID = Convert.ToInt32(reader[2]); 
                 }
                 reader.Close();
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                string msg = "Select Error in EventContact";
+                string msg = "Select Error in Instructor:";
                 msg += ex.Message;
                 throw new Exception(msg);
             }
 
-            // Insert Student Access Code into AccessCode Table
-            String sqlQuery = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
-            SqlCommand cmd = new SqlCommand(sqlQuery, sqlconnect);
-            cmd.Parameters.Add(new SqlParameter("@Code", studentCode));
-            cmd.Parameters.Add(new SqlParameter("@UserType", "Student"));
+
+
+            string sqlQuery_InsertStudentCode = "INSERT INTO ACCESSCODE (Code, UserType, CoordinatorID) VALUES (@Code, @UserType, @CoordinatorID)";
+            SqlCommand cmd_InsertStudentCode = new SqlCommand(sqlQuery_InsertStudentCode, sqlconnect);
+            cmd_InsertStudentCode.Parameters.Add(new SqlParameter("@Code", studentCode));
+            cmd_InsertStudentCode.Parameters.Add(new SqlParameter("@UserType", "Student"));
+            cmd_InsertStudentCode.Parameters.Add(new SqlParameter("@CoordinatorID", CoordinatorID));
+
             try
             {
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
+                cmd_InsertStudentCode.CommandType = CommandType.Text;
+                cmd_InsertStudentCode.ExecuteNonQuery();
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                string msg = "Insert Error into AccessCode";
+                string msg = "Insert StudentCode Error into AccessCode";
                 msg += ex.Message;
                 throw new Exception(msg);
             }
 
-            //// Insert - Student
-            //String sqlQuery2 = "INSERT INTO STUDENT(StudentCode, Name, InstructorCode, Notes)" +
-            //    "VALUES (@StudentCode, @Name, @InstructorCode, @Notes)";
-            //SqlCommand cmd2 = new SqlCommand(sqlQuery2, sqlconnect);
-            //cmd2.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
-            //cmd2.Parameters.Add(new SqlParameter("@Name", Student_tbFirstName.Text + ' ' + Student_tbLastName.Text));
-            //cmd2.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
-            //cmd2.Parameters.Add(new SqlParameter("@Notes", Student_tbNotes.Text));
+            string sqlQuery_InsertStudentCode_StudentTable = "INSERT INTO Student (StudentCode) VALUES (@StudentCode)";
+            SqlCommand cmd_InsertStudentCode_StudentTable = new SqlCommand(sqlQuery_InsertStudentCode_StudentTable, sqlconnect);
+            cmd_InsertStudentCode_StudentTable.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+
+            try
+            {
+                cmd_InsertStudentCode_StudentTable.CommandType = CommandType.Text;
+                cmd_InsertStudentCode_StudentTable.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert StudentCode Error into Student";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            if (rbtnMeal_No_StudentSignup.Checked == true)
+            {
+                mealConfirmation = "no";
+            }
+            if (rbtnMeal_Yes_StudentSignup.Checked == true)
+            {
+                mealConfirmation = "yes";
+            }
+
+            String sqlQuery_Update_StudentTable = "UPDATE Student SET Name = @Name, Age = @Age, MealTicket = @MealTicket, InstructorCode = @InstructorCode, Notes = @Notes,  OrganizationID = @OrganizationID WHERE StudentCode = @StudentCode";
+            SqlCommand cmd_Update_StudentTable = new SqlCommand(sqlQuery_Update_StudentTable, sqlconnect);
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Name", tbName_StudentSignup.Text));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Age", tbAge_StudentSignup.Text));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@MealTicket", mealConfirmation));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Notes", tbNotes_StudentSignup.Text));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@OrganizationID", organizationID));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+
+            try
+            {
+                cmd_Update_StudentTable.CommandType = CommandType.Text;
+                cmd_Update_StudentTable.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Update Student Info Error into Student";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            lblSucessStudentSignup.Visible = true; 
+            sqlconnect.Close();
+
             //try
             //{
-            //    cmd2.CommandType = CommandType.Text;
-            //    cmd2.ExecuteNonQuery();
+            //    SqlDataReader reader = cmd101.ExecuteReader();
+
+            //    while (reader.Read())
+            //    {
+            //        Int_Code = reader[0].ToString();
+            //        orgID = reader[1].ToString();
+            //    }
+            //    reader.Close();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Select Error in EventContact";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+
+            //// Insert Student Access Code into AccessCode Table
+            //String sqlQuery = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
+            //SqlCommand cmd = new SqlCommand(sqlQuery, sqlconnect);
+            //cmd.Parameters.Add(new SqlParameter("@Code", studentCode));
+            //cmd.Parameters.Add(new SqlParameter("@UserType", "Student"));
+            //try
+            //{
+            //    cmd.CommandType = CommandType.Text;
+            //    cmd.ExecuteNonQuery();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Insert Error into AccessCode";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+
+            ////// Insert - Student
+            ////String sqlQuery2 = "INSERT INTO STUDENT(StudentCode, Name, InstructorCode, Notes)" +
+            ////    "VALUES (@StudentCode, @Name, @InstructorCode, @Notes)";
+            ////SqlCommand cmd2 = new SqlCommand(sqlQuery2, sqlconnect);
+            ////cmd2.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+            ////cmd2.Parameters.Add(new SqlParameter("@Name", Student_tbFirstName.Text + ' ' + Student_tbLastName.Text));
+            ////cmd2.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
+            ////cmd2.Parameters.Add(new SqlParameter("@Notes", Student_tbNotes.Text));
+            ////try
+            ////{
+            ////    cmd2.CommandType = CommandType.Text;
+            ////    cmd2.ExecuteNonQuery();
+            ////}
+            ////catch (System.Data.SqlClient.SqlException ex)
+            ////{
+            ////    string msg = "Insert Error into Student";
+            ////    msg += ex.Message;
+            ////    throw new Exception(msg);
+
+            ////}
+
+            //// Insert - Student Part 3
+            //String sqlQuery2_p3 = "INSERT INTO STUDENT(StudentCode, InstructorCode)" +
+            //    "VALUES (@StudentCode, @InstructorCode)";
+            //SqlCommand cmd2_p3 = new SqlCommand(sqlQuery2_p3, sqlconnect);
+            //cmd2_p3.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+            //cmd2_p3.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
+            //try
+            //{
+            //    cmd2_p3.CommandType = CommandType.Text;
+            //    cmd2_p3.ExecuteNonQuery();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Insert Error into Student Part 3";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+
+            ////// Insert - Student Part 1
+            ////String sqlQuery2_p1 = "UPDATE Student SET StudentCode = @StudentCode WHERE StudentCode = @StudentCode AND InstructorCode = @InstructorCode";
+            ////SqlCommand cmd2_p1 = new SqlCommand(sqlQuery2_p1, sqlconnect);
+            ////cmd2_p1.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
+            ////cmd2_p1.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+
+            ////try
+            ////{
+            ////    cmd2_p1.CommandType = CommandType.Text;
+            ////    cmd2_p1.ExecuteNonQuery();
+            ////}
+            ////catch (System.Data.SqlClient.SqlException ex)
+            ////{
+            ////    string msg = "Insert Error into Student Part 1";
+            ////    msg += ex.Message;
+            ////    throw new Exception(msg);
+
+            ////}
+
+            //// Insert - Student Part 2
+
+            //String sqlQuery2_p2 = "UPDATE Student SET Name = @Name, Notes = @Notes, OrganizationID = @OrganizationID WHERE InstructorCode = @InstructorCode AND StudentCode = @StudentCode";
+
+            //SqlCommand cmd2_p2 = new SqlCommand(sqlQuery2_p2, sqlconnect);
+            //cmd2_p2.Parameters.Add(new SqlParameter("@Name", Student_tbFirstName.Text + ' ' + Student_tbLastName.Text));
+            //cmd2_p2.Parameters.Add(new SqlParameter("@Notes", Student_tbNotes.Text));
+            //cmd2_p2.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
+            //cmd2_p2.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
+            //cmd2_p2.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
+
+            //try
+            //{
+            //    cmd2_p2.CommandType = CommandType.Text;
+            //    cmd2_p2.ExecuteNonQuery();
             //}
             //catch (System.Data.SqlClient.SqlException ex)
             //{
             //    string msg = "Insert Error into Student";
             //    msg += ex.Message;
             //    throw new Exception(msg);
-
             //}
 
-            // Insert - Student Part 3
-            String sqlQuery2_p3 = "INSERT INTO STUDENT(StudentCode, InstructorCode)" +
-                "VALUES (@StudentCode, @InstructorCode)";
-            SqlCommand cmd2_p3 = new SqlCommand(sqlQuery2_p3, sqlconnect);
-            cmd2_p3.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
-            cmd2_p3.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
-            try
-            {
-                cmd2_p3.CommandType = CommandType.Text;
-                cmd2_p3.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert Error into Student Part 3";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
 
-            //// Insert - Student Part 1
-            //String sqlQuery2_p1 = "UPDATE Student SET StudentCode = @StudentCode WHERE StudentCode = @StudentCode AND InstructorCode = @InstructorCode";
-            //SqlCommand cmd2_p1 = new SqlCommand(sqlQuery2_p1, sqlconnect);
-            //cmd2_p1.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
-            //cmd2_p1.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
-
-            //try
-            //{
-            //    cmd2_p1.CommandType = CommandType.Text;
-            //    cmd2_p1.ExecuteNonQuery();
-            //}
-            //catch (System.Data.SqlClient.SqlException ex)
-            //{
-            //    string msg = "Insert Error into Student Part 1";
-            //    msg += ex.Message;
-            //    throw new Exception(msg);
-
-            //}
-
-            // Insert - Student Part 2
-
-            String sqlQuery2_p2 = "UPDATE Student SET Name = @Name, Notes = @Notes, OrganizationID = @OrganizationID WHERE InstructorCode = @InstructorCode AND StudentCode = @StudentCode";
-
-            SqlCommand cmd2_p2 = new SqlCommand(sqlQuery2_p2, sqlconnect);
-            cmd2_p2.Parameters.Add(new SqlParameter("@Name", Student_tbFirstName.Text + ' ' + Student_tbLastName.Text));
-            cmd2_p2.Parameters.Add(new SqlParameter("@Notes", Student_tbNotes.Text));
-            cmd2_p2.Parameters.Add(new SqlParameter("@InstructorCode", Int_Code));
-            cmd2_p2.Parameters.Add(new SqlParameter("@StudentCode", studentCode));
-            cmd2_p2.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
-
-            try
-            {
-                cmd2_p2.CommandType = CommandType.Text;
-                cmd2_p2.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert Error into Student";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
         }
 
         protected void btnStudentSignUpReset_Click(object sender, EventArgs e)
         {
-            Student_tbFirstName.Text = "";
-            Student_tbLastName.Text = "";
-            Student_tbNotes.Text = "";
+            tbName_StudentSignup.Text = "";
+            tbNotes_StudentSignup.Text = "";
+            tbAge_StudentSignup.Text = "";
+            rbtnMeal_No_StudentSignup.Checked = false;
+            rbtnMeal_Yes_StudentSignup.Checked = false; 
         }
 
         protected void SubmitCoordinator_Click(object sender, EventArgs e)
@@ -1560,6 +1654,11 @@ namespace CapstoneProject2_CIS484
                 msg += ex.Message;
                 throw new Exception(msg);
             }
+        }
+
+        protected void btnStudentSignUp_Click1(object sender, EventArgs e)
+        {
+
         }
     }
 }
