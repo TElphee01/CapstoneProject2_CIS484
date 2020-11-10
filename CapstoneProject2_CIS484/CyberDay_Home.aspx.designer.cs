@@ -24,15 +24,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblAccessCode;
 
         /// <summary>
-        /// lblAccessCodeStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAccessCodeStatus;
-
-        /// <summary>
         /// txtAccessCodeEntry control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAccessCodeEntry;
+
+        /// <summary>
+        /// lblAccessCodeStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAccessCodeStatus;
 
         /// <summary>
         /// UpdatePanel2 control.
@@ -195,6 +195,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button ResetButton;
 
         /// <summary>
+        /// lblSuccess_EventCreation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuccess_EventCreation;
+
+        /// <summary>
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -274,15 +283,6 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblInstructor_SchOrg;
-
-        /// <summary>
-        /// DisplaySchool control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DisplaySchool;
 
         /// <summary>
         /// Orgview1 control.
@@ -420,6 +420,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button Instructor_ResetButton;
 
         /// <summary>
+        /// lblSucesss_InstructorCreation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSucesss_InstructorCreation;
+
+        /// <summary>
         /// Instructor_GridView control.
         /// </summary>
         /// <remarks>
@@ -436,15 +445,6 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcInstructor;
-
-        /// <summary>
-        /// UpdatePanel6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
 
         /// <summary>
         /// lblVolSelect control.
@@ -580,6 +580,15 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button RBVoluntter;
+
+        /// <summary>
+        /// lblSucesss_VolunteerCreation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSucesss_VolunteerCreation;
 
         /// <summary>
         /// VVolunteer1 control.

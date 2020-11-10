@@ -192,8 +192,8 @@ namespace CapstoneProject2_CIS484
                         {
                             StudentSignUpDiv.Attributes.Add("style", "margin-top: 40px; display = normal");
                             StudentSignUpDiv.Visible = true;
-                            lblAccessCodeStatus.Text = "Logged in as Student. Please Create Your Student Profile!";
-
+                            
+                            lblAccessCodeStatus.Text = "ClassCode Entered Successfully";
                             //SqlConnection newcon = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
                             //newcon.Open();
                             //SqlCommand nameCommand = new SqlCommand(EventinfoQry, newcon);
@@ -213,6 +213,7 @@ namespace CapstoneProject2_CIS484
                             sqlsrcEventActivities.SelectCommand = "SELECT TOP(1000) ActivityName as 'Activity Name', Time, Room from EVENTACTIVITIES inner join Event on EventActivities.EventID = Event.EventID where Event.EventCode = '" + code + "'";
                             sqlsrcEventActivities.DataBind();
                             GridView1.DataBind();
+                            lblAccessCodeStatus.Text = "EventCode Entered Successfully";
 
                         }
 
@@ -266,7 +267,7 @@ namespace CapstoneProject2_CIS484
         {
             // Generate Cluster and Instructor Codes
             ClassCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
-            instructorCode5x = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
+            instructorCode5x = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 7);
             AccessCode newAccessxx = new AccessCode();
             //instructorCode5x = "349843";
             //instructorCode5x += "v";
@@ -399,14 +400,12 @@ namespace CapstoneProject2_CIS484
                 msg += ex.Message;
                 throw new Exception(msg);
             }
-            //sqlsrcInstructor.SelectCommand =
-            //   "SELECT TOP (1000) INSTRUCTOR.NAME, INSTRUCTOR.EMAIL, INSTRUCTOR.PHONE, INSTRUCTOR.INSTRUCTORCODE, ClassCode.ClassCode FROM INSTRUCTOR " +
-            //   "INNER JOIN CLUSTER ON INSTRUCTOR.INSTRUCTORCODE = ClassCode.INSTRUCTORCODE " +
-            //   "WHERE  INSTRUCTOR.EventCode ='" + EventCode + "'";
-
-            //sqlsrcInstructor.DataBind();
-            //Instructor_GridView.DataBind();
+            sqlsrcInstructor.SelectCommand = "select * from Instructor";
+            sqlsrcInstructor.DataBind();
+            Instructor_GridView.DataBind();
             sqlconnect.Close();
+
+            lblSucesss_InstructorCreation.Visible = true; 
         }
 
         protected void InsertClusterCode()
@@ -431,6 +430,8 @@ namespace CapstoneProject2_CIS484
                 throw new Exception(msg);
             }
             sqlconnect.Close();
+
+
         }
 
         protected void Instructor_ResetButton_Click(object sender, EventArgs e)
@@ -1261,7 +1262,6 @@ namespace CapstoneProject2_CIS484
             //Get connection string from web.config file
             string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
             //Inserting teacher query
-
             //Get connection string from web.config file
             //create new sqlconnection and connection to database by using connection string from web.config file
             SqlConnection con = new SqlConnection(strcon);
@@ -1341,6 +1341,7 @@ namespace CapstoneProject2_CIS484
 
             ResetButton_Click(sender,e);
             //EventRefreshPanel.Update();
+            lblSuccess_EventCreation.Visible = true; 
         }
 
         protected void ResetButton_Click(object sender, EventArgs e)
@@ -1464,7 +1465,12 @@ namespace CapstoneProject2_CIS484
             //    msg += ex.Message;
             //    throw new Exception(msg);
             //}
+            Vvolunteer2.SelectCommand = "select * from Volunteer";
+            Vvolunteer2.DataBind();
+            VVolunteer1.DataBind();
             sqlconnect.Close();
+
+            lblSucesss_VolunteerCreation.Visible = true; 
         }
 
         protected void RBVoluntter_Click(object sender, EventArgs e)
@@ -1478,8 +1484,8 @@ namespace CapstoneProject2_CIS484
 
         protected void btnSubmitCode_Click(object sender, EventArgs e)
         {
-            instructorviewandedit.Attributes.Add("style", "margin - top: 40px; display = none");
-            instructorviewandedit.Visible = false;
+            //instructorviewandedit.Attributes.Add("style", "margin - top: 40px; display = normal");
+            //instructorviewandedit.Visible = true;
 
             VolunteerViewInfo.Attributes.Add("style", "margin-top: 40px; display = none");
             VolunteerViewInfo.Visible = false;
@@ -1513,6 +1519,7 @@ namespace CapstoneProject2_CIS484
                         {
                             instructorviewandedit.Attributes.Add("style", "margin-top: 40px; display = normal");
                             instructorviewandedit.Visible = true;
+
                             string qry1 = "Select * from Instructor where InstructorCode ='" + code + "'";
                             string qry2 = "Select * from Organization inner join Instructor on Organization.OrganizationID = Instructor.OrganizationID where Instructor.InstructorCode ='" + code + "'";
                             SqlConnection aa = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);

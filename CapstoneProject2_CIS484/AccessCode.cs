@@ -17,7 +17,7 @@ namespace CapstoneProject2_CIS484
         public string GenerateCode(bool lowercase, bool uppercase, bool numbers, bool otherChar,
             int codeSize)
         {
-            codeSize = 8;
+            
             char[] code = new char[codeSize];
             string charSet = "";
             System.Random random = new Random();
