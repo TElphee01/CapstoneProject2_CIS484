@@ -1,6 +1,6 @@
-﻿USE [master]
+USE [master]
 GO
-/****** Object:  Database [CyberCityDB]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Database [CyberCityDB]    Script Date: 11/10/2020 10:36:09 AM ******/
 CREATE DATABASE [CyberCityDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -8,7 +8,7 @@ CREATE DATABASE [CyberCityDB]
  LOG ON 
 ( NAME = N'CyberCityDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\CyberCityDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
-GO 
+GO
 ALTER DATABASE [CyberCityDB] SET COMPATIBILITY_LEVEL = 150
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -80,7 +80,7 @@ ALTER DATABASE [CyberCityDB] SET QUERY_STORE = OFF
 GO
 USE [CyberCityDB]
 GO
-/****** Object:  Table [dbo].[AccessCode]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[AccessCode]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -95,7 +95,7 @@ CREATE TABLE [dbo].[AccessCode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClassCode]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[ClassCode]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -106,22 +106,11 @@ CREATE TABLE [dbo].[ClassCode](
 	[OrganizationID] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EventCode]    Script Date: 10/25/2020 12:51:00 AM ******/
+/****** Object:  Table [dbo].[Coordinator]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[EventCode](
-	[EventCode] [varchar](50) NOT NULL,
-	[EventID] [int] NULL,
-	[VolunteerID] [int] NULL
-	) ON [Primary]
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-/****** Object:  Table [dbo].[Coordinator]    Script Date: 11/06/2020 12:05:0000 AM ******/
 CREATE TABLE [dbo].[Coordinator](
 	[CoordinatorID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NULL,
@@ -133,7 +122,7 @@ CREATE TABLE [dbo].[Coordinator](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CoordinatorAuth]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[CoordinatorAuth]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -144,7 +133,7 @@ CREATE TABLE [dbo].[CoordinatorAuth](
 	[Password] [varchar](200) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Event]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[Event]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -161,7 +150,7 @@ CREATE TABLE [dbo].[Event](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EventActivities]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[EventActivities]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -173,13 +162,20 @@ CREATE TABLE [dbo].[EventActivities](
 	[Time] [time](7) NULL,
 	[Room] [int] NULL,
 	[ActivityGuideID] [int] NULL
- CONSTRAINT [PK_EventActivities] PRIMARY KEY CLUSTERED 
-(
-	[ActivityID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EventVolunteers]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[EventCode]    Script Date: 11/10/2020 10:36:09 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EventCode](
+	[EventCode] [varchar](50) NOT NULL,
+	[EventID] [int] NULL,
+	[VolunteerID] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EventVolunteers]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,14 +183,29 @@ GO
 CREATE TABLE [dbo].[EventVolunteers](
 	[VolunteerID] [int] IDENTITY(1,1) NOT NULL,
 	[VolunteerCode] [varchar](50) NULL,
-	[EventCode] [varchar](50) NULL,
- CONSTRAINT [PK_EventVolunteers] PRIMARY KEY CLUSTERED 
-(
-	[VolunteerID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	[EventCode] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Instructor]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[File]    Script Date: 11/10/2020 10:36:09 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[File](
+	[FileID] [int] NOT NULL,
+	[FileName] [varchar](200) NULL,
+	[FileSize] [int] NOT NULL,
+	[ContentType] [varchar](200) NOT NULL,
+	[FileExtension] [varchar](10) NOT NULL,
+	[FileContent] [varbinary](max) NOT NULL,
+	[StudentCode] [varchar](50) NULL,
+ CONSTRAINT [PK_File] PRIMARY KEY CLUSTERED 
+(
+	[FileID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Instructor]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +223,7 @@ CREATE TABLE [dbo].[Instructor](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Organization]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[Organization]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,13 +239,13 @@ CREATE TABLE [dbo].[Organization](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Student]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[Student]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Student](
-	[StudentCode] [varchar](50),
+	[StudentCode] [varchar](50) NOT NULL,
 	[Name] [varchar](50) NULL,
 	[Age] [varchar](50) NULL,
 	[MealTicket] [varchar](50) NULL,
@@ -246,14 +257,14 @@ CREATE TABLE [dbo].[Student](
 	[StudentCode] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-
-/****** Object:  Table [dbo].[Tshirt]    Script Date: 11/06/2020 12:05:0000 AM ******/
+GO
+/****** Object:  Table [dbo].[Tshirt]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Tshirt](
-	[TshirtID] [int],
+	[TshirtID] [int] NOT NULL,
 	[Size] [varchar](50) NULL,
 	[StudentCode] [varchar](50) NULL,
  CONSTRAINT [PK_Tshirt] PRIMARY KEY CLUSTERED 
@@ -261,27 +272,8 @@ CREATE TABLE [dbo].[Tshirt](
 	[TshirtID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-
-/****** Object:  Table [dbo].[File]    Script Date: 10/27/2020 9:09:00 PM ******/
-SET ANSI_NULLS ON
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[File](
-	[FileID] [int] NOT NULL,
-	[FileName] [varchar](200) NULL,
-	[FileSize] [int] NOT NULL,
-	[ContentType] [varchar](200) NOT NULL,
-	[FileExtension] [varchar](10) NOT NULL,
-	[FileContent] [varbinary](MAX) NOT NULL,
-	[StudentCode] [varchar](50) NULL,
- CONSTRAINT [PK_File] PRIMARY KEY CLUSTERED 
-(
-	[FileID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-/****** Object:  Table [dbo].[Volunteer]    Script Date: 11/06/2020 12:05:0000 AM ******/
+/****** Object:  Table [dbo].[Volunteer]    Script Date: 11/10/2020 10:36:09 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,10 +316,25 @@ REFERENCES [dbo].[Event] ([EventID])
 GO
 ALTER TABLE [dbo].[EventActivities] CHECK CONSTRAINT [FK_EventActivities_Event]
 GO
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_AccessCode] FOREIGN KEY([EventCode])
+REFERENCES [dbo].[AccessCode] ([Code])
+GO
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_AccessCode]
+GO
+ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Event] FOREIGN KEY([EventID])
+REFERENCES [dbo].[Event] ([EventID])
+GO
+ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Event]
+GO
 ALTER TABLE [dbo].[EventVolunteers]  WITH CHECK ADD  CONSTRAINT [FK_EventVolunteers_Volunteer] FOREIGN KEY([VolunteerCode])
 REFERENCES [dbo].[Volunteer] ([VolunteerCode])
 GO
 ALTER TABLE [dbo].[EventVolunteers] CHECK CONSTRAINT [FK_EventVolunteers_Volunteer]
+GO
+ALTER TABLE [dbo].[File]  WITH CHECK ADD  CONSTRAINT [FK_File_Student] FOREIGN KEY([StudentCode])
+REFERENCES [dbo].[Student] ([StudentCode])
+GO
+ALTER TABLE [dbo].[File] CHECK CONSTRAINT [FK_File_Student]
 GO
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Instructor] FOREIGN KEY([InstructorCode])
 REFERENCES [dbo].[Instructor] ([InstructorCode])
@@ -339,39 +346,16 @@ REFERENCES [dbo].[Organization] ([OrganizationID])
 GO
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Organization]
 GO
-
 ALTER TABLE [dbo].[Tshirt]  WITH CHECK ADD  CONSTRAINT [FK_Tshirt_Student] FOREIGN KEY([StudentCode])
 REFERENCES [dbo].[Student] ([StudentCode])
 GO
 ALTER TABLE [dbo].[Tshirt] CHECK CONSTRAINT [FK_Tshirt_Student]
 GO
-
-ALTER TABLE [dbo].[File]  WITH CHECK ADD  CONSTRAINT [FK_File_Student] FOREIGN KEY([StudentCode])
-REFERENCES [dbo].[Student] ([StudentCode])
-GO
-ALTER TABLE [dbo].[File] CHECK CONSTRAINT [FK_File_Student]
-GO
-
-
 ALTER TABLE [dbo].[Volunteer]  WITH CHECK ADD  CONSTRAINT [FK_Volunteer_AccessCode] FOREIGN KEY([VolunteerCode])
 REFERENCES [dbo].[AccessCode] ([Code])
 GO
 ALTER TABLE [dbo].[Volunteer] CHECK CONSTRAINT [FK_Volunteer_AccessCode]
 GO
-
-/*EventCode Foreign keys*/
-ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_Event] FOREIGN KEY([EventID])
-REFERENCES [dbo].[Event] ([EventID])
-GO
-ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_Event]
-GO
-
-ALTER TABLE [dbo].[EventCode]  WITH CHECK ADD  CONSTRAINT [FK_EventCode_AccessCode] FOREIGN KEY([EventCode])
-REFERENCES [dbo].[AccessCode] ([Code])
-GO
-ALTER TABLE [dbo].[EventCode] CHECK CONSTRAINT [FK_EventCode_AccessCode]
-GO
-
 USE [master]
 GO
 ALTER DATABASE [CyberCityDB] SET  READ_WRITE 
