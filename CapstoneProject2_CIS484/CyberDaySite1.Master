@@ -295,8 +295,8 @@
                                     <div style="margin-top: 40px;">
                                         <asp:ContentPlaceHolder ID="Eventsignup" runat="server">
                                         </asp:ContentPlaceHolder>                                        
-<%--                                        <asp:ContentPlaceHolder ID="CoordinatorSubmissionViewPlaceholder" runat="server">
-                                        </asp:ContentPlaceHolder>--%>
+                                        <asp:ContentPlaceHolder ID="CoordinatorSubmissionViewPlaceholder" runat="server">
+                                        </asp:ContentPlaceHolder>
                                         <asp:ContentPlaceHolder ID="EventInfoPlaceHolder" runat="server">
                                         </asp:ContentPlaceHolder>
                                         <br />

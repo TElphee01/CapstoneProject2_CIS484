@@ -439,7 +439,7 @@
   </fieldset>
 </asp:Content>
 
-<%--<asp:Content ID="Content8" ContentPlaceHolderID="CoordinatorSubmissionViewPlaceholder" runat="server">
+<asp:Content ID="Content8" ContentPlaceHolderID="CoordinatorSubmissionViewPlaceholder" runat="server">
     <div class="form-group">
 
                 <asp:GridView ID="ContactSubmissionGrid"
@@ -462,7 +462,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-</asp:Content>--%>
+</asp:Content>
 <asp:Content ID="EventInfo" ContentPlaceHolderID="EventInfoPlaceHolder" runat="server">
     <fieldset>
         <br />
@@ -494,7 +494,7 @@
                         <ItemTemplate>
                             <table>
                                 <tr>
-                                    <td><%# Container.DataItem %></td>
+                                    <%--<td><%# Container.DataItem %></td>--%>
                                 </tr>
                             </table>
                         </ItemTemplate>
@@ -505,7 +505,7 @@
                         <ItemTemplate>
                             <table>
                                 <tr>
-                                    <td><%# Container.DataItem %></td>
+                                    <%--<td><%# Container.DataItem %></td>--%>
                                 </tr>
                             </table>
                         </ItemTemplate>
@@ -796,7 +796,7 @@
                         </div>--%>
                         <div class="col">
                         <div class="form-group">
-                        <asp:Label ID="Label16" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
+                        <asp:Label ID="Labe26" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
                         <asp:SqlDataSource runat="server" ID="eventview2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
                             SelectCommand="select * from Event"></asp:SqlDataSource>
 
@@ -1171,7 +1171,7 @@
                                 <div class="row">
                                     <div class="col-sm text-left">
                                         <asp:Button ID="btnUpdateStudent" runat="server" OnClick="btnUpdateStudent_Click" Text="Update Info" Style="margin-left: 0%;" CssClass="btn btn-primary" />
-                                        <asp:Label ID="Label17" runat="server" Text="Your information has been successfuly updated!" Font-Bold="true" Font-Size="Large"  Visible="false"/>
+                                        <asp:Label ID="Label25" runat="server" Text="Your information has been successfuly updated!" Font-Bold="true" Font-Size="Large"  Visible="false"/>
 
                                     </div>
                                     <div class="col-sm text-right">

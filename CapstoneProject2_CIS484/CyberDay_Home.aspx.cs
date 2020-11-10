@@ -31,7 +31,7 @@ namespace CapstoneProject2_CIS484
         public static string instructorCode = "";
         public static string ClassCode = "";
         public static string clusterCode = "";
-        public static string ClassCode = "";
+        //public static string ClassCode = "";
         public static string instructorCode5x = "";
         public static string VolunteerCode = "";
 
@@ -58,15 +58,15 @@ namespace CapstoneProject2_CIS484
             CreateGrid();
         }
 
-        //protected void PopulateSequence()
-        //{
-        //    submissionDataTable.Clear();
-        //    AddRowsToGrid();
+        protected void PopulateSequence()
+        {
+            submissionDataTable.Clear();
+            AddRowsToGrid();
 
-        //    // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
-        //    ContactSubmissionGrid.DataSource = submissionDataTable;
-        //    ContactSubmissionGrid.DataBind();
-        //}
+            // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
+            ContactSubmissionGrid.DataSource = submissionDataTable;
+            ContactSubmissionGrid.DataBind();
+        }
 
         private void CreateGrid()
         {
@@ -111,50 +111,50 @@ namespace CapstoneProject2_CIS484
                 {
                     while (reader.Read())
                     {
-                        //TableCell btnCell = new TableCell();
-                        //TableCell btnCell2 = new TableCell();
+                        TableCell btnCell = new TableCell();
+                        TableCell btnCell2 = new TableCell();
 
-                        //Button addEvent = new Button();
-                        //addEvent.ID = "AddEvent" + count;
-                        //addEvent.Text = "Add";
-                        ////addEvent.OnClientClick();
-                        //btnCell.Controls.Add(addEvent);
-                        //Button deleteEvent = new Button();
-                        //deleteEvent.ID = "DeleteEvent" + count;
-                        //deleteEvent.Text = "Delete";
-                        ////deleteEvent.OnClientClick();
-                        //btnCell2.Controls.Add(deleteEvent);
+                        System.Web.UI.WebControls.Button addEvent = new System.Web.UI.WebControls.Button();
+                        addEvent.ID = "AddEvent" + count;
+                        addEvent.Text = "Add";
+                        //addEvent.OnClientClick();
+                        btnCell.Controls.Add(addEvent);
+                        System.Web.UI.WebControls.Button deleteEvent = new System.Web.UI.WebControls.Button();
+                        deleteEvent.ID = "DeleteEvent" + count;
+                        deleteEvent.Text = "Delete";
+                        //deleteEvent.OnClientClick();
+                        btnCell2.Controls.Add(deleteEvent);
 
-                        //count++;
-                        // submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
+                        count++;
+                        submissionDataTable.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
                     }
                 }
             }
         }
 
-        //protected void GridView_RowDataBound(object sender,
-        //    System.Web.UI.WebControls.GridViewRowEventArgs e)
-        //{
-        //    Button addEvent = new Button();
-        //    addEvent.CssClass = "btn btn-primary";
-        //    addEvent.ID = "AddEvent" + count;
-        //    addEvent.Text = "Add";
-        //    addEvent.CausesValidation = false;
-        //    addEvent.UseSubmitBehavior = false;
-        //    addEvent.Click += new EventHandler(addEvent_Click);
-        //    e.Row.Cells[7].Controls.Add(addEvent);
-        //    Button deleteEvent = new Button();
-        //    deleteEvent.ID = "DeleteEvent" + count;
-        //    deleteEvent.Text = "Delete";
-        //    //deleteEvent.OnClientClick();
-        //    e.Row.Cells[8].Controls.Add(deleteEvent);
-        //    count++;
-        //}
+        protected void GridView_RowDataBound(object sender,
+            System.Web.UI.WebControls.GridViewRowEventArgs e)
+        {
+            System.Web.UI.WebControls.Button addEvent = new System.Web.UI.WebControls.Button();
+            addEvent.CssClass = "btn btn-primary";
+            addEvent.ID = "AddEvent" + count;
+            addEvent.Text = "Add";
+            addEvent.CausesValidation = false;
+            addEvent.UseSubmitBehavior = false;
+            addEvent.Click += new EventHandler(addEvent_Click);
+            e.Row.Cells[7].Controls.Add(addEvent);
+            System.Web.UI.WebControls.Button deleteEvent = new System.Web.UI.WebControls.Button();
+            deleteEvent.ID = "DeleteEvent" + count;
+            deleteEvent.Text = "Delete";
+            //deleteEvent.OnClientClick();
+            e.Row.Cells[8].Controls.Add(deleteEvent);
+            count++;
+        }
 
-        //protected void addEvent_Click(object sender, EventArgs e)
-        //{
+        protected void addEvent_Click(object sender, EventArgs e)
+        {
 
-        //}
+        }
 
         protected void btnAccessCodeEntry_Click(object sender, EventArgs e)
         {
@@ -233,35 +233,35 @@ namespace CapstoneProject2_CIS484
             }
         }
 
-        //protected void DeleteEvent_OnClickEvent_Click(object sender, EventArgs e)
-        //{
-        //    string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
+        protected void DeleteEvent_OnClickEvent_Click(object sender, EventArgs e)
+        {
+            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
 
-        //    string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-        //    //Inserting teacher query
+            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+            //Inserting teacher query
 
-        //    //Get connection string from web.config file
-        //    //create new sqlconnection and connection to database by using connection string from web.config file
-        //    SqlConnection con = new SqlConnection(strcon);
+            //Get connection string from web.config file
+            //create new sqlconnection and connection to database by using connection string from web.config file
+            SqlConnection con = new SqlConnection(strcon);
 
-        //    con.Open();
-        //    String sqlQuery = " Delete from ContactRequest where RequestID = '" + RequestID + "'";
-        //    SqlCommand cmd = new SqlCommand(sqlQuery, con);
+            con.Open();
+            String sqlQuery = " Delete from ContactRequest where RequestID = '" + RequestID + "'";
+            SqlCommand cmd = new SqlCommand(sqlQuery, con);
 
-        //    try
-        //    {
-        //        cmd.CommandType = CommandType.Text;
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    catch (System.Data.SqlClient.SqlException ex)
-        //    {
-        //        string msg = "Delete Error in ContactRequest:";
-        //        msg += ex.Message;
-        //        throw new Exception(msg);
-        //    }
-        //    PopulateSequence();
-        //    RequestListDDLUpdate.Update();
-        //}
+            try
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Delete Error in ContactRequest:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            PopulateSequence();
+            RequestListDDLUpdate.Update();
+        }
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
@@ -1218,7 +1218,7 @@ namespace CapstoneProject2_CIS484
             msg.Body = "<h2> Cyber City is happening! </h2><br>" +
                "Parents, please create an account in Cyber City system for your child with the Access Code provided in this email. " +
                "<br />" +
-               "<br /> Volunteer Code:" + MasterAccessCodeCluster.GetHashCode().ToString() + " <br />" +
+               "<br /> Volunteer Code:" + MasterAccessCode.GetHashCode().ToString() + " <br />" +
                "At: " + CyberCityURL.ToString() +
                "<br />" +
                "Please be sure to have the photo release form signed and upload your account 24 hours prior to the event. " +
@@ -1228,25 +1228,25 @@ namespace CapstoneProject2_CIS484
             smtpClient.Send(msg);
         }
 
-        //protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
+        protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
 
-        //    foreach (GridViewRow row in ContactSubmissionGrid.Rows)
-        //    {
-        //        if (row.RowIndex == ContactSubmissionGrid.SelectedIndex)
-        //        {
-        //            row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-        //            row.ToolTip = string.Empty;
-        //        }
-        //        else
-        //        {
-        //            row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-        //            row.ToolTip = "Click to select this row.";
-        //        }
-        //    }
-        //    MessageBox.Show(RequestID);
-        //}
+            foreach (GridViewRow row in ContactSubmissionGrid.Rows)
+            {
+                if (row.RowIndex == ContactSubmissionGrid.SelectedIndex)
+                {
+                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+                    row.ToolTip = string.Empty;
+                }
+                else
+                {
+                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+                    row.ToolTip = "Click to select this row.";
+                }
+            }
+            MessageBox.Show(RequestID);
+        }
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
         {
