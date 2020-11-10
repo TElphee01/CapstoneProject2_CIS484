@@ -796,7 +796,7 @@
                         </div>--%>
                         <div class="col">
                         <div class="form-group">
-                        <asp:Label ID="Label16" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
+                        <asp:Label ID="lblVolSelect" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
                         <asp:SqlDataSource runat="server" ID="eventview2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
                             SelectCommand="select * from Event"></asp:SqlDataSource>
 
@@ -810,7 +810,7 @@
                         <div class="w-100"></div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label17" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                <asp:Label ID="lblVolName" CssClass="label" runat="server" Text="Name"></asp:Label>
                                 <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vname1" runat="server"/>
                             </div>
                         </div>

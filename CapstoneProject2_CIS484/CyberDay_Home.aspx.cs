@@ -31,7 +31,6 @@ namespace CapstoneProject2_CIS484
         public static string instructorCode = "";
         public static string ClassCode = "";
         public static string clusterCode = "";
-        public static string ClassCode = "";
         public static string instructorCode5x = "";
         public static string VolunteerCode = "";
 
@@ -1156,11 +1155,11 @@ namespace CapstoneProject2_CIS484
         
         protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
-                e.Row.Attributes["style"] = "cursor:pointer";
-            }
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
+            //    e.Row.Attributes["style"] = "cursor:pointer";
+            //}
         }
 
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
@@ -1210,22 +1209,22 @@ namespace CapstoneProject2_CIS484
 
         protected void Email_Parent_EventCreated()
         {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City is happening! </h2><br>" +
-               "Parents, please create an account in Cyber City system for your child with the Access Code provided in this email. " +
-               "<br />" +
-               "<br /> Volunteer Code:" + MasterAccessCodeCluster.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "Please be sure to have the photo release form signed and upload your account 24 hours prior to the event. " +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
+            //SmtpClient smtpClient = new SmtpClient();
+            //System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            //msg.To.Add(sendToEmailAddress);
+            //msg.IsBodyHtml = true;
+            //msg.Subject = "CyberCity Event invitation.";
+            //msg.Body = "<h2> Cyber City is happening! </h2><br>" +
+            //   "Parents, please create an account in Cyber City system for your child with the Access Code provided in this email. " +
+            //   "<br />" +
+            //   "<br /> Volunteer Code:" +  AccessCode.MasterAccessCodeCluster.GetHashCode().ToString() + " <br />" +
+            //   "At: " + CyberCityURL.ToString() +
+            //   "<br />" +
+            //   "Please be sure to have the photo release form signed and upload your account 24 hours prior to the event. " +
+            //   "<br /> This code is unique to you and should not be distributed." +
+            //   "<br />" +
+            //   "This is an auto generated email. Please Do Not Reply.";
+            //smtpClient.Send(msg);
         }
 
         //protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
