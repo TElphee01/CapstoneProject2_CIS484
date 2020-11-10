@@ -25,13 +25,15 @@ namespace CapstoneProject2_CIS484
         public static AccessCode MasterAccessCode = new AccessCode();
         public static AccessCode MasterAccessCodeCluster = new AccessCode();
         public static int CoordinatorID = CyberDaySite1.CoordinatorID;
+        public static string EventCode = "";
         public static string contactCode = "";
         public static string volunteerCode = "";
         public static string StudentCode = "";
         public static string instructorCode = "";
         public static string clusterCode = "";
-        public static string clusterCode5 = "";
+        public static string ClassCode = "";
         public static string instructorCode5x = "";
+        public static string VolunteerCode = "";
 
         //public static Button addEvent = new Button();
 
@@ -54,18 +56,17 @@ namespace CapstoneProject2_CIS484
             //    "$(document).ready(function() { $('.js-example-basic-single').select2();  $('.grid').masonry({ itemSelector: '.grid-item', columnWidth: 160,  gutter: 20   }); $(document).ready(function () {$('#manBt').click(function() {$('#manPan1').slideToggle('slow');});});});",
             //    true);
             CreateGrid();
-            PopulateSequence();
         }
 
-        protected void PopulateSequence()
-        {
-            submissionDataTable.Clear();
-            AddRowsToGrid();
+        //protected void PopulateSequence()
+        //{
+        //    submissionDataTable.Clear();
+        //    AddRowsToGrid();
 
-            // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
-            ContactSubmissionGrid.DataSource = submissionDataTable;
-            ContactSubmissionGrid.DataBind();
-        }
+        //    // NOW BIND THE GRIDVIEW WITH THE DATATABLE.
+        //    ContactSubmissionGrid.DataSource = submissionDataTable;
+        //    ContactSubmissionGrid.DataBind();
+        //}
 
         private void CreateGrid()
         {
@@ -150,172 +151,19 @@ namespace CapstoneProject2_CIS484
         //    count++;
         //}
 
-        protected void addEvent_Click(object sender, EventArgs e)
-        {
-            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
-            string OrgName = "";
-            string OrgType = "";
-            string EventName = "";
-            string ContactName = "";
-            string Phone = "";
-            string Email = "";
-            DateTime Date1 = new DateTime();
-            AccessCode contact = new AccessCode();
-            string code = contact.GenerateCode(true, true, true, true, 8);
-            //MessageBox.Show(code);
-            //Inserting teacher query
-            //Get connection string from web.config file
-            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-            //Inserting teacher query
+        //protected void addEvent_Click(object sender, EventArgs e)
+        //{
 
-            //Get connection string from web.config file
-            //create new sqlconnection and connection to database by using connection string from web.config file
-            SqlConnection con = new SqlConnection(strcon);
-            String sqlQuery4 = "Select * from ContactRequest where RequestID = '" + RequestID + "'";
-            SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
-
-            con.Open();
-            try
-            {
-                SqlDataReader reader = cmd4.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    RequestID = reader[0].ToString();
-                    ContactName = reader[1].ToString();
-                    Phone = reader[2].ToString();
-                    Email = reader[3].ToString();
-                    OrgName = reader[4].ToString();
-                    OrgType = reader[5].ToString();
-                    Date1 = Convert.ToDateTime(reader[6]);
-
-                    EventName = reader[7].ToString();
-                }
-                reader.Close();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Select Error in ContactRequest:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-
-            String sqlQuery = "Insert into AccessCode (Code, UserType, CoordinatorID) values (@Code, @UserType, @CoordinatorID)";
-            String sqlQuery6 = "Insert into EventContact (ContactCode) values (@Code)";
-
-            SqlCommand cmd = new SqlCommand(sqlQuery, con);
-            cmd.Parameters.Add(new SqlParameter("@Code", code));
-            cmd.Parameters.Add(new SqlParameter("@UserType", "EventContact"));
-            cmd.Parameters.Add(new SqlParameter("@CoordinatorID", CyberDaySite1.CoordinatorID));
-
-            SqlCommand cmd6 = new SqlCommand(sqlQuery6, con);
-            cmd6.Parameters.Add(new SqlParameter("@Code", code));
-
-            try
-            {
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert/Update Error Insert into AccessCode:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            try
-            {
-                cmd6.CommandType = CommandType.Text;
-                cmd6.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert/Update Error Insert into EventContact 1:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            String sqlQuery2 = "  Insert into Organization (Name, Type, ContactCode) values " +
-                               "(@OrgName, @OrgType, @ContactCode);";
-            SqlCommand cmd2 = new SqlCommand(sqlQuery2, con);
-            cmd2.Parameters.Add(new SqlParameter("@OrgName", OrgName));
-            cmd2.Parameters.Add(new SqlParameter("@ContactCode", code));
-            cmd2.Parameters.Add(new SqlParameter("@OrgType", OrgType));
-
-            try
-            {
-                cmd2.CommandType = CommandType.Text;
-                cmd2.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert/Update Error Insert into Org:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-
-            String sqlQuery3 = "  Insert into Event (Date, Name) values " +
-                               "('" + Date1.ToString("yyyy-MM-dd") + "', @EventName);";
-            SqlCommand cmd3 = new SqlCommand(sqlQuery3, con);
-            cmd3.Parameters.Add(new SqlParameter("@EventName", EventName));
-            cmd3.Parameters.Add(new SqlParameter("@Date", Date1));
-
-            try
-            {
-                cmd3.CommandType = CommandType.Text;
-                cmd3.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert/Update Error Insert into Event:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            //UPDATE table_name
-            //SET column1 = value1, column2 = value2, ...
-            //WHERE condition;
-            String sqlQuery1 = "  Update  EventContact Set Name = @ContactName, OrganizationID =(select OrganizationID from Organization where Name=@OrgName), Phone = @Phone, Email = @Email, EventID=(select EventID from Event where Name=@EventName)" +
-                               " where ContactCode = @ContactCode;";
-            SqlCommand cmd1 = new SqlCommand(sqlQuery1, con);
-            cmd1.Parameters.Add(new SqlParameter("@Email", Email));
-            cmd1.Parameters.Add(new SqlParameter("@ContactCode", code));
-            cmd1.Parameters.Add(new SqlParameter("@ContactName", ContactName));
-            cmd1.Parameters.Add(new SqlParameter("@OrgName", OrgName));
-            cmd1.Parameters.Add(new SqlParameter("@Phone", Phone));
-            cmd1.Parameters.Add(new SqlParameter("@EventName", EventName));
-
-            try
-            {
-                cmd1.CommandType = CommandType.Text;
-                cmd1.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Insert/Update Error in EventContact:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-
-            String sqlQuery5 = " Delete from ContactRequest where RequestID = '" + RequestID + "'";
-            SqlCommand cmd5 = new SqlCommand(sqlQuery5, con);
-
-            try
-            {
-                cmd5.CommandType = CommandType.Text;
-                cmd5.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Delete Error in ContactRequest:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-
-            con.Close();
-            PopulateSequence();
-            RequestListDDLUpdate.Update();
-        }
+        //}
 
         protected void btnAccessCodeEntry_Click(object sender, EventArgs e)
         {
+            VolDiv.Attributes.Add("style", "margin-top: 40px; display = none");
+            VolDiv.Visible = false;
+            InstDiv.Attributes.Add("style", "margin-top: 40px; display = none");
+            InstDiv.Visible = false;
+            StudentSignUpDiv.Attributes.Add("style", "margin-top: 40px; display = none");
+            StudentSignUpDiv.Visible = false;
             StudentSignUpDiv.Attributes.Add("style", "margin-top: 40px; display = none");
             StudentSignUpDiv.Visible = false;
             InstDiv.Attributes.Add("style", "margin-top: 40px; display = none");
@@ -323,7 +171,7 @@ namespace CapstoneProject2_CIS484
 
             string code = txtAccessCodeEntry.Text;
             string type = "";
-            contactCode = code;
+            EventCode = code;
             instructorCode = code;
             clusterCode = code;
             SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
@@ -341,7 +189,6 @@ namespace CapstoneProject2_CIS484
                     while (reader.Read())
                     {
                         type = reader[1].ToString();
-
                         if (type.Equals("ClassCode"))
                         {
                             StudentSignUpDiv.Attributes.Add("style", "margin-top: 40px; display = normal");
@@ -387,123 +234,44 @@ namespace CapstoneProject2_CIS484
             }
         }
 
-        protected void AddRequest_Click(object sender, EventArgs e)
-        {
-            Boolean dup = false;
+        //protected void DeleteEvent_OnClickEvent_Click(object sender, EventArgs e)
+        //{
+        //    string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
 
-            if (dup == false && ContactRequestNameText.Text != "" && ContactRequestPhoneText.Text != "" && OrganizationTypeList.SelectedIndex > -1 && ContactRequestEmailText.Text != "")
-            {
-                //If filled out and non duplicate it inserts into object
-                string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-                SqlConnection connection = new SqlConnection(strcon);
-                SqlCommand cmd;
-                int sub;
-                try
-                {
-                    // open the Sql connection
-                    connection.Open();
-                    //Check for size in Note field and insert temporarily or permanently into DB if it does not exist
-                    string sqlStatement =
-                        "If Not Exists (select 1 from ContactRequest where ContactName= @ContactName and OrganizationName= @OrganizationName) " +
-                        "Insert into ContactRequest (ContactName, Phone, Email, OrganizationName, OrganizationType, EventNameRequest, DateRequest) " +
-                        "values(@ContactName, @Phone, @Email, @OrganizationName, @OrganizationType, @EventNameRequest, @DateRequest)";
-                    String strDateFormat = "yyyy-MM-dd";
-                    string x = EventDateRequest.ToString("yyyy-MM-dd");
-                    cmd = new SqlCommand(sqlStatement, connection);
-                    cmd.Parameters.AddWithValue("@ContactName", ContactRequestNameText.Text);
-                    cmd.Parameters.AddWithValue("@OrganizationName", ContactRequestOrganizationNameText.Text);
-                    cmd.Parameters.AddWithValue("@OrganizationType", OrganizationTypeList.SelectedValue.ToString());
-                    DateTime to = DateTime.ParseExact(x, strDateFormat, CultureInfo.InvariantCulture);
-                    cmd.Parameters.AddWithValue("@DateRequest", to);
+        //    string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+        //    //Inserting teacher query
 
-                    cmd.Parameters.AddWithValue("@Phone", ContactRequestPhoneText.Text);
-                    cmd.Parameters.AddWithValue("@Email", ContactRequestEmailText.Text);
-                    cmd.Parameters.AddWithValue("@EventNameRequest", EventNameRequest.Text);
+        //    //Get connection string from web.config file
+        //    //create new sqlconnection and connection to database by using connection string from web.config file
+        //    SqlConnection con = new SqlConnection(strcon);
 
-                    cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                    ResetButton_Click(sender, e);
-                }
-                //If it does not work
-                catch (System.Data.SqlClient.SqlException ex)
-                {
-                    string msg = "Insert/Update Error:";
-                    msg += ex.Message;
-                    throw new Exception(msg);
-                }
-                finally
-                {
-                    // close the Sql Connection
-                    connection.Close();
-                }
-            }
-            //Failure alternatives
-            else if (dup == true)
-            {
-                MessageBox.Show("Try Again", "Duplicate");
-            }
-            else
-            {
-                MessageBox.Show("Oops", "All fields must be filled");
-            }
+        //    con.Open();
+        //    String sqlQuery = " Delete from ContactRequest where RequestID = '" + RequestID + "'";
+        //    SqlCommand cmd = new SqlCommand(sqlQuery, con);
 
-            PopulateSequence();
-            RequestListDDLUpdate.Update();
-        }
-
-        protected void ResetButton_Click(object sender, EventArgs eventArgs)
-        {
-            ContactRequestNameText.Text = string.Empty;
-            ContactRequestOrganizationNameText.Text = string.Empty;
-            OrganizationTypeList.SelectedIndex = 0;
-            ContactRequestPhoneText.Text = string.Empty;
-            ContactRequestEmailText.Text = string.Empty;
-            EventNameRequest.Text = string.Empty;
-        }
-
-        protected void EventRequestDate_SelectionChanged(object sender, EventArgs e)
-        {
-            EventDateRequest = EventRequestDate.SelectedDate;
-            //MessageBox.Show(EventDateRequest.Date.ToShortDateString());
-        }
-
-        protected void DeleteEvent_OnClickEvent_Click(object sender, EventArgs e)
-        {
-            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
-
-            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-            //Inserting teacher query
-
-            //Get connection string from web.config file
-            //create new sqlconnection and connection to database by using connection string from web.config file
-            SqlConnection con = new SqlConnection(strcon);
-
-            con.Open();
-            String sqlQuery = " Delete from ContactRequest where RequestID = '" + RequestID + "'";
-            SqlCommand cmd = new SqlCommand(sqlQuery, con);
-
-            try
-            {
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Delete Error in ContactRequest:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            PopulateSequence();
-            RequestListDDLUpdate.Update();
-        }
+        //    try
+        //    {
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (System.Data.SqlClient.SqlException ex)
+        //    {
+        //        string msg = "Delete Error in ContactRequest:";
+        //        msg += ex.Message;
+        //        throw new Exception(msg);
+        //    }
+        //    PopulateSequence();
+        //    RequestListDDLUpdate.Update();
+        //}
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
             // Generate Cluster and Instructor Codes
+            ClassCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             instructorCode5x = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             AccessCode newAccessxx = new AccessCode();
-            instructorCode5x = "349843";
-            instructorCode5x += "v";
+            //instructorCode5x = "349843";
+            //instructorCode5x += "v";
             //string instructorCode = "";
             //instructorCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             //MessageBox.Show(instructorCode.ToString(), "Code 2 for instructor: ");
@@ -512,11 +280,12 @@ namespace CapstoneProject2_CIS484
             sqlconnect.Open();
 
             // Necessary information for insert statements
-            string eventID = "";
-            string orgID = "";
+            string eventID = EventView.SelectedValue;
+            string orgID = ddlOrgview.SelectedValue;
+            string EventCode = "";
 
             // Find necessary information
-            string sqlQuery2 = "SELECT EventID, ContactCode, OrganizationID FROM EVENTCONTACT WHERE CONTACTCODE = '" + contactCode + "'";
+            string sqlQuery2 = "SELECT EventCode FROM Event where EventID = '" + eventID + "'";
             SqlCommand cmd100 = new SqlCommand(sqlQuery2, sqlconnect);
 
             try
@@ -525,8 +294,7 @@ namespace CapstoneProject2_CIS484
 
                 while (reader.Read())
                 {
-                    eventID = reader[0].ToString();
-                    orgID = reader[2].ToString();
+                    EventCode = reader[0].ToString();
                 }
                 reader.Close();
             }
@@ -536,6 +304,27 @@ namespace CapstoneProject2_CIS484
                 msg += ex.Message;
                 throw new Exception(msg);
             }
+
+            //string sqlQuery99 = "SELECT OrganizationID FROM Organization where Name = '" + OrgName + "'";
+            //SqlCommand cmd99 = new SqlCommand(sqlQuery99, sqlconnect);
+
+            //try
+            //{
+            //    SqlDataReader reader = cmd99.ExecuteReader();
+
+            //    while (reader.Read())
+            //    {
+            //        orgID = reader[0].ToString();
+            //    }
+            //    reader.Close();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Select Error in EventContact";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+
 
             // INSERT SQL Statements
             InsertClusterCode();
@@ -557,9 +346,9 @@ namespace CapstoneProject2_CIS484
             }
 
             // Insert - Cluster Part 1
-            String sqlQuery_p2 = "INSERT INTO CLUSTER(ClusterCode) VALUES (@ClusterCode)";
+            String sqlQuery_p2 = "INSERT INTO ClassCode(ClassCode) VALUES (@ClassCode)";
             SqlCommand cmd_p2 = new SqlCommand(sqlQuery_p2, sqlconnect);
-            cmd_p2.Parameters.Add(new SqlParameter("@ClusterCode", clusterCode5));
+            cmd_p2.Parameters.Add(new SqlParameter("@ClassCode", ClassCode));
 
             try
             {
@@ -568,21 +357,21 @@ namespace CapstoneProject2_CIS484
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                string msg = "Insert Error into Cluster Part 1";
+                string msg = "Insert Error into ClassCode Part 1";
                 msg += ex.Message;
                 throw new Exception(msg);
             }
 
             // Insert - Instructor
-            String sqlQuery4 = "INSERT INTO INSTRUCTOR(InstructorCode, Name, OrganizationID, Email, Phone, ContactCode)" +
-                "VALUES (@InstructorCode, @Name, @OrganizationID, @Email, @Phone, @ContactCode)";
+            String sqlQuery4 = "INSERT INTO INSTRUCTOR(InstructorCode, Name, OrganizationID, Email, Phone, EventCode)" +
+                "VALUES (@InstructorCode, @Name, @OrganizationID, @Email, @Phone, @EventCode)";
             SqlCommand cmd101 = new SqlCommand(sqlQuery4, sqlconnect);
             cmd101.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode5x));
             cmd101.Parameters.Add(new SqlParameter("@Name", Instructor_tbFirstName.Text + ' ' + Instructor_tbLastName.Text));
             cmd101.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
             cmd101.Parameters.Add(new SqlParameter("@Email", Instructor_tbEmail.Text));
             cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Instructor_tbPhone.Text)));
-            cmd101.Parameters.Add(new SqlParameter("@ContactCode", contactCode));
+            cmd101.Parameters.Add(new SqlParameter("@EventCode", EventCode));
             try
             {
                 cmd101.CommandType = CommandType.Text;
@@ -596,11 +385,11 @@ namespace CapstoneProject2_CIS484
             }
 
             // Update - Cluster Part 2
-            String sqlQuery3 = "UPDATE Cluster SET InstructorCode = @InstructorCode, OrganizationID = @OrganizationID WHERE ClusterCode = @ClusterCode";
+            String sqlQuery3 = "UPDATE ClassCode SET InstructorCode = @InstructorCode, OrganizationID = @OrganizationID WHERE ClassCode = @ClassCode";
             SqlCommand cmd103 = new SqlCommand(sqlQuery3, sqlconnect);
             cmd103.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode5x));
             cmd103.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
-            cmd103.Parameters.Add(new SqlParameter("@ClusterCode", clusterCode5));
+            cmd103.Parameters.Add(new SqlParameter("@ClassCode", ClassCode));
             try
             {
                 cmd103.CommandType = CommandType.Text;
@@ -612,6 +401,13 @@ namespace CapstoneProject2_CIS484
                 msg += ex.Message;
                 throw new Exception(msg);
             }
+            //sqlsrcInstructor.SelectCommand =
+            //   "SELECT TOP (1000) INSTRUCTOR.NAME, INSTRUCTOR.EMAIL, INSTRUCTOR.PHONE, INSTRUCTOR.INSTRUCTORCODE, ClassCode.ClassCode FROM INSTRUCTOR " +
+            //   "INNER JOIN CLUSTER ON INSTRUCTOR.INSTRUCTORCODE = ClassCode.INSTRUCTORCODE " +
+            //   "WHERE  INSTRUCTOR.EventCode ='" + EventCode + "'";
+
+            //sqlsrcInstructor.DataBind();
+            //Instructor_GridView.DataBind();
             sqlconnect.Close();
         }
 
@@ -619,11 +415,11 @@ namespace CapstoneProject2_CIS484
         {
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
-            clusterCode5 = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
+            ClassCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
             String sqlqryyy = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
             SqlCommand cmd_p11 = new SqlCommand(sqlqryyy, sqlconnect);
-            cmd_p11.Parameters.Add(new SqlParameter("@Code", clusterCode5));
-            cmd_p11.Parameters.Add(new SqlParameter("@UserType", "Cluster"));
+            cmd_p11.Parameters.Add(new SqlParameter("@Code", ClassCode));
+            cmd_p11.Parameters.Add(new SqlParameter("@UserType", "ClassCode"));
             try
             {
                 cmd_p11.CommandType = CommandType.Text;
@@ -811,13 +607,17 @@ namespace CapstoneProject2_CIS484
             con.Open();
             try
             {
+
+
                 command.ExecuteNonQuery();
 
                 //cmd.Parameters.Add(new SqlParameter("@Username", UsernameTextBox.Text));
                 //cmd.Parameters.Add(new SqlParameter("@Password", PasswordHash.HashPassword(modalLRInput13.Text)));
 
+
                 Console.Write("insert successful");
                 //MessageBox.Show("insert teacher success");
+
             }
             catch (SqlException ex)
             {
@@ -826,11 +626,14 @@ namespace CapstoneProject2_CIS484
             }
             try
             {
+
+
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 ResetCoordinator_Click(sender, e);
                 //cmd.Parameters.Add(new SqlParameter("@Username", UsernameTextBox.Text));
                 //cmd.Parameters.Add(new SqlParameter("@Password", PasswordHash.HashPassword(modalLRInput13.Text)));
+
 
                 Console.Write("insert 2 successful");
                 //MessageBox.Show("insert teacher success");
@@ -845,7 +648,9 @@ namespace CapstoneProject2_CIS484
             }
             con.Close();
 
+
             //con1.Close();
+
         }
 
         protected void PopulateCoordinator_Click(object sender, EventArgs e)
@@ -981,14 +786,11 @@ namespace CapstoneProject2_CIS484
             //Queries Relevant to home page, fetching event info student info and more
 
             string EventID = GvEventdisplay.SelectedRow.Cells[0].Text;
-            string OrgName = "";
-            string OrgType = "";
-            string EventName = "";
-            string ContactName = "";
-            string Phone = "";
-            string Email = "";
-            string ContactCode = "";
-            DateTime Date1 = new DateTime();
+            string EventName = GvEventdisplay.SelectedRow.Cells[1].Text;
+            string OrgType = GvEventdisplay.SelectedRow.Cells[4].Text;
+            string OrgName = GvEventdisplay.SelectedRow.Cells[3].Text;
+            string ContactName = GvEventdisplay.SelectedRow.Cells[5].Text;
+            string EventCode = GvEventdisplay.SelectedRow.Cells[6].Text;
             //Inserting teacher query
             //Get connection string from web.config file
             string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
@@ -997,45 +799,45 @@ namespace CapstoneProject2_CIS484
             //Get connection string from web.config file
             //create new sqlconnection and connection to database by using connection string from web.config file
             SqlConnection con = new SqlConnection(strcon);
-            String sqlQuery4 = "select C.ContactCode as ContactCode, C.Name as ContactName, format(E.Date, 'MM/dd/yyyy') as Date, O.Name as OrgName, O.Type as OrgType, E.Name as EventName" +
-            " from EventContact C" +
-            " inner join Organization O on O.OrganizationID = C.OrganizationID" +
-            " inner join Event E on C.EventID = E.EventID" +
-            " where C.EventID = '" + EventID + "'";
-            SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
+            //String sqlQuery4 = "select C. as ContactCode, C.Name as ContactName, format(E.Date, 'MM/dd/yyyy') as Date, O.Name as OrgName, O.Type as OrgType, E.Name as EventName" +
+            //" from EventContact C" +
+            //" inner join Organization O on O.OrganizationID = C.OrganizationID" +
+            //" inner join Event E on C.EventID = E.EventID" +
+            //" where C.EventID = '" + EventID + "'";
+            //SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
 
             con.Open();
-            try
-            {
-                SqlDataReader reader = cmd4.ExecuteReader();
-                //MessageBox.Show(EventID, "helloo");
-                while (reader.Read())
-                {
-                    ContactCode = reader[0].ToString();
-                    ContactName = reader[1].ToString();
-                    Date1 = Convert.ToDateTime(reader[2]);
-                    OrgName = reader[3].ToString();
-                    OrgType = reader[4].ToString();
-                    EventName = reader[5].ToString();
-                }
-                reader.Close();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Select Error in EventContact:";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery4, con);
-            DataSet ds = new DataSet();
+            //try
+            //{
+            //    SqlDataReader reader = cmd4.ExecuteReader();
+            //MessageBox.Show(EventCode);
+            //    while (reader.Read())
+            //    {
+            //        ContactCode = reader[0].ToString();
+            //        ContactName = reader[1].ToString();
+            //        Date1 = Convert.ToDateTime(reader[2]);
+            //        OrgName = reader[3].ToString();
+            //        OrgType = reader[4].ToString();
+            //        EventName = reader[5].ToString();
+            //    }
+            //    reader.Close();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Select Error in EventContact:";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+            //SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlQuery4, con);
+            //DataSet ds = new DataSet();
 
-            sqlAdapter.Fill(ds);
+            //sqlAdapter.Fill(ds);
 
             //EventInfoTable.DataSource = ds;
             //EventInfoTable.DataBind();
 
             String sqlQuery1 = "select S.Name from Student S inner join Instructor I on S.InstructorCode = I.InstructorCode" +
-            " where I.ContactCode = '" + ContactCode + "';";
+            " where I.EventCode = '" + EventCode + "';";
             SqlDataAdapter sqlAdapter1 = new SqlDataAdapter(sqlQuery1, con);
 
             //Fill table with data
@@ -1048,7 +850,7 @@ namespace CapstoneProject2_CIS484
                 StudentListBox.DataBind();
             }
 
-            string sqlQuery2 = "select Name from Instructor where ContactCode = '" + ContactCode + "'";
+            string sqlQuery2 = "select Name from Instructor where EventCode = '" + EventCode + "'";
             SqlDataAdapter sqlAdapter2 = new SqlDataAdapter(sqlQuery2, con);
 
             var items = new List<string>();
@@ -1068,7 +870,7 @@ namespace CapstoneProject2_CIS484
             InstructorRepeater.DataBind();
             //MessageBox.Show(items[0]);
 
-            string sqlQuery3 = "select V.VolunteerCode, V.Name from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode where E.EventID = '" + EventID + "'";
+            string sqlQuery3 = "select V.VolunteerCode, V.Name from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode where E.EventCode = '" + EventCode + "'";
             var items1 = new List<string>();
 
             using (SqlCommand command = new SqlCommand(sqlQuery3, con))
@@ -1087,7 +889,7 @@ namespace CapstoneProject2_CIS484
 
             con.Close();
 
-            string mag = "Row Info: " + EventID + " " + EventName + " " + Date1 + " " + OrgName + " " + OrgName + " " + ContactName + " " + ContactCode;
+            string mag = "Row Info: " + EventID + " " + EventName + " " + " " + OrgName + " " + OrgName + " " + ContactName + " ";
             foreach (GridViewRow row in GvEventdisplay.Rows)
             {
                 if (row.RowIndex == GvEventdisplay.SelectedIndex)
@@ -1249,6 +1051,15 @@ namespace CapstoneProject2_CIS484
                 }
             }
         }
+        //protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
+        //        e.Row.Attributes["style"] = "cursor:pointer";
+        //    }
+        //}
+        
         protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -1323,24 +1134,253 @@ namespace CapstoneProject2_CIS484
             smtpClient.Send(msg);
         }
 
-        protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
+        //protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
 
-            foreach (GridViewRow row in ContactSubmissionGrid.Rows)
+        //    foreach (GridViewRow row in ContactSubmissionGrid.Rows)
+        //    {
+        //        if (row.RowIndex == ContactSubmissionGrid.SelectedIndex)
+        //        {
+        //            row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+        //            row.ToolTip = string.Empty;
+        //        }
+        //        else
+        //        {
+        //            row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+        //            row.ToolTip = "Click to select this row.";
+        //        }
+        //    }
+        //    MessageBox.Show(RequestID);
+        //}
+
+        protected void SubmitButton_Click1(object sender, EventArgs e)
+        {
+            string ContactName = ContactRequestNameText.Text;
+            string OrgName = ContactRequestOrganizationNameText.Text;
+            string OrgType = OrganizationTypeList.SelectedValue;
+            string EventName = EventNameRequest.Text;
+            DateTime Date1 = EventRequestDate.SelectedDate;
+            AccessCode contact = new AccessCode();
+            string code = contact.GenerateCode(true, true, true, true, 8);
+            //MessageBox.Show(code);
+            //Inserting teacher query
+            //Get connection string from web.config file
+            string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+            //Inserting teacher query
+
+            //Get connection string from web.config file
+            //create new sqlconnection and connection to database by using connection string from web.config file
+            SqlConnection con = new SqlConnection(strcon);
+            con.Open();
+            String sqlQuery4 = "If Not Exists (select 1 from Event where Name= @EventName)" + 
+                "insert into Event (Date, Name, ContactName, EventCode) values (@Date1, @EventName, @ContactName, @EventCode)";
+            SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
+            cmd4.Parameters.Add(new SqlParameter("@Date1", Date1));
+            cmd4.Parameters.Add(new SqlParameter("@EventName", EventName));
+            cmd4.Parameters.Add(new SqlParameter("ContactName", ContactName)); 
+            cmd4.Parameters.Add(new SqlParameter("@EventCode", code));
+
+            try
             {
-                if (row.RowIndex == ContactSubmissionGrid.SelectedIndex)
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    row.ToolTip = string.Empty;
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    row.ToolTip = "Click to select this row.";
-                }
+                cmd4.CommandType = CommandType.Text;
+                cmd4.ExecuteNonQuery();
             }
-            MessageBox.Show(RequestID);
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert/Update Error Insert into Event:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            String sqlQuery = "Insert into AccessCode (Code, UserType) values (@Code, @UserType)";
+            String sqlQuery6 = "Insert into EventCode (EventCode) values (@Code)";
+
+            SqlCommand cmd = new SqlCommand(sqlQuery, con);
+            cmd.Parameters.Add(new SqlParameter("@Code", code));
+            cmd.Parameters.Add(new SqlParameter("@UserType", "EventCode"));
+            //cmd.Parameters.Add(new SqlParameter("@CoordinatorID", CyberDaySite1.CoordinatorID));
+
+            SqlCommand cmd6 = new SqlCommand(sqlQuery6, con);
+            cmd6.Parameters.Add(new SqlParameter("@Code", code));
+
+            try
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert/Update Error Insert into AccessCode:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            try
+            {
+                cmd6.CommandType = CommandType.Text;
+                cmd6.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert/Update Error Insert into EventCode 1:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            String sqlQuery2 = "  Insert into Organization (Name, Type, EventCode) values " +
+                               "(@OrgName, @OrgType, @EventCode);";
+            SqlCommand cmd2 = new SqlCommand(sqlQuery2, con);
+            cmd2.Parameters.Add(new SqlParameter("@OrgName", OrgName));
+            cmd2.Parameters.Add(new SqlParameter("@EventCode", code));
+            cmd2.Parameters.Add(new SqlParameter("@OrgType", OrgType));
+
+            try
+            {
+                cmd2.CommandType = CommandType.Text;
+                cmd2.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert/Update Error Insert into Org:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            ResetButton_Click(sender,e);
+            //EventRefreshPanel.Update();
+        }
+
+        protected void ResetButton_Click(object sender, EventArgs e)
+        {
+            ContactRequestNameText.Text = string.Empty;
+            ContactRequestOrganizationNameText.Text = string.Empty;
+            OrganizationTypeList.SelectedIndex = 0;
+            EventNameRequest.Text = string.Empty;
+        }
+
+        protected void EventRequestDate_SelectionChanged(object sender, EventArgs e)
+        {
+            EventDateRequest = EventRequestDate.SelectedDate;
+        }
+
+        protected void SBVolunteer_Click(object sender, EventArgs e)
+        {
+            VolunteerCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
+            AccessCode newAccessxx = new AccessCode();
+
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
+
+            // Necessary information for insert statements
+            string eventID = ddleventv.SelectedValue;
+            //string orgID = ddlOrgv.SelectedValue;
+            string EventCode = "";
+            // Find necessary information
+            string sqlQuery2 = "SELECT EventCode FROM Event where EventID = '" + eventID + "'";
+            SqlCommand cmd100 = new SqlCommand(sqlQuery2, sqlconnect);
+
+            try
+            {
+                SqlDataReader reader = cmd100.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    EventCode = reader[0].ToString();
+                }
+                reader.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Select Error in EventContact";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert into accesscode
+            String sqlQuery_p1 = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
+            SqlCommand cmd_p1 = new SqlCommand(sqlQuery_p1, sqlconnect);
+            cmd_p1.Parameters.Add(new SqlParameter("@Code", VolunteerCode));
+            cmd_p1.Parameters.Add(new SqlParameter("@UserType", "Volunteer"));
+            try
+            {
+                cmd_p1.CommandType = CommandType.Text;
+                cmd_p1.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into AccessCode";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert into volunteer
+            String sqlQuery4 = "INSERT INTO Volunteer(VolunteerCode, Name, Role, Phone, Email, MealTicket)" +
+            "VALUES (@VolunteerCode, @Name, @Role, @Phone, @Email, @MealTicket)";
+            SqlCommand cmd101 = new SqlCommand(sqlQuery4, sqlconnect);
+            cmd101.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
+            cmd101.Parameters.Add(new SqlParameter("@Name", Vname1.Text));
+            cmd101.Parameters.Add(new SqlParameter("@Role", Role.Text));
+            cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Vphone1.Text)));
+            cmd101.Parameters.Add(new SqlParameter("@Email", vemail1.Text));
+            cmd101.Parameters.Add(new SqlParameter("@MealTicket", MealTicket.Text));
+            try
+            {
+                cmd101.CommandType = CommandType.Text;
+                cmd101.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into Volunteer";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert to eventvolunteer
+            String sqlQuery_p2 = "INSERT INTO EventVolunteers (VolunteerCode, EventCode) VALUES (@VolunteerCode, @EventCode)";
+            SqlCommand cmd_p2 = new SqlCommand(sqlQuery_p2, sqlconnect);
+            cmd_p2.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
+            cmd_p2.Parameters.Add(new SqlParameter("@EventCode", EventCode));
+
+            try
+            {
+                cmd_p2.CommandType = CommandType.Text;
+                cmd_p2.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into ClassCode Part 1";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+
+            ////update eventvolunteer
+            //String sqlQuery3 = "UPDATE Volunteer SET VolunteerCode = @VolunteerCode, EventCode = @ WHERE ClassCode = @ClassCode";
+            //SqlCommand cmd103 = new SqlCommand(sqlQuery3, sqlconnect);
+            //cmd103.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode5x));
+            //cmd103.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
+            //cmd103.Parameters.Add(new SqlParameter("@ClassCode", ClassCode));
+            //try
+            //{
+            //    cmd103.CommandType = CommandType.Text;
+            //    cmd103.ExecuteNonQuery();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Insert Error into Cluster Part 2";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+            sqlconnect.Close();
+        }
+
+        protected void RBVoluntter_Click(object sender, EventArgs e)
+        {
+            Vname1.Text = string.Empty;
+            Role.Text = string.Empty;
+            vemail1.Text = string.Empty;
+            Vphone1.Text = string.Empty;
+            MealTicket.Text = string.Empty;
         }
 
         protected void btnSubmitCode_Click(object sender, EventArgs e)

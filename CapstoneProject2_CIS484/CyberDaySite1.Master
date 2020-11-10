@@ -284,8 +284,7 @@
                                         </asp:ContentPlaceHolder>
                                         <asp:ContentPlaceHolder ID="VolunteerView" runat="server">
                                         </asp:ContentPlaceHolder>
-                                        <asp:ContentPlaceHolder ID="EventContactAddInstructorView" runat="server">
-                                            </asp:ContentPlaceHolder>
+
                                         <asp:ContentPlaceHolder ID="StudentSignUp" runat="server">
                                             </asp:ContentPlaceHolder>
                                         <asp:ContentPlaceHolder ID="StudentPage" runat="server">
@@ -294,10 +293,19 @@
                                 </asp:View>
                                 <asp:View runat="server">
                                     <div style="margin-top: 40px;">
-                                        <h2>Event Request List</h2>
-                                        <asp:ContentPlaceHolder ID="CoordinatorSubmissionViewPlaceholder" runat="server">
-                                        </asp:ContentPlaceHolder>
+                                        <asp:ContentPlaceHolder ID="Eventsignup" runat="server">
+                                        </asp:ContentPlaceHolder>                                        
+<%--                                        <asp:ContentPlaceHolder ID="CoordinatorSubmissionViewPlaceholder" runat="server">
+                                        </asp:ContentPlaceHolder>--%>
                                         <asp:ContentPlaceHolder ID="EventInfoPlaceHolder" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                        <br />
+                                        <asp:ContentPlaceHolder ID="AddInstructorView" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                        <br />
+                                        <asp:ContentPlaceHolder ID="EventContactAddInstructorView" runat="server">
+                                           </asp:ContentPlaceHolder>
+                                        <asp:ContentPlaceHolder ID="Volunteeradd" runat="server">
                                         </asp:ContentPlaceHolder>
 
                                     </div>

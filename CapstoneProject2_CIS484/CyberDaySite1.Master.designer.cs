@@ -159,15 +159,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.ContentPlaceHolder VolunteerView;
 
         /// <summary>
-        /// EventContactAddInstructorView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder EventContactAddInstructorView;
-
-        /// <summary>
         /// StudentSignUp control.
         /// </summary>
         /// <remarks>
@@ -186,13 +177,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.ContentPlaceHolder StudentPage;
 
         /// <summary>
-        /// CoordinatorSubmissionViewPlaceholder control.
+        /// Eventsignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CoordinatorSubmissionViewPlaceholder;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Eventsignup;
 
         /// <summary>
         /// EventInfoPlaceHolder control.
@@ -202,5 +193,32 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder EventInfoPlaceHolder;
+
+        /// <summary>
+        /// AddInstructorView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder AddInstructorView;
+
+        /// <summary>
+        /// EventContactAddInstructorView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder EventContactAddInstructorView;
+
+        /// <summary>
+        /// Volunteeradd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Volunteeradd;
     }
 }

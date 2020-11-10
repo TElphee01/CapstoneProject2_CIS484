@@ -1,5 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/CyberDaySite1.Master" AutoEventWireup="true" CodeBehind="CyberDay_Home.aspx.cs" Inherits="CapstoneProject2_CIS484.CyberDay_Home" %>
-
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/CyberDaySite1.Master" AutoEventWireup="true" CodeBehind="CyberDay_Home.aspx.cs" Inherits="CapstoneProject2_CIS484.CyberDay_Home" enableEventValidation="false" %>
 <asp:Content ID="HomepageContent" ContentPlaceHolderID="HomePlaceHolder" runat="server">
 
  
@@ -150,115 +149,7 @@
             <button type="button" class="accordion">What age is this event catered for?</button>
             <div class="panel">
                 <p class="answer">This event typically caters to Middle Schoolers aged 10-12</p>
-            </div>
-            <button type="button" class="accordion">Want your organization to join? Sign up here</button>
-            <div class="panel">
-                <div class="answer">
-                    <div class="form-group">
-                        <div>
-                        </div>
-                        <%--            <h2 style="text-align: center">Want your organization to join a cyber day? Submit a request here</h2>--%>
-                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                            <ContentTemplate>
-                                <div style="margin-top: 40px;">
-                                    <div class="row">
-                                        <div class="col">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                                                ControlToValidate="ContactRequestNameText"
-                                                ValidationGroup="ContactRequestInput"
-                                                ErrorMessage="Enter your Name."
-                                                runat="Server" />
-                                            <div class="form-group">
-                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Name"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestNameText" runat="server" required="false" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-                                                ControlToValidate="ContactRequestPhoneText"
-                                                ValidationGroup="ContactRequestInput"
-                                                ErrorMessage="Enter your Phone."
-                                                runat="Server" />
-                                            <div class="form-group">
-                                                <asp:Label ID="ContactRequestPhoneLabel" CssClass="label" runat="server" Text="Phone"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestPhoneText" runat="server" required="false" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
-                                                ControlToValidate="ContactRequestPhoneText"
-                                                ValidationGroup="ContactRequestInput"
-                                                ErrorMessage="Enter your Phone."
-                                                runat="Server" />
-                                            <div class="form-group">
-                                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Email"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestEmailText" runat="server" required="false" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
-                                                ControlToValidate="ContactRequestOrganizationNameText"
-                                                ValidationGroup="ContactRequestInput"
-                                                ErrorMessage="Enter your Org Name."
-                                                runat="Server" />
-                                            <div class="form-group">
-                                                <asp:Label ID="Label3" CssClass="label" runat="server" Text="Org Name"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestOrganizationNameText" runat="server" required="false" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <asp:Label ID="Label5" CssClass="label" runat="server" Text="Organization Type"></asp:Label>
-                                                <asp:DropDownList
-                                                    ID="OrganizationTypeList"
-                                                    runat="server"
-                                                    CssClass="js-example-basic-single">
-                                                    <asp:ListItem Value="School" Selected="True" Text="School" />
-                                                    <asp:ListItem Value="HomeSchool" Text="Home School Co-Op" />
-                                                    <asp:ListItem Value="AfterSchoolOrg" Text="After School Program" />
-                                                    <asp:ListItem Value="Other" Text="Other" />
-                                                </asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
-                                                ControlToValidate="EventNameRequest"
-                                                ValidationGroup="ContactRequestInput"
-                                                ErrorMessage="Enter your Phone."
-                                                runat="Server" />
-                                            <div class="form-group">
-                                                <asp:Label ID="Label4" CssClass="label" runat="server" Text="Event Name"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="EventNameRequest" runat="server" required="false" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="w-100"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <asp:Label ID="Label1" CssClass="label" runat="server" Text="What Date Do You Want Your Event On?"></asp:Label>
-                                        <asp:Calendar ID="EventRequestDate" OnSelectionChanged="EventRequestDate_SelectionChanged" runat="server"></asp:Calendar>
-                                    </div>
-
-                                    <!--Button options for Submit, Commit Populate and Reset Distinguishable-->
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm text-left">
-                                                <asp:Button ID="SubmitButton" runat="server" ValidationGroup="ContactRequestInput" OnClick="AddRequest_Click" Text="Submit" Style="margin-left: 0%;" CssClass="btn btn-primary" />
-                                            </div>
-                                            <div class="col-sm text-right">
-                                                <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click" ValidationGroup="ContactRequestInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
-                                            </div>
-                                        </div>
-                                    </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                </div>
-            </div>
+            </div>    
         </div>
     </div>
     <style>
@@ -459,18 +350,104 @@
         }
     </script>
 </asp:Content>
-<asp:Content ID="Content8" ContentPlaceHolderID="CoordinatorSubmissionViewPlaceholder" runat="server">
+
+<asp:Content ID="Content99" ContentPlaceHolderID="Eventsignup" runat="server">
+    <fieldset>
+        <legend>Want your organization to join? Sign up here</legend>
+    <div class="panel">
+                <div class="answer">
+                    <div class="form-group">
+                        <%--            <h2 style="text-align: center">Want your organization to join a cyber day? Submit a request here</h2>--%>
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <div style="margin-top: 40px;">
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
+                                                ControlToValidate="ContactRequestNameText"
+                                                ValidationGroup="ContactRequestInput"
+                                                ErrorMessage="Enter your Name."
+                                                runat="Server" />
+                                            <div class="form-group">
+                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestNameText" runat="server" required="false" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
+                                                ControlToValidate="ContactRequestOrganizationNameText"
+                                                ValidationGroup="ContactRequestInput"
+                                                ErrorMessage="Enter your Org Name."
+                                                runat="Server" />
+                                            <div class="form-group">
+                                                <asp:Label ID="Label3" CssClass="label" runat="server" Text="Org Name"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestOrganizationNameText" runat="server" required="false" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label5" CssClass="label" runat="server" Text="Organization Type"></asp:Label>
+                                                <asp:DropDownList
+                                                    ID="OrganizationTypeList"
+                                                    runat="server"
+                                                    CssClass="js-example-basic-single">
+                                                    <asp:ListItem Value="School" Selected="True" Text="School" />
+                                                    <asp:ListItem Value="HomeSchool" Text="Home School Co-Op" />
+                                                    <asp:ListItem Value="AfterSchoolOrg" Text="After School Program" />
+                                                    <asp:ListItem Value="Other" Text="Other" />
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
+                                                ControlToValidate="EventNameRequest"
+                                                ValidationGroup="ContactRequestInput"
+                                                ErrorMessage="Enter your Event Name."
+                                                runat="Server" />
+                                            <div class="form-group">
+                                                <asp:Label ID="Label4" CssClass="label" runat="server" Text="Event Name"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="EventNameRequest" runat="server" required="false" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="w-100"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label ID="Label1" CssClass="label" runat="server" Text="What Date Do You Want Your Event On?"></asp:Label>
+                                        <asp:Calendar ID="EventRequestDate" OnSelectionChanged="EventRequestDate_SelectionChanged" runat="server"></asp:Calendar>
+                                    </div>
+
+                                    <!--Button options for Submit, Commit Populate and Reset Distinguishable-->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm text-left">
+                                                <asp:Button ID="SubmitButton" runat="server" ValidationGroup="ContactRequestInput" OnClick="SubmitButton_Click1" Text="Submit" UseSubmitBehavior="true" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                                            </div>
+                                            <div class="col-sm text-right">
+                                                <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click" ValidationGroup="ContactRequestInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+  </fieldset>
+</asp:Content>
+
+<%--<asp:Content ID="Content8" ContentPlaceHolderID="CoordinatorSubmissionViewPlaceholder" runat="server">
     <div class="form-group">
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
+
                 <asp:GridView ID="ContactSubmissionGrid"
                     AutoGenerateColumns="true" OnRowDataBound="ContactSubmissionGrid_RowDataBound" OnSelectedIndexChanged="ContactSubmissionGrid_SelectedIndexChanged"
                     runat="server">
 
                     <HeaderStyle BackColor="#989898" ForeColor="white" />
                 </asp:GridView>
-            </ContentTemplate>
-        </asp:UpdatePanel>
 
         <asp:UpdatePanel ID="RequestListDDLUpdate" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -485,27 +462,28 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-</asp:Content>
+</asp:Content>--%>
 <asp:Content ID="EventInfo" ContentPlaceHolderID="EventInfoPlaceHolder" runat="server">
+    <fieldset>
+        <br />
+        <legend>Event list:</legend>
     <div style="margin-top: 40px;">
         <div class="container-fluid">
             <div class="grid">
-
                 <div class="grid-item grid-item--width3 grid-item--height3" style="height: 100%">
                     <div class="form-group">
-                        <%--                      <asp:UpdatePanel ID="EventRefreshPanel" runat="server">
+<%--                        <asp:UpdatePanel ID="EventRefreshPanel" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>--%>
                         <asp:Label ID="Label6" CssClass="label" runat="server" Text="Event"></asp:Label>
 
                         <asp:SqlDataSource ID="EventdisplayDb" runat="server"
                             DataSourceMode="DataReader"
                             ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-                            SelectCommand="SELECT E.EventID, E.Name as 'Event Name', E.ContactName as 'Contact Name', E.EventCode as 'EventCode', Date, O.Name as 'Organization Name', Type from Event E inner join Organization O on E.EventCode = O.EventCode Order by E.EventID ASC" />
-
+                            SelectCommand="SELECT E.EventID, E.Name as 'Event Name', Date, O.Name as 'Organization Name', Type, ContactName as 'Contact Name', E.EventCode as 'Event Code' from Event E inner join Organization O on E.EventCode = O.EventCode Order by E.EventID ASC" />
                         <asp:GridView runat="server" ID="GvEventdisplay" DataSourceID="EventdisplayDb" OnRowDataBound="GvEventdisplay_RowDataBound" OnSelectedIndexChanged="GvEventdisplay_SelectedIndexChanged">
                             <HeaderStyle BackColor="#989898" ForeColor="white" />
                         </asp:GridView>
-                        <%--                       </ContentTemplate>
+<%--                        </ContentTemplate>
                         </asp:UpdatePanel>--%>
                     </div>
                 </div>
@@ -669,7 +647,239 @@
             </div>
         </div>
     </div>
+    </fieldset>
 </asp:Content>
+
+<%--<asp:Content ID="AddInstructor" ContentPlaceHolderID="AddInstructorView" runat="server">
+        <asp:UpdatePanel ID="UP98" runat="server">
+            <ContentTemplate>
+                <div class="row">
+                    <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_SchOrg1" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="DisplaySchool1" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
+                            </div>
+                    </div>
+                     <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_FirstName1" CssClass="label" runat="server" Text="First Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbFirstName1" runat="server" required="true" />
+                            </div>
+                             <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_LastName1" CssClass="label" runat="server" Text="Last Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbLastName1" runat="server" required="true" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_Email1" CssClass="label" runat="server" Text="Email Address"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbEmail1" runat="server" required="true" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_Phone1" CssClass="label" runat="server" Text="Phone Number"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbPhone1" runat="server" required="true" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+</asp:Content>--%>
+
+<asp:Content ID="EventContactAddInstructorView" ContentPlaceHolderID="EventContactAddInstructorView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
+                <div style="margin-top: 40px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_SchOrg" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="DisplaySchool" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
+                                <asp:SqlDataSource ID="Orgview1" runat="server" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                                     SelectCommand="select * from Organization"></asp:SqlDataSource>
+                                <asp:DropDownList runat="server" ID="ddlOrgview"
+                                     DataSourceID="Orgview1" DataTextField="Name" DataValueField="OrganizationID" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col">
+                        <div class="form-group">
+                        <asp:Label ID="InstEvent" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
+                        <asp:SqlDataSource runat="server" ID="Eventview1" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
+                            SelectCommand="select * from Event"></asp:SqlDataSource>
+
+                        <asp:DropDownList runat="server" ID="EventView" 
+                            DataSourceID="Eventview1" 
+                            DataTextField="Name" 
+                            DataValueField="EventID" 
+                            AutoPostBack="true" ></asp:DropDownList>
+                         </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_FirstName" CssClass="label" runat="server" Text="First Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbFirstName" runat="server" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_LastName" CssClass="label" runat="server" Text="Last Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbLastName" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_Email" CssClass="label" runat="server" Text="Email Address"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbEmail" runat="server"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblInstructor_Phone" CssClass="label" runat="server" Text="Phone Number"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbPhone" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm text-left">
+                            <asp:Button ID="Button1" runat="server" OnClick="SubmitButton_Click" Text="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                        </div>
+                        <div class="col-sm text-right">
+                            <asp:Button ID="Instructor_ResetButton" OnClick="Instructor_ResetButton_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" />
+                <fieldset>
+                    <legend>View Instructors</legend>
+                    <asp:GridView
+                        runat="server"
+                        ID="Instructor_GridView"
+                        DataSourceID="sqlsrcInstructor">
+                    </asp:GridView>
+                </fieldset>
+                <asp:SqlDataSource
+                    runat="server"
+                    ID="sqlsrcInstructor"
+                    DataSourceMode="DataReader"
+                    ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                    SelectCommand="select * from Instructor" />
+            </ContentTemplate>
+        </asp:UpdatePanel>
+</asp:Content>
+
+<asp:Content ID="Addvolunteer" runat="server"  ContentPlaceHolderID="Volunteeradd" >
+            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+            <ContentTemplate>
+                <div style="margin-top: 40px;">
+                    <div class="row">
+<%--                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Sign up Volunteer " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="Label8" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
+                                <asp:SqlDataSource ID="orgview2" runat="server" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                                     SelectCommand="select * from Organization"></asp:SqlDataSource>
+                                <asp:DropDownList runat="server" ID="ddlOrgv"
+                                     DataSourceID="orgview2" DataTextField="Name" DataValueField="OrganizationID" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>--%>
+                        <div class="col">
+                        <div class="form-group">
+                        <asp:Label ID="Label16" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
+                        <asp:SqlDataSource runat="server" ID="eventview2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
+                            SelectCommand="select * from Event"></asp:SqlDataSource>
+
+                        <asp:DropDownList runat="server" ID="ddleventv" 
+                            DataSourceID="eventview2" 
+                            DataTextField="Name" 
+                            DataValueField="EventID" 
+                            AutoPostBack="true" ></asp:DropDownList>
+                         </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label17" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vname1" runat="server"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label18" CssClass="label" runat="server" Text="Role"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Role" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label19" CssClass="label" runat="server" Text="Email"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="vemail1" runat="server" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label20" CssClass="label" runat="server" Text="Phone"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vphone1" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label21" CssClass="label" runat="server" Text="MealTicket (input Y/N)"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="MealTicket" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm text-left">
+                            <asp:Button ID="SBVolunteer" runat="server" OnClick="SBVolunteer_Click" Text="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                        </div>
+                        <div class="col-sm text-right">
+                            <asp:Button ID="RBVoluntter" OnClick="RBVoluntter_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" />
+                <fieldset>
+                    <legend>View Volunteer</legend>
+                    <asp:GridView
+                        runat="server"
+                        ID="VVolunteer1"
+                        DataSourceID="Vvolunteer2">
+                    </asp:GridView>
+                </fieldset>
+                <asp:SqlDataSource
+                    runat="server"
+                    ID="Vvolunteer2"
+                    DataSourceMode="DataReader"
+                    ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                    SelectCommand="select V.Name, Role, Phone, Email, Phone, MealTicket,
+                    T.Name, E.EventCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
+                    on E.EventCode = T.EventCode;"/>
+
+            </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>
+
+
+
+
+
 <asp:Content ID="VolunteerView" ContentPlaceHolderID="VolunteerView" runat="server">
     <div runat="server" id="VolDiv" style="margin-top: 40px; display: none" visible="false">
         <div class="form-group">
@@ -1163,77 +1373,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
-<asp:Content ID="EventContactAddInstructorView" ContentPlaceHolderID="EventContactAddInstructorView" runat="server">
-    <div runat="server" id="AddInstDiv" style="margin-top: 40px; display: none" visible="false">
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-            <ContentTemplate>
-                <div style="margin-top: 40px;">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="lblInstructor_SchOrg" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
-                                <asp:Label ID="DisplaySchool" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="lblInstructor_FirstName" CssClass="label" runat="server" Text="First Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbFirstName" runat="server" required="true" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="lblInstructor_LastName" CssClass="label" runat="server" Text="Last Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbLastName" runat="server" required="true" ValidateRequestMode="Inherit" />
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="lblInstructor_Email" CssClass="label" runat="server" Text="Email Address"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbEmail" runat="server" required="true" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <asp:Label ID="lblInstructor_Phone" CssClass="label" runat="server" Text="Phone Number"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbPhone" runat="server" required="true" ValidateRequestMode="Inherit" />
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm text-left">
-                            <asp:Button ID="Button1" runat="server" OnClick="SubmitButton_Click" Text="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
-                        </div>
-                        <div class="col-sm text-right">
-                            <asp:Button ID="Instructor_ResetButton" OnClick="Instructor_ResetButton_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col" />
-                <fieldset>
-                    <legend>View Instructors</legend>
-                    <asp:GridView
-                        runat="server"
-                        ID="Instructor_GridView"
-                        DataSourceID="sqlsrcInstructor">
-                    </asp:GridView>
-                </fieldset>
-                <asp:SqlDataSource
-                    runat="server"
-                    ID="sqlsrcInstructor"
-                    DataSourceMode="DataReader"
-                    ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-                    SelectCommand="" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
-</asp:Content>
 <asp:Content ID="StudentSignUp" ContentPlaceHolderID="StudentSignUp" runat="server">
     <div runat="server" id="StudentSignUpDiv" style="margin-top: 40px; display: none" visible="false">
 
