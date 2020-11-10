@@ -438,14 +438,15 @@
 </asp:Content>--%>
 <asp:Content ID="EventInfo" ContentPlaceHolderID="EventInfoPlaceHolder" runat="server">
     <fieldset>
+        <br />
         <legend>Event list:</legend>
     <div style="margin-top: 40px;">
         <div class="container-fluid">
             <div class="grid">
                 <div class="grid-item grid-item--width3 grid-item--height3" style="height: 100%">
                     <div class="form-group">
-                        <asp:UpdatePanel ID="EventRefreshPanel" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
+<%--                        <asp:UpdatePanel ID="EventRefreshPanel" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>--%>
                         <asp:Label ID="Label6" CssClass="label" runat="server" Text="Event"></asp:Label>
 
                         <asp:SqlDataSource ID="EventdisplayDb" runat="server"
@@ -456,8 +457,8 @@
                         <asp:GridView runat="server" ID="GvEventdisplay" DataSourceID="EventdisplayDb" OnRowDataBound="GvEventdisplay_RowDataBound" OnSelectedIndexChanged="GvEventdisplay_SelectedIndexChanged">
                             <HeaderStyle BackColor="#989898" ForeColor="white" />
                         </asp:GridView>
-                        </ContentTemplate>
-                        </asp:UpdatePanel>
+<%--                        </ContentTemplate>
+                        </asp:UpdatePanel>--%>
                     </div>
                 </div>
 
@@ -696,26 +697,26 @@
                         <div class="col">
                             <div class="form-group">
                                 <asp:Label ID="lblInstructor_FirstName" CssClass="label" runat="server" Text="First Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbFirstName" runat="server" required="true" />
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbFirstName" runat="server" />
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <asp:Label ID="lblInstructor_LastName" CssClass="label" runat="server" Text="Last Name"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbLastName" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbLastName" runat="server" ValidateRequestMode="Inherit" />
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col">
                             <div class="form-group">
                                 <asp:Label ID="lblInstructor_Email" CssClass="label" runat="server" Text="Email Address"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbEmail" runat="server" required="true" />
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbEmail" runat="server"/>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <asp:Label ID="lblInstructor_Phone" CssClass="label" runat="server" Text="Phone Number"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbPhone" runat="server" required="true" ValidateRequestMode="Inherit" />
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Instructor_tbPhone" runat="server" ValidateRequestMode="Inherit" />
                             </div>
                         </div>
                         <div class="w-100"></div>
@@ -752,6 +753,102 @@
         </asp:UpdatePanel>
 </asp:Content>
 
+<asp:Content ID="Addvolunteer" runat="server"  ContentPlaceHolderID="Volunteeradd" >
+            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+            <ContentTemplate>
+                <div style="margin-top: 40px;">
+                    <div class="row">
+<%--                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Sign up Volunteer " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="Label8" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
+                                <asp:SqlDataSource ID="orgview2" runat="server" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                                     SelectCommand="select * from Organization"></asp:SqlDataSource>
+                                <asp:DropDownList runat="server" ID="ddlOrgv"
+                                     DataSourceID="orgview2" DataTextField="Name" DataValueField="OrganizationID" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>--%>
+                        <div class="col">
+                        <div class="form-group">
+                        <asp:Label ID="Label16" CssClass="label" runat="server" Text="select Event: " Font-Bold="true"></asp:Label>
+                        <asp:SqlDataSource runat="server" ID="eventview2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
+                            SelectCommand="select * from Event"></asp:SqlDataSource>
+
+                        <asp:DropDownList runat="server" ID="ddleventv" 
+                            DataSourceID="eventview2" 
+                            DataTextField="Name" 
+                            DataValueField="EventID" 
+                            AutoPostBack="true" ></asp:DropDownList>
+                         </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label17" CssClass="label" runat="server" Text="Name"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vname1" runat="server"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label18" CssClass="label" runat="server" Text="Role"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Role" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label19" CssClass="label" runat="server" Text="Email"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="vemail1" runat="server" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label20" CssClass="label" runat="server" Text="Phone"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vphone1" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label21" CssClass="label" runat="server" Text="MealTicket (input Y/N)"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="MealTicket" runat="server" ValidateRequestMode="Inherit" />
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm text-left">
+                            <asp:Button ID="SBVolunteer" runat="server" OnClick="SBVolunteer_Click" Text="Sign Up" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                        </div>
+                        <div class="col-sm text-right">
+                            <asp:Button ID="RBVoluntter" OnClick="RBVoluntter_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" />
+                <fieldset>
+                    <legend>View Volunteer</legend>
+                    <asp:GridView
+                        runat="server"
+                        ID="VVolunteer1"
+                        DataSourceID="Vvolunteer2">
+                    </asp:GridView>
+                </fieldset>
+                <asp:SqlDataSource
+                    runat="server"
+                    ID="Vvolunteer2"
+                    DataSourceMode="DataReader"
+                    ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                    SelectCommand="select V.Name, Role, Phone, Email, Phone, MealTicket,
+                    T.Name, E.EventCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
+                    on E.EventCode = T.EventCode;"/>
+
+            </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>
 
 
 

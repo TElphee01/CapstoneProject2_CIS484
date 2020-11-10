@@ -31,6 +31,7 @@ namespace CapstoneProject2_CIS484
         public static string clusterCode = "";
         public static string ClassCode = "";
         public static string instructorCode5x = "";
+        public static string VolunteerCode = "";
 
         //public static Button addEvent = new Button();
 
@@ -1342,7 +1343,7 @@ namespace CapstoneProject2_CIS484
             }
 
             ResetButton_Click(sender,e);
-            EventRefreshPanel.Update();
+            //EventRefreshPanel.Update();
         }
 
         protected void ResetButton_Click(object sender, EventArgs e)
@@ -1356,6 +1357,126 @@ namespace CapstoneProject2_CIS484
         protected void EventRequestDate_SelectionChanged(object sender, EventArgs e)
         {
             EventDateRequest = EventRequestDate.SelectedDate;
+        }
+
+        protected void SBVolunteer_Click(object sender, EventArgs e)
+        {
+            VolunteerCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
+            AccessCode newAccessxx = new AccessCode();
+
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
+
+            // Necessary information for insert statements
+            string eventID = ddleventv.SelectedValue;
+            //string orgID = ddlOrgv.SelectedValue;
+            string EventCode = "";
+            // Find necessary information
+            string sqlQuery2 = "SELECT EventCode FROM Event where EventID = '" + eventID + "'";
+            SqlCommand cmd100 = new SqlCommand(sqlQuery2, sqlconnect);
+
+            try
+            {
+                SqlDataReader reader = cmd100.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    EventCode = reader[0].ToString();
+                }
+                reader.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Select Error in EventContact";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert into accesscode
+            String sqlQuery_p1 = "INSERT INTO ACCESSCODE(Code, UserType) VALUES (@Code, @UserType)";
+            SqlCommand cmd_p1 = new SqlCommand(sqlQuery_p1, sqlconnect);
+            cmd_p1.Parameters.Add(new SqlParameter("@Code", VolunteerCode));
+            cmd_p1.Parameters.Add(new SqlParameter("@UserType", "Volunteer"));
+            try
+            {
+                cmd_p1.CommandType = CommandType.Text;
+                cmd_p1.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into AccessCode";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert into volunteer
+            String sqlQuery4 = "INSERT INTO Volunteer(VolunteerCode, Name, Role, Phone, Email, MealTicket)" +
+            "VALUES (@VolunteerCode, @Name, @Role, @Phone, @Email, @MealTicket)";
+            SqlCommand cmd101 = new SqlCommand(sqlQuery4, sqlconnect);
+            cmd101.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
+            cmd101.Parameters.Add(new SqlParameter("@Name", Vname1.Text));
+            cmd101.Parameters.Add(new SqlParameter("@Role", Role.Text));
+            cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Vphone1.Text)));
+            cmd101.Parameters.Add(new SqlParameter("@Email", vemail1.Text));
+            cmd101.Parameters.Add(new SqlParameter("@MealTicket", MealTicket.Text));
+            try
+            {
+                cmd101.CommandType = CommandType.Text;
+                cmd101.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into Volunteer";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            //insert to eventvolunteer
+            String sqlQuery_p2 = "INSERT INTO EventVolunteers (VolunteerCode, EventCode) VALUES (@VolunteerCode, @EventCode)";
+            SqlCommand cmd_p2 = new SqlCommand(sqlQuery_p2, sqlconnect);
+            cmd_p2.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
+            cmd_p2.Parameters.Add(new SqlParameter("@EventCode", EventCode));
+
+            try
+            {
+                cmd_p2.CommandType = CommandType.Text;
+                cmd_p2.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Error into ClassCode Part 1";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+
+            ////update eventvolunteer
+            //String sqlQuery3 = "UPDATE Volunteer SET VolunteerCode = @VolunteerCode, EventCode = @ WHERE ClassCode = @ClassCode";
+            //SqlCommand cmd103 = new SqlCommand(sqlQuery3, sqlconnect);
+            //cmd103.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode5x));
+            //cmd103.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
+            //cmd103.Parameters.Add(new SqlParameter("@ClassCode", ClassCode));
+            //try
+            //{
+            //    cmd103.CommandType = CommandType.Text;
+            //    cmd103.ExecuteNonQuery();
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    string msg = "Insert Error into Cluster Part 2";
+            //    msg += ex.Message;
+            //    throw new Exception(msg);
+            //}
+            sqlconnect.Close();
+        }
+
+        protected void RBVoluntter_Click(object sender, EventArgs e)
+        {
+            Vname1.Text = string.Empty;
+            Role.Text = string.Empty;
+            vemail1.Text = string.Empty;
+            Vphone1.Text = string.Empty;
+            MealTicket.Text = string.Empty;
         }
     }
 }

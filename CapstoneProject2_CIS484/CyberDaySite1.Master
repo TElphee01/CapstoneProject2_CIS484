@@ -295,8 +295,10 @@
                                         </asp:ContentPlaceHolder>--%>
                                         <asp:ContentPlaceHolder ID="EventInfoPlaceHolder" runat="server">
                                         </asp:ContentPlaceHolder>
+                                        <br />
                                         <asp:ContentPlaceHolder ID="AddInstructorView" runat="server">
                                         </asp:ContentPlaceHolder>
+                                        <br />
                                         <asp:ContentPlaceHolder ID="EventContactAddInstructorView" runat="server">
                                            </asp:ContentPlaceHolder>
                                         <asp:ContentPlaceHolder ID="Volunteeradd" runat="server">
