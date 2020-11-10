@@ -1,7 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CyberDaySite1.master.cs" Inherits="CapstoneProject2_CIS484.CyberDaySite1" %>
 
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
     <meta charset="UTF-8" />
@@ -130,16 +129,17 @@
         });
     </script>
     <div class="page-wrapper background1 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
+        <div class="wrapper wrapper--w750">
             <div class="card card-4">
                 <div class="card-body">
                     <!-- My Heading and my Name included in the Title and in the body-->
                     <div class="row">
                         <div class="col">
-                            <h1 class="title" style="width: 100%;">Cyber Day! </h1>
+  
+                            <h1 class="title" style="width: 100%;" >James Madison University Cyber Day </h1>
                         </div>
                         <div id="LoginDiv" class="col text-right" runat="server">
-                            <a href="" class="btn btn-primary btn-sm float-right" data-toggle="modal" id="LoginForm" onclick='newwin()' style="padding-top: 0%; padding-bottom: 0%;" data-target="#modalLRForm">LogIn/Register</a>
+                            <a href="" class="btn btn-primary btn-sm float-right" data-toggle="modal" id="LoginForm" onclick='newwin()' style="padding-top: 0%; padding-bottom: 0%;" data-target="#modalLRForm">Coordinator LogIn/Register</a>
                         </div>
 
                         <div id="LogoutDiv" style="display: none;" class="col text-right" runat="server">
@@ -162,11 +162,15 @@
                                             <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
-                                                        Login</a>
+                                                       Login</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
                                                         Register</a>
+                                                </li>
+                                                 <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#panel9" role="tab"><i class="fas mr-1"></i>
+                                                        Sign out</a>
                                                 </li>
                                             </ul>
 
@@ -310,7 +314,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </%--div>
         </div>
     </div>
 </body>
