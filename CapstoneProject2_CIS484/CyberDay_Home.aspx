@@ -877,7 +877,7 @@
 
 
 <asp:Content ID="VolunteerView" ContentPlaceHolderID="VolunteerView" runat="server">
-    <div runat="server" id="VolDiv" style="margin-top: 40px; display: none" visible="false">
+    <div runat="server" id="VolDiv" style="margin-top: 40px; display: none" visible="true">
         <div class="form-group">
             <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
                 <asp:TableRow>

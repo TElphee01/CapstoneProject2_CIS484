@@ -1484,8 +1484,8 @@ namespace CapstoneProject2_CIS484
 
         protected void btnSubmitCode_Click(object sender, EventArgs e)
         {
-            //instructorviewandedit.Attributes.Add("style", "margin - top: 40px; display = normal");
-            //instructorviewandedit.Visible = true;
+            instructorviewandedit.Attributes.Add("style", "margin - top: 40px; display = none");
+            instructorviewandedit.Visible = false;
 
             VolunteerViewInfo.Attributes.Add("style", "margin-top: 40px; display = none");
             VolunteerViewInfo.Visible = false;
@@ -1493,7 +1493,7 @@ namespace CapstoneProject2_CIS484
             ParentRegisterAndAttach.Attributes.Add("style", "margin-top: 40px; display = none");
             ParentRegisterAndAttach.Visible = false;
 
-            string code = lblAccessCode.Text;
+            string code = tbAccessCode.Text;
             string type = "";
             contactCode = code;
             instructorCode = code;
