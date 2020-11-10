@@ -173,6 +173,10 @@ CREATE TABLE [dbo].[EventActivities](
 	[Time] [time](7) NULL,
 	[Room] [int] NULL,
 	[ActivityGuideID] [int] NULL
+ CONSTRAINT [PK_EventActivities] PRIMARY KEY CLUSTERED 
+(
+	[ActivityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[EventVolunteers]    Script Date: 11/06/2020 12:05:0000 AM ******/
@@ -184,6 +188,10 @@ CREATE TABLE [dbo].[EventVolunteers](
 	[VolunteerID] [int] IDENTITY(1,1) NOT NULL,
 	[VolunteerCode] [varchar](50) NULL,
 	[EventCode] [varchar](50) NULL,
+ CONSTRAINT [PK_EventVolunteers] PRIMARY KEY CLUSTERED 
+(
+	[VolunteerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Instructor]    Script Date: 11/06/2020 12:05:0000 AM ******/
