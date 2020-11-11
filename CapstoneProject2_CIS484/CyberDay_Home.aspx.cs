@@ -1341,7 +1341,10 @@ namespace CapstoneProject2_CIS484
 
             ResetButton_Click(sender,e);
             //EventRefreshPanel.Update();
-            lblSuccess_EventCreation.Visible = true; 
+            lblSuccess_EventCreation.Visible = true;
+            //EventdisplayDb.ConnectionString = "SELECT E.EventID, E.Name as 'Event Name', Date, O.Name as 'Organization Name', Type, ContactName as 'Contact Name', E.EventCode as 'Event Code' from Event E inner join Organization O on E.EventCode = O.EventCode Order by E.EventID ASC";
+            //EventdisplayDb.DataBind();
+            
         }
 
         protected void ResetButton_Click(object sender, EventArgs e)
