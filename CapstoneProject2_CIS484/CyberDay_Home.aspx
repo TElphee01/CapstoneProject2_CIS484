@@ -53,21 +53,14 @@
         <div class="form-group">
             <h2 style="text-align: center" >Welcome to Cyber Day 2021</h2>
              <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
-                <asp:TableRow>
+                <asp:TableRow RowSpan="2">
                     <asp:TableCell>
-                        <asp:Label ID="lblAccessCode" runat="server" Text="Parents,Teachers and Volunteers please Enter your access code given here: " Font-Bold Font-Size="Larger"></asp:Label>
-                        
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <br />
+                        <asp:Label ID="lblAccessCode" runat="server" Text="Please enter your Event/Class code: " Font-Bold="true" Font-Size="Larger"></asp:Label>
                         <asp:TextBox ID="txtAccessCodeEntry" BorderStyle="Double" runat="server" Width="100" MaxLength="300" ></asp:TextBox>
-                    </asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow>
                     <asp:TableCell>
                         <asp:Button ID="btnAccessCodeEntry" runat="server" Text="Confirm" CausesValidation="false" UseSubmitBehavior="false" OnClick="btnAccessCodeEntry_Click" Width="100" />
-                        <p>(please navigate to the "USER" on the top pain after hitting Confirm to view more information)</p>
-
+                        <p>(Please navigate to the "USER" tab on the navigation pain after selecting CONFIRM to view more information)</p>
+                    </asp:TableCell>
                     </asp:TableCell>
                 </asp:TableRow>
                  <asp:TableRow>
@@ -697,9 +690,7 @@
 </asp:Content>--%>
 
 <asp:Content ID="EventContactAddInstructorView" ContentPlaceHolderID="EventContactAddInstructorView" runat="server">
-    <fieldset> 
-        <legend>Create an Instructor:</legend>
-            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
                 <div style="margin-top: 40px;">
                     <div class="row">
@@ -757,7 +748,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm text-left">
-                            <asp:Button ID="Button1" runat="server" OnClick="SubmitButton_Click" Text="Create Instructor" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                            <asp:Button ID="Button1" runat="server" OnClick="SubmitButton_Click" Text="Create Instructor" Style="margin-left: 0%;" CssClass="btn btn-primary" CausesValidation="false" />
                         </div>
                         <div class="col-sm text-center">
                             <asp:Button ID="Instructor_ResetButton" OnClick="Instructor_ResetButton_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
@@ -791,7 +782,6 @@
                         <asp:Label ID="lblVolSelect" CssClass="label" runat="server" Text="Select an event:" Font-Bold="true"></asp:Label>
                         <asp:SqlDataSource runat="server" ID="eventview2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
                             SelectCommand="select * from Event"></asp:SqlDataSource>
-
                         <asp:DropDownList runat="server" ID="ddleventv" 
                             DataSourceID="eventview2" 
                             DataTextField="Name" 
@@ -864,6 +854,7 @@
                     SelectCommand="select V.Name, Role, Phone, Email, Phone, MealTicket,
                     T.Name, E.EventCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
                     on E.EventCode = T.EventCode;"/>
+            </fieldset> 
             </ContentTemplate>
         </asp:UpdatePanel>
 </asp:Content>
@@ -1018,19 +1009,16 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell ID="instructorviewandedit" Visible="false">
-                    <asp:UpdatePanel ID="UpdatePanelInstructorView" runat="server">
+                    <fieldset>
+                        <legend>Update your personal information below:</legend>
+                        <asp:UpdatePanel ID="UpdatePanelInstructorView" runat="server">
                         <ContentTemplate>
                             <div style="margin-top: 40px;">
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <b>PLEASE EDIT YOUR PERSONAL INFORMATION BELOW: </b>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
                                             <asp:Label ID="lblOrganization" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
-                                            <asp:Label ID="lblOrganization_Show" CssClass="label" runat="server" Text="PLACE SCHOOL/ORGANIZATION HERE"></asp:Label>
+                                            <asp:Label ID="lblOrganization_Show" CssClass="label" runat="server" Text=""></asp:Label>
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
@@ -1066,9 +1054,12 @@
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </fieldset>
                 </asp:TableCell>
                 <asp:TableCell ID="VolunteerViewInfo" Visible="false">
-                    <asp:UpdatePanel ID="UpdatePanelVolunteerView" runat="server">
+                    <fieldset>
+                        <legend>Update your personal information below:</legend>
+            <asp:UpdatePanel ID="UpdatePanelVolunteerView" runat="server">
                         <ContentTemplate>
                             <div style="margin-top: 40px;">
                                 <div class="row">
@@ -1105,19 +1096,16 @@
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </fieldset>
+                    
                 </asp:TableCell>
                 <asp:TableCell ID="ParentRegisterAndAttach" Visible="false">
-                    <asp:UpdatePanel ID="UpdatePanelParent" runat="server">
+                    <fieldset> 
+                        <legend>Update your personal information below:</legend>
+                        <asp:UpdatePanel ID="UpdatePanelParent" runat="server">
                         <ContentTemplate>
                             <div style="margin-top: 40px;">
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblOrganization_Student" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
-                                            <asp:Label ID="lblOrganization_Student_Show" CssClass="label" runat="server" Text=""></asp:Label>
-                                        </div>
-                                    </div>
-                                    <div class="w-100"></div>
                                     <div class="col">
                                         <div class="form-group">
                                             <asp:Label ID="lblName_Student" CssClass="label" runat="server" Text="Name:"></asp:Label>
@@ -1177,6 +1165,8 @@
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </fieldset>
+                    
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>

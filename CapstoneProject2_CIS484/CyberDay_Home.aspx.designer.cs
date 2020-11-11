@@ -1050,24 +1050,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.UpdatePanel UpdatePanelParent;
 
         /// <summary>
-        /// lblOrganization_Student control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrganization_Student;
-
-        /// <summary>
-        /// lblOrganization_Student_Show control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrganization_Student_Show;
-
-        /// <summary>
         /// lblName_Student control.
         /// </summary>
         /// <remarks>
