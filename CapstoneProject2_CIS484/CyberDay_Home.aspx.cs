@@ -14,6 +14,8 @@ using System.Drawing;
 using System.Net.Mail;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
+
 
 namespace CapstoneProject2_CIS484
 {
@@ -447,9 +449,9 @@ namespace CapstoneProject2_CIS484
             //// Generate Cluster and Instructor Codes
             string studentCode = "";
             int CoordinatorID = 1; // Need as Static Variable
-            int organizationID=1;
+            int organizationID = 1;
             string instructorCode = "";
-            string mealConfirmation = ""; 
+            string mealConfirmation = "";
 
             studentCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
 
@@ -463,12 +465,12 @@ namespace CapstoneProject2_CIS484
 
             try
             {
-                SqlDataReader reader = cmd_FindStudentInfo.ExecuteReader(); 
-                
+                SqlDataReader reader = cmd_FindStudentInfo.ExecuteReader();
+
                 while (reader.Read())
                 {
                     instructorCode = reader[1].ToString();
-                    organizationID = Convert.ToInt32(reader[2]); 
+                    organizationID = Convert.ToInt32(reader[2]);
                 }
                 reader.Close();
             }
@@ -546,7 +548,7 @@ namespace CapstoneProject2_CIS484
                 throw new Exception(msg);
             }
 
-            lblSucessStudentSignup.Visible = true; 
+            lblSucessStudentSignup.Visible = true;
             sqlconnect.Close();
 
             //try
@@ -664,8 +666,6 @@ namespace CapstoneProject2_CIS484
             //    msg += ex.Message;
             //    throw new Exception(msg);
             //}
-
-
         }
 
         protected void btnStudentSignUpReset_Click(object sender, EventArgs e)
@@ -674,7 +674,7 @@ namespace CapstoneProject2_CIS484
             tbNotes_StudentSignup.Text = "";
             tbAge_StudentSignup.Text = "";
             rbtnMeal_No_StudentSignup.Checked = false;
-            rbtnMeal_Yes_StudentSignup.Checked = false; 
+            rbtnMeal_Yes_StudentSignup.Checked = false;
         }
 
         protected void SubmitCoordinator_Click(object sender, EventArgs e)
@@ -1140,20 +1140,11 @@ namespace CapstoneProject2_CIS484
                             }
                             Response.End();
                         }
-
                     }
                 }
             }
         }
-        //protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(ContactSubmissionGrid, "Select$" + e.Row.RowIndex);
-        //        e.Row.Attributes["style"] = "cursor:pointer";
-        //    }
-        //}
-        
+
         protected void ContactSubmissionGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -1163,70 +1154,12 @@ namespace CapstoneProject2_CIS484
             }
         }
 
+        private String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
-        public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
         //public static String sendToEmailAddress = "maxwell.vaughan.mv@gmail.com";
         public static String CyberCityURL = "www.CyberCity_Fake.com";
-
-
-        protected void Email_Instructor_EventCreated()
-        {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City Instructor! </h2><br>" +
-               "Please access the Cyber City system with the Instructor Code provided in this email. " +
-               "<br />" +
-               "<br /> Instructor Code:" + instructorCode.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
-        }
-
-        protected void Email_Volunteer_EventCreated()
-        {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City Volunteer! </h2><br>" +
-               "Please access the Cyber City system with the Volunteer Code provided in this email. " +
-               "<br />" +
-               "<br /> Volunteer Code:" + volunteerCode.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
-        }
-
-        protected void Email_Parent_EventCreated()
-        {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City is happening! </h2><br>" +
-               "Parents, please create an account in Cyber City system for your child with the Access Code provided in this email. " +
-               "<br />" +
-               "<br /> Volunteer Code:" + MasterAccessCode.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "Please be sure to have the photo release form signed and upload your account 24 hours prior to the event. " +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
-        }
 
         protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1267,12 +1200,12 @@ namespace CapstoneProject2_CIS484
             //create new sqlconnection and connection to database by using connection string from web.config file
             SqlConnection con = new SqlConnection(strcon);
             con.Open();
-            String sqlQuery4 = "If Not Exists (select 1 from Event where Name= @EventName)" + 
+            String sqlQuery4 = "If Not Exists (select 1 from Event where Name= @EventName)" +
                 "insert into Event (Date, Name, ContactName, EventCode) values (@Date1, @EventName, @ContactName, @EventCode)";
             SqlCommand cmd4 = new SqlCommand(sqlQuery4, con);
             cmd4.Parameters.Add(new SqlParameter("@Date1", Date1));
             cmd4.Parameters.Add(new SqlParameter("@EventName", EventName));
-            cmd4.Parameters.Add(new SqlParameter("ContactName", ContactName)); 
+            cmd4.Parameters.Add(new SqlParameter("ContactName", ContactName));
             cmd4.Parameters.Add(new SqlParameter("@EventCode", code));
 
             try
@@ -1340,7 +1273,7 @@ namespace CapstoneProject2_CIS484
                 throw new Exception(msg);
             }
 
-            ResetButton_Click(sender,e);
+            ResetButton_Click(sender, e);
             //EventRefreshPanel.Update();
         }
 
@@ -1525,6 +1458,8 @@ namespace CapstoneProject2_CIS484
                                 tbName_Instructor.Text = (HttpUtility.HtmlEncode(instReader[1].ToString()));
                                 tbEmail_Instructor.Text = (HttpUtility.HtmlEncode(instReader[3].ToString()));
                                 tbPhone_Instructor.Text = (HttpUtility.HtmlEncode(instReader[4].ToString()));
+
+
                             }
                             SqlConnection bb = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
                             bb.Open();
@@ -1532,11 +1467,11 @@ namespace CapstoneProject2_CIS484
                             SqlDataReader orgReader = instorg.ExecuteReader();
                             while (orgReader.Read())
                             {
-                               lblOrganization_Show.Text = (HttpUtility.HtmlEncode(orgReader[1].ToString()));
+                                lblOrganization_Show.Text = (HttpUtility.HtmlEncode(orgReader[1].ToString()));
                             }
                             sqlsrcViewStudents.ConnectionString = "SELECT Name, Age, Notes, MealTicket as 'Meal Ticket Confirmation' from Student where Student.InstructorCode = '" + code + "'";
                             sqlsrcViewStudents.DataBind();
-                            
+
 
                         }
                         else if (type.Equals("Volunteer"))
@@ -1599,7 +1534,7 @@ namespace CapstoneProject2_CIS484
 
         protected void btnUpdateInstructorInfo_Click(object sender, EventArgs e)
         {
-            lblSuccessPopup.Visible = true; 
+            lblSuccessPopup.Visible = true;
             // NEED INSTRUCTOR CODE TO BE STATIC HERE 
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
@@ -1681,7 +1616,7 @@ namespace CapstoneProject2_CIS484
 
             string mealConfirmation = "";
 
-            String sqlQuery_UpdateStudent= "UPDATE Student SET Name = @Name, Age = @Age, Notes = @Notes, MealTicket = @MealTicket WHERE StudentCode = @StudentCode";
+            String sqlQuery_UpdateStudent = "UPDATE Student SET Name = @Name, Age = @Age, Notes = @Notes, MealTicket = @MealTicket WHERE StudentCode = @StudentCode";
 
             if (rbtnMeal_No.Checked == true)
             {
@@ -1717,6 +1652,80 @@ namespace CapstoneProject2_CIS484
         protected void btnStudentSignUp_Click1(object sender, EventArgs e)
         {
 
+        }
+
+        protected void EmailVolunteers_Click(object sender, EventArgs e)
+        {
+
+            string emailBodyInstructor;
+            string subjectInstructor;
+            string code = lblAccessCode.Text;
+            string type = "";
+            contactCode = code;
+            instructorCode = code;
+            volunteerCode = code;
+            StudentCode = code;
+            clusterCode = code;
+            SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            dbConnection.Open();
+
+            string qry1 = "Select * from Instructor";
+            string qry2 = "Select * from Organization inner join Instructor on Organization.OrganizationID = Instructor.OrganizationID where Instructor.InstructorCode ='" + code + "'";
+            SqlConnection aa = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            aa.Open();
+            SqlCommand instCom = new SqlCommand(qry1, aa);
+            SqlDataReader instReader = instCom.ExecuteReader();
+            while (instReader.Read())
+
+            {
+
+                string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+                String sqlQuery = "SELECT * from [File]";
+                List<File> allFiles = new List<File>();
+
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            count++;
+                            tbName_Instructor.Text = (HttpUtility.HtmlEncode(instReader[1].ToString()));
+                            tbEmail_Instructor.Text = (HttpUtility.HtmlEncode(instReader[3].ToString()));
+                            tbPhone_Instructor.Text = (HttpUtility.HtmlEncode(instReader[4].ToString()));
+                            while (reader.Read())
+                            {
+                                File newFileVolunteer = new File()
+                                {
+                                    FileID = Convert.ToInt32(reader["FileID"]),
+                                    FileName = reader["FileName"].ToString(),
+                                    FileSize = Convert.ToInt32(reader["FileSize"]),
+                                    ContentType = reader["ContentType"].ToString(),
+                                    FileExtension = reader["FileExtension"].ToString(),
+                                    FileContent = Encoding.ASCII.GetBytes(reader["FileContent"].ToString())
+                                };
+                                allFiles.Add(newFileVolunteer);
+                            }
+
+                            subjectInstructor = "CyberCity Event invitation.";
+                            emailBodyInstructor = "<h2> Cyber City Instructor! </h2><br>" +
+                               "Please access the Cyber City system with the Instructor Code provided in this email. " +
+                               "<br />" +
+                               "<br /> Instructor Code:" + VolunteerCode + " <br />" +
+                               "At: " + CyberCityURL.ToString() +
+                               "<br />" +
+                               "<br /> This code is unique to you and should not be distributed." +
+                               "<br />" +
+                               "This is an auto generated email. Please Do Not Reply.";
+                            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor, );
+
+                        }
+                    }
+                }
+
+            }            
         }
     }
 }

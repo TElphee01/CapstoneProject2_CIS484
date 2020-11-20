@@ -426,6 +426,9 @@
                                             <div class="col-sm text-left">
                                                 <asp:Button ID="SubmitButton" runat="server" ValidationGroup="ContactRequestInput" OnClick="SubmitButton_Click1" Text="Submit" UseSubmitBehavior="true" Style="margin-left: 0%;" CssClass="btn btn-primary" />
                                             </div>
+                                            <div class="col-sm text-center">
+                                                <asp:Button ID="EmailVolunteers" runat="server" ValidationGroup="ContactRequestInput" OnClick="EmailVolunteers_Click" Text="Email code to Volunteers" UseSubmitBehavior="true" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+                                            </div>
                                             <div class="col-sm text-right">
                                                 <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click" ValidationGroup="ContactRequestInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
                                             </div>
