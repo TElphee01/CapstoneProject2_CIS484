@@ -23,7 +23,7 @@ namespace CapstoneProject2_CIS484
         #region Static Members
 
 
-        public static void SendMailMessage(string toEmail, string fromEmail, string bcc, string cc, string subject, string body, IList<string> attachmentFullPath)
+        public static void SendMailMessage(string toEmail, string fromEmail, string bcc, string cc, string subject, string body, byte[] attachmentFullPath)
         {
             //create the MailMessage object
             MailMessage mMailMessage = new MailMessage();
@@ -71,7 +71,7 @@ namespace CapstoneProject2_CIS484
             //add any attachments from the filesystem
             foreach (var attachmentPath in attachmentFullPath)
             {
-                Attachment mailAttachment = new Attachment(attachmentPath);
+                Attachment mailAttachment = new Attachment(attachmentPath.ToString());
                 mMailMessage.Attachments.Add(mailAttachment);
             }
 

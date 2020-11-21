@@ -1656,7 +1656,6 @@ namespace CapstoneProject2_CIS484
 
         protected void EmailVolunteers_Click(object sender, EventArgs e)
         {
-
             string emailBodyInstructor;
             string subjectInstructor;
             string code = lblAccessCode.Text;
@@ -1672,42 +1671,32 @@ namespace CapstoneProject2_CIS484
             string qry1 = "Select * from Instructor";
             string qry2 = "Select * from Organization inner join Instructor on Organization.OrganizationID = Instructor.OrganizationID where Instructor.InstructorCode ='" + code + "'";
             SqlConnection aa = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            String sqlQuery = "SELECT * from [File]";
+            List<File> instructorFile = new List<File>();
+
             aa.Open();
-            SqlCommand instCom = new SqlCommand(qry1, aa);
-            SqlDataReader instReader = instCom.ExecuteReader();
-            while (instReader.Read())
-
             {
-
-                string strcon = ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString;
-                SqlConnection con = new SqlConnection(strcon);
-                String sqlQuery = "SELECT * from [File]";
-                List<File> allFiles = new List<File>();
-
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+                using (SqlCommand cmd1 = new SqlCommand(sqlQuery, aa))
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader instaReader = cmd1.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (instaReader.Read())
                         {
                             count++;
-                            tbName_Instructor.Text = (HttpUtility.HtmlEncode(instReader[1].ToString()));
-                            tbEmail_Instructor.Text = (HttpUtility.HtmlEncode(instReader[3].ToString()));
-                            tbPhone_Instructor.Text = (HttpUtility.HtmlEncode(instReader[4].ToString()));
-                            while (reader.Read())
+                            tbName_Instructor.Text = (HttpUtility.HtmlEncode(instaReader[1].ToString()));
+                            tbEmail_Instructor.Text = (HttpUtility.HtmlEncode(instaReader[3].ToString()));
+                            tbPhone_Instructor.Text = (HttpUtility.HtmlEncode(instaReader[4].ToString()));
+
+                            File newFileVolunteer = new File()
                             {
-                                File newFileVolunteer = new File()
-                                {
-                                    FileID = Convert.ToInt32(reader["FileID"]),
-                                    FileName = reader["FileName"].ToString(),
-                                    FileSize = Convert.ToInt32(reader["FileSize"]),
-                                    ContentType = reader["ContentType"].ToString(),
-                                    FileExtension = reader["FileExtension"].ToString(),
-                                    FileContent = Encoding.ASCII.GetBytes(reader["FileContent"].ToString())
-                                };
-                                allFiles.Add(newFileVolunteer);
-                            }
+                                FileID = Convert.ToInt32(instaReader["FileID"]),
+                                FileName = instaReader["FileName"].ToString(),
+                                FileSize = Convert.ToInt32(instaReader["FileSize"]),
+                                ContentType = instaReader["ContentType"].ToString(),
+                                FileExtension = instaReader["FileExtension"].ToString(),
+                                FileContent = Encoding.ASCII.GetBytes(instaReader["FileContent"].ToString())
+                            };
+                            newFileVolunteer.Add(instructorFile);
 
                             subjectInstructor = "CyberCity Event invitation.";
                             emailBodyInstructor = "<h2> Cyber City Instructor! </h2><br>" +
@@ -1719,12 +1708,11 @@ namespace CapstoneProject2_CIS484
                                "<br /> This code is unique to you and should not be distributed." +
                                "<br />" +
                                "This is an auto generated email. Please Do Not Reply.";
-                            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor, );
+                            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor, newFileVolunteer.FileContent);
 
                         }
                     }
                 }
-
             }            
         }
     }

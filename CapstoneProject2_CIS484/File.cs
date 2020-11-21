@@ -20,5 +20,10 @@ namespace CapstoneProject2_CIS484
         public string ContentType { get; set; }
         public string FileExtension { get; set; }
         public byte[] FileContent { get; set; }
+
+        internal void Add(List<File> instructorFile)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
