@@ -186,13 +186,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button SubmitButton;
 
         /// <summary>
-        /// EmailVolunteers control.
+        /// emailCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EmailVolunteers;
+        protected global::System.Web.UI.WebControls.Button emailCode;
+
+        /// <summary>
+        /// emailCodeDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList emailCodeDDL;
 
         /// <summary>
         /// ResetButton control.

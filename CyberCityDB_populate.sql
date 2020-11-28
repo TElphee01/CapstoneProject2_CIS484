@@ -34,6 +34,8 @@ INSERT [dbo].[Instructor] ([InstructorCode], [Name], [OrganizationID], [Email], 
 GO
 INSERT [dbo].[Instructor] ([InstructorCode], [Name], [OrganizationID], [Email], [Phone], [EventCode]) VALUES (N'6666', N'Barry', 2, N'barry@gmail.com', 8765432, N'2222')
 GO
+INSERT [dbo].[Instructor] ([InstructorCode], [Name], [OrganizationID], [Email], [Phone], [EventCode]) VALUES (N'6655', N'Tanner', 2, N'telphee@gmail.com', 1115432, N'2222')
+GO
 INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'9999', N'5555', 1)
 GO
 INSERT [dbo].[ClassCode] ([ClassCode], [InstructorCode], [OrganizationID]) VALUES (N'abcd', N'6666', 2)

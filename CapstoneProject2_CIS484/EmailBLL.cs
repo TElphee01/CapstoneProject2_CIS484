@@ -23,7 +23,9 @@ namespace CapstoneProject2_CIS484
         #region Static Members
 
 
-        public static void SendMailMessage(string toEmail, string fromEmail, string bcc, string cc, string subject, string body, byte[] attachmentFullPath)
+        public static void SendMailMessage(string toEmail, string fromEmail, string bcc, string cc, string subject, string body 
+            //byte[] attachmentFullPath
+            )
         {
             //create the MailMessage object
             MailMessage mMailMessage = new MailMessage();
@@ -52,7 +54,7 @@ namespace CapstoneProject2_CIS484
             //set the subject of the mail message
             if (!string.IsNullOrEmpty(subject))
             {
-                mMailMessage.Subject = "UBH Web Application Notification";
+                mMailMessage.Subject = "CyberDay Event Invitation";
             }
             else
             {
@@ -69,11 +71,11 @@ namespace CapstoneProject2_CIS484
             mMailMessage.Priority = MailPriority.Normal;
 
             //add any attachments from the filesystem
-            foreach (var attachmentPath in attachmentFullPath)
-            {
-                Attachment mailAttachment = new Attachment(attachmentPath.ToString());
-                mMailMessage.Attachments.Add(mailAttachment);
-            }
+            //foreach (var attachmentPath in attachmentFullPath)
+            //{
+            //    Attachment mailAttachment = new Attachment(attachmentPath.ToString());
+            //    mMailMessage.Attachments.Add(mailAttachment);
+            //}
 
             //create the SmtpClient instance
             SmtpClient mSmtpClient = new SmtpClient();
@@ -109,7 +111,6 @@ namespace CapstoneProject2_CIS484
             else
                 return (false);
         }
-
         #endregion
     }
 }
