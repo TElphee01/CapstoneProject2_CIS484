@@ -259,7 +259,7 @@
                                 runat="server"
                                 OnMenuItemClick="MasterMenu_MenuItemClick" NavigateUrl="javascript:  needToConfirm = false;" StaticMenuItemStyle-CssClass="menuItems" OnClientClick="javascript: needToConfirm = false;" StaticMenuStyle-CssClass="navb" StaticSelectedStyle-CssClass="menuItems" ClientIDMode="Static">
                                 <Items>
-                                    <asp:MenuItem Text="Home" Value="0" Selected="true" />
+                                    <asp:MenuItem Text="Home" Value="0" Selected="true"  />
                                     <asp:MenuItem Text="User" Value="1" />
                                     <%--<asp:MenuItem Text="User: None" Enabled="False"  />--%>
                                 </Items>
