@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessCode.cs" />
+    <Compile Include="EmailBLL.cs" />
     <Compile Include="CyberDaySite1.Master.cs">
       <DependentUpon>CyberDaySite1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

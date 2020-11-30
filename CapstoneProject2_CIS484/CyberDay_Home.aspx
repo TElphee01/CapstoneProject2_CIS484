@@ -424,6 +424,14 @@
                                                 <asp:Button ID="SubmitButton" runat="server" ValidationGroup="ContactRequestInput" OnClick="SubmitButton_Click1" Text="Create Event" UseSubmitBehavior="true" Style="margin-left: 0%;" CssClass="btn btn-primary" />
                                             </div>
                                             <div class="col-sm text-center">
+                                                <asp:Button ID="emailCode" runat="server" OnClick="userSendEmail_Click" Text="Select type of user to send email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+                                                <asp:DropDownList ID="emailCodeDDL" runat="server">
+                                                    <asp:ListItem>Instructors</asp:ListItem>
+                                                    <asp:ListItem>Volunteers</asp:ListItem>
+                                                    <asp:ListItem>Students</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div class="col-sm text-right">
                                                 <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click" ValidationGroup="ContactRequestInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
                                             </div>
                                         </div>
