@@ -1163,71 +1163,6 @@ namespace CapstoneProject2_CIS484
             //}
         }
 
-        //SMTP information in WebConfig file MUST MATCH coordinator email address.
-        public static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
-        public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
-        //public static String sendToEmailAddress = "maxwell.vaughan.mv@gmail.com";
-        public static String CyberCityURL = "www.CyberCity_Fake.com";
-
-
-        protected void Email_Instructor_EventCreated()
-        {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City Instructor! </h2><br>" +
-               "Please access the Cyber City system with the Instructor Code provided in this email. " +
-               "<br />" +
-               "<br /> Instructor Code:" + instructorCode.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
-        }
-
-        protected void Email_Volunteer_EventCreated()
-        {
-            SmtpClient smtpClient = new SmtpClient();
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(sendToEmailAddress);
-            msg.IsBodyHtml = true;
-            msg.Subject = "CyberCity Event invitation.";
-            msg.Body = "<h2> Cyber City Volunteer! </h2><br>" +
-               "Please access the Cyber City system with the Volunteer Code provided in this email. " +
-               "<br />" +
-               "<br /> Volunteer Code:" + volunteerCode.GetHashCode().ToString() + " <br />" +
-               "At: " + CyberCityURL.ToString() +
-               "<br />" +
-               "<br /> This code is unique to you and should not be distributed." +
-               "<br />" +
-               "This is an auto generated email. Please Do Not Reply.";
-            smtpClient.Send(msg);
-        }
-
-        protected void Email_Parent_EventCreated()
-        {
-            //SmtpClient smtpClient = new SmtpClient();
-            //System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            //msg.To.Add(sendToEmailAddress);
-            //msg.IsBodyHtml = true;
-            //msg.Subject = "CyberCity Event invitation.";
-            //msg.Body = "<h2> Cyber City is happening! </h2><br>" +
-            //   "Parents, please create an account in Cyber City system for your child with the Access Code provided in this email. " +
-            //   "<br />" +
-            //   "<br /> Volunteer Code:" +  AccessCode.MasterAccessCodeCluster.GetHashCode().ToString() + " <br />" +
-            //   "At: " + CyberCityURL.ToString() +
-            //   "<br />" +
-            //   "Please be sure to have the photo release form signed and upload your account 24 hours prior to the event. " +
-            //   "<br /> This code is unique to you and should not be distributed." +
-            //   "<br />" +
-            //   "This is an auto generated email. Please Do Not Reply.";
-            //smtpClient.Send(msg);
-        }
-
         //protected void ContactSubmissionGrid_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    string RequestID = ContactSubmissionGrid.SelectedRow.Cells[0].Text;
@@ -1726,6 +1661,141 @@ namespace CapstoneProject2_CIS484
         protected void btnStudentSignUp_Click1(object sender, EventArgs e)
         {
 
+        }
+
+        private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
+        //SMTP information in WebConfig file MUST MATCH coordinator email address.
+        public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
+        public static String CyberCityURL = "www.CyberCity_Fake.com";
+
+        protected void instructorEmail()
+        {
+            string subjectInstructor;
+            string emailBodyInstructor;
+            string instructorEventCode = "3333";
+
+            subjectInstructor = "CyberCity Event invitation - Instructor";
+            emailBodyInstructor = " Cyber City Instructor! " +
+                " Please access the Cyber City system with the EventCode provided in this email. " +
+                " Event Code: " + instructorEventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Instructor Code to login." +
+                " This code is unique to you and should not be distributed." +
+                " This is an auto generated email. Please Do Not Reply.";
+
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
+        }
+
+        protected void instructorEmailTest()
+        {
+            string instructorEmailFound;
+            List<string> instructorEmailAddresses = new List<string>();
+
+            //Read in all instructor emails
+            SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            dbConnection.Open();
+            try
+            {
+                SqlCommand loginCommand = new SqlCommand();
+                loginCommand.Connection = dbConnection;
+                loginCommand.CommandText = "Select * from Instructor";
+
+                SqlDataReader reader = loginCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        instructorEmailFound = reader[4].ToString();
+
+                        if (instructorEmailFound != null)
+                        {
+                            //Save instructor emails to list
+                            instructorEmailAddresses.Add(instructorEmailFound);
+                        }
+                    }
+                }
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Instructor email address not found";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+
+            //Loop through list and send emails
+            if (instructorEmailAddresses != null)
+            {
+                string subjectInstructor;
+                string emailBodyInstructor;
+                string instructorEventCode = "3333";
+
+                subjectInstructor = "CyberCity Event invitation - Instructor";
+                emailBodyInstructor = " Cyber City Instructor! " +
+                    " Please access the Cyber City system with the EventCode provided in this email. " +
+                    " Event Code: " + instructorEventCode +
+                    " At: " + CyberCityURL.ToString() +
+                    " Once in the event use your Instructor Code to login." +
+                    " This code is unique to you and should not be distributed." +
+                    " This is an auto generated email. Please Do Not Reply.";
+
+                EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
+            }
+        }
+
+        protected void volunteerEmail()
+        {
+            string subjectVolunteer;
+            string emailBodyVolunteer;
+            string volunteerEventCode = "3333";
+
+            subjectVolunteer = "CyberCity Event invitation - Volunteer";
+            emailBodyVolunteer = " Cyber City Volunteer " +
+                " Please access the Cyber City system with the EventCode provided in this email. " +
+                " Event Code: " + volunteerEventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Volunteer Code to login. " +
+                " This code is unique to you and should not be distributed. " +
+                " This is an auto generated email. Please Do Not Reply. ";
+
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectVolunteer, emailBodyVolunteer);
+        }
+
+        protected void studentEmail()
+        {
+            string subjectStudent;
+            string emailBodyStudent;
+            string studentEventCode = "7777";
+
+            subjectStudent = "CyberCity Event invitation - Student";
+            emailBodyStudent = "Cyber City Participant " +
+                "Please access the Cyber City system with the EventCode provided in this email. " +
+                "Event Code: " + studentEventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Student Code to login. " +
+                " This code is unique to you and should not be distributed. " +
+                " This is an auto generated email. Please Do Not Reply. ";
+
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectStudent, emailBodyStudent);
+        }
+
+        protected void userSendEmail_Click(object sender, EventArgs e)
+        {
+            if (emailCodeDDL.SelectedValue == "Instructors")
+            {
+                instructorEmail();
+            }
+            else if (emailCodeDDL.SelectedValue == "Volunteers")
+            {
+                volunteerEmail();
+            }
+            else if (emailCodeDDL.SelectedValue == "Students")
+            {
+                studentEmail();
+            }
         }
     }
 }
