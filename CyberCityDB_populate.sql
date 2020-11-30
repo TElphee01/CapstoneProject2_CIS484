@@ -81,6 +81,9 @@ INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALU
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1111', N'Max Vaughan',12, 'yes',  N'efgh', N'Sharp Cookie', 1)
 GO
+
+
+
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1010', N'Barry Allen', 11, 'yes', N'5678', N'Droppy', 2)
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1011', N'Ralph Nader', 10, 'yes', N'5678', N'Cant swin', 2)
@@ -111,7 +114,6 @@ INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorC
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1024', N'Tanner McPhee', 10, 'yes', N'5678', N'Will throw a fit!', 2)
 GO
-
 SET IDENTITY_INSERT [dbo].[EventVolunteers] OFF 
 Go 
 INSERT INTO [dbo].[Tshirt] ([TshirtID],[Size],[StudentCode]) VALUES (1, 'Small', '1111')
