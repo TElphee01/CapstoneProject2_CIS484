@@ -144,18 +144,18 @@ namespace CapstoneProject2_CIS484
             //ShowMessage("Heard! " + Username, MessageType.Info);
         }
 
-        protected void Instructor_MenuItemClick(object sender, MenuEventArgs e)
-        {
-            System.Web.UI.WebControls.Menu Intructor = sender as System.Web.UI.WebControls.Menu;
-            MultiView multiTabs = this.FindControl("InstructorView") as MultiView;
-            multiTabs.ActiveViewIndex = Int32.Parse(MasterMenu.SelectedValue);
-        }
+        //protected void Instructor_MenuItemClick(object sender, MenuEventArgs e)
+        //{
+        //    System.Web.UI.WebControls.Menu Intructor = sender as System.Web.UI.WebControls.Menu;
+        //    MultiView multiTabs = this.FindControl("InstructorView") as MultiView;
+        //    multiTabs.ActiveViewIndex = Int32.Parse(MasterMenu.SelectedValue);
+        //}
 
-        protected void Volunteer_MenuItemClick(object sender, MenuEventArgs e)
-        {
-            System.Web.UI.WebControls.Menu Volunteer = sender as System.Web.UI.WebControls.Menu;
-            MultiView multiTabs = this.FindControl("VolunteerView") as MultiView;
-            multiTabs.ActiveViewIndex = Int32.Parse(MasterMenu.SelectedValue);
-        }
+        //protected void Volunteer_MenuItemClick(object sender, MenuEventArgs e)
+        //{
+        //    System.Web.UI.WebControls.Menu Volunteer = sender as System.Web.UI.WebControls.Menu;
+        //    MultiView multiTabs = this.FindControl("VolunteerView") as MultiView;
+        //    multiTabs.ActiveViewIndex = Int32.Parse(MasterMenu.SelectedValue);
+        //}
     }
 }
