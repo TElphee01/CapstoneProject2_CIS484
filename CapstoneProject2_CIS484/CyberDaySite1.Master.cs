@@ -133,9 +133,14 @@ namespace CapstoneProject2_CIS484
                 //dbConnection.Close();
                 CDMConnection.Close();
                 MasterMenu.Items.RemoveAt(1);
-                System.Web.UI.WebControls.MenuItem myItem = new System.Web.UI.WebControls.MenuItem("CoordinatorView", "2");
-                MasterMenu.Items.AddAt(1, myItem);
-            
+                //System.Web.UI.WebControls.MenuItem myItem = new System.Web.UI.WebControls.MenuItem("CoordinatorView", "2");
+                //MasterMenu.Items.AddAt(1, myItem);
+                System.Web.UI.WebControls.MenuItem myItem2 = new System.Web.UI.WebControls.MenuItem("Add Event", "3");
+                MasterMenu.Items.AddAt(1, myItem2);
+            System.Web.UI.WebControls.MenuItem myItem3 = new System.Web.UI.WebControls.MenuItem("Add Teacher", "4");
+            MasterMenu.Items.AddAt(2, myItem3);
+            System.Web.UI.WebControls.MenuItem myItem4 = new System.Web.UI.WebControls.MenuItem("Add Volunteer", "5");
+            MasterMenu.Items.AddAt(3, myItem4);
             //ShowMessage("Heard! " + Username, MessageType.Info);
         }
 
