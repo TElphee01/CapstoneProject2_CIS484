@@ -695,7 +695,7 @@ namespace CapstoneProject2_CIS484
 
             String sqlQuery = "Insert into Coordinator (Name, Email, Phone) values (@Name, @Email, @Phone);";
             SqlCommand command = new SqlCommand(sqlQuery, con);
-            command.Parameters.Add(new SqlParameter("@Name", CoordinatorNameText.Text));
+            command.Parameters.Add(new SqlParameter("@Name", CoordinatorFNameText.Text + " " + CoordinatorLNameText.Text));
             command.Parameters.Add(new SqlParameter("@Email", EmailTextBox.Text));
             command.Parameters.Add(new SqlParameter("@Phone", PhoneTextBox.Text));
             con.Open();
@@ -750,7 +750,7 @@ namespace CapstoneProject2_CIS484
         protected void PopulateCoordinator_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            UsernameTextBox.Text = HttpUtility.HtmlEncode(CoordinatorNameText.Text);
+            UsernameTextBox.Text = HttpUtility.HtmlEncode(CoordinatorFNameText.Text+ " " + CoordinatorLNameText.Text);
             EmailTextBox.Text = HttpUtility.HtmlEncode(UsernameTextBox.Text) + "@edu.com";
             modalLRInput13.Text = "";
         }
@@ -758,7 +758,8 @@ namespace CapstoneProject2_CIS484
         protected void ResetCoordinator_Click(object sender, EventArgs e)
         {
             //clear teacher input
-            CoordinatorNameText.Text = string.Empty;
+            CoordinatorFNameText.Text = string.Empty;
+            CoordinatorLNameText.Text = string.Empty;
             EmailTextBox.Text = string.Empty;
             PhoneTextBox.Text = string.Empty;
             UsernameTextBox.Text = string.Empty;
@@ -1185,7 +1186,7 @@ namespace CapstoneProject2_CIS484
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
         {
-            string ContactName = ContactRequestNameText.Text;
+            string ContactName = ContactRequestFNameText.Text + " " + ContactRequestLNameText.Text;
             string OrgName = ContactRequestOrganizationNameText.Text;
             string OrgType = OrganizationTypeList.SelectedValue;
             string EventName = EventNameRequest.Text;
@@ -1284,7 +1285,8 @@ namespace CapstoneProject2_CIS484
 
         protected void ResetButton_Click(object sender, EventArgs e)
         {
-            ContactRequestNameText.Text = string.Empty;
+            ContactRequestFNameText.Text = string.Empty;
+            ContactRequestLNameText.Text = string.Empty;
             ContactRequestOrganizationNameText.Text = string.Empty;
             OrganizationTypeList.SelectedIndex = 0;
             EventNameRequest.Text = string.Empty;
@@ -1350,11 +1352,11 @@ namespace CapstoneProject2_CIS484
             "VALUES (@VolunteerCode, @Name, @Role, @Phone, @Email, @MealTicket)";
             SqlCommand cmd101 = new SqlCommand(sqlQuery4, sqlconnect);
             cmd101.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
-            cmd101.Parameters.Add(new SqlParameter("@Name", Vname1.Text));
+            cmd101.Parameters.Add(new SqlParameter("@Name", Vname1.Text + " " + Vname2.Text));
             cmd101.Parameters.Add(new SqlParameter("@Role", Role.Text));
             cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Vphone1.Text)));
             cmd101.Parameters.Add(new SqlParameter("@Email", vemail1.Text));
-            cmd101.Parameters.Add(new SqlParameter("@MealTicket", MealTicket.Text));
+            cmd101.Parameters.Add(new SqlParameter("@MealTicket", Vmealtickt.SelectedValue));
             try
             {
                 cmd101.CommandType = CommandType.Text;
@@ -1414,10 +1416,11 @@ namespace CapstoneProject2_CIS484
         protected void RBVoluntter_Click(object sender, EventArgs e)
         {
             Vname1.Text = string.Empty;
+            Vname2.Text = string.Empty;
             Role.Text = string.Empty;
             vemail1.Text = string.Empty;
             Vphone1.Text = string.Empty;
-            MealTicket.Text = string.Empty;
+            Vmealtickt.Text = string.Empty;
         }
 
         protected void btnSubmitCode_Click(object sender, EventArgs e)

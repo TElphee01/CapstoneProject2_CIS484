@@ -78,13 +78,40 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label ContactRequestNameLabel;
 
         /// <summary>
-        /// ContactRequestNameText control.
+        /// ContactRequestFNameText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ContactRequestNameText;
+        protected global::System.Web.UI.WebControls.TextBox ContactRequestFNameText;
+
+        /// <summary>
+        /// RequiredFieldValidator7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// ContactRequestLNameText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContactRequestLNameText;
 
         /// <summary>
         /// RequiredFieldValidator9 control.
@@ -519,6 +546,24 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.TextBox Vname1;
 
         /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+
+        /// <summary>
+        /// Vname2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Vname2;
+
+        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>
@@ -582,13 +627,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label Label21;
 
         /// <summary>
-        /// MealTicket control.
+        /// Vmealtickt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MealTicket;
+        protected global::System.Web.UI.WebControls.DropDownList Vmealtickt;
 
         /// <summary>
         /// SBVolunteer control.
@@ -1284,13 +1329,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label CoordinatorName;
 
         /// <summary>
-        /// CoordinatorNameText control.
+        /// CoordinatorFNameText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CoordinatorNameText;
+        protected global::System.Web.UI.WebControls.TextBox CoordinatorFNameText;
 
         /// <summary>
         /// RequiredFieldValidator2 control.
@@ -1300,6 +1345,33 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+
+        /// <summary>
+        /// Label8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+
+        /// <summary>
+        /// CoordinatorLNameText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CoordinatorLNameText;
+
+        /// <summary>
+        /// RequiredFieldValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
 
         /// <summary>
         /// Email control.
