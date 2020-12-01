@@ -261,6 +261,7 @@
                                 <Items>
                                     <asp:MenuItem Text="Home" Value="0" Selected="true"  />
                                     <asp:MenuItem Text="User" Value="1" />
+                                    <asp:MenuItem Text="Add Instructor" Enabled="false" />
                                     <%--<asp:MenuItem Text="User: None" Enabled="False"  />--%>
                                 </Items>
                             </asp:Menu>
