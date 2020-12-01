@@ -478,16 +478,14 @@
 </asp:Content>--%>
 <asp:Content ID="EventInfo" ContentPlaceHolderID="EventInfoPlaceHolder" runat="server">
     <fieldset>
-        <br />
-        <legend>Event list:</legend>
     <div style="margin-top: 40px;">
         <div class="container-fluid">
             <div class="grid">
-                <div class="grid-item grid-item--width3 grid-item--height3" style="height: 100%">
+                <div class="grid" style="height: 100%">
                     <div class="form-group">
 <%--                        <asp:UpdatePanel ID="EventRefreshPanel" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>--%>
-                        <asp:Label ID="Label6" CssClass="label" runat="server" Text="Event"></asp:Label>
+                        <asp:Label ID="Label6" CssClass="label" runat="server" Text="Event list:"></asp:Label>
 
                         <asp:SqlDataSource ID="EventdisplayDb" runat="server"
                             DataSourceMode="DataReader"
@@ -501,7 +499,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item grid-item--width2 grid-item--height2">
+                <div class="active">
                     <h4>Volunteers: </h4>
                     <asp:Repeater ID="VolunteerRepeater" runat="server">
                         <ItemTemplate>
@@ -524,8 +522,8 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
-                <div class="grid-item grid-item--width2 grid-item--height2 ">
-                    <div class="form-group">
+                <div class="active">
+                    <div class="active">
                         <asp:Label ID="Label9" CssClass="label" runat="server" Text="Students Attending Event"></asp:Label>
                         <asp:ListBox ID="StudentListBox" CssClass="custom-select" runat="server"></asp:ListBox>
                     </div>
@@ -660,13 +658,15 @@
             </div>
         </div>
     </div>
-                                                    <div class="form-group">
+                                                    <div class="align-content-center">
                                                 <asp:Button ID="emailCode" runat="server" OnClick="userSendEmail_Click" Text="Select type of user to send email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
-                                                <asp:DropDownList ID="emailCodeDDL" runat="server">
+                                                <asp:Label ID="semail" CssClass="label" runat="server" Text="Email your want to sent:"></asp:Label>
+                                                <asp:TextBox ID="semail1"  CssClass="input--style-4" runat="server" required="false"></asp:TextBox>
+<%--                                                <asp:DropDownList ID="emailCodeDDL" runat="server">
                                                     <asp:ListItem>Instructors</asp:ListItem>
                                                     <asp:ListItem>Volunteers</asp:ListItem>
                                                     <asp:ListItem>Students</asp:ListItem>
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
                                             </div>
     </fieldset>
 </asp:Content>
@@ -796,6 +796,8 @@
                     DataSourceMode="DataReader"
                     ConnectionString="<%$ConnectionStrings:CyberCityDB%>"
                     SelectCommand="Select * from Instructor" />
+                   
+
                 </br> 
                 </ContentTemplate>
         </asp:UpdatePanel>
@@ -894,8 +896,8 @@
                     ID="Vvolunteer2"
                     DataSourceMode="DataReader"
                     ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
-                    SelectCommand="select V.Name, Role, Phone, Email, Phone, MealTicket,
-                    T.Name, E.EventCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
+                    SelectCommand="select V.Name, Role, Phone, Email, MealTicket,
+                    T.Name as 'Event Name', E.EventCode, V.VolunteerCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
                     on E.EventCode = T.EventCode;"/>
             </fieldset> 
             </ContentTemplate>

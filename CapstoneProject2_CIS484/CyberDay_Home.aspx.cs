@@ -1668,115 +1668,116 @@ namespace CapstoneProject2_CIS484
 
         private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
-        public static String sendToEmailAddress = "maxwell.vaughan.mv@gmail.com";
         public static String CyberCityURL = "www.CyberCity_Fake.com";
 
-        protected void instructorEmail()
-        {
-            string subjectInstructor;
-            string emailBodyInstructor;
-            string instructorEventCode = "3333";
+        //protected void instructorEmail()
+        //{
+        //    string subjectInstructor;
+        //    string emailBodyInstructor;
+        //    string instructorEventCode = "3333";
+            
 
-            subjectInstructor = "CyberCity Event invitation - Instructor";
-            emailBodyInstructor = " Cyber City Instructor! " +
-                " Please access the Cyber City system with the EventCode provided in this email. " +
-                " Event Code: " + instructorEventCode +
-                " At: " + CyberCityURL.ToString() +
-                " Once in the event use your Instructor Code to login." +
-                " This code is unique to you and should not be distributed." +
-                " This is an auto generated email. Please Do Not Reply.";
+        //    subjectInstructor = "CyberCity Event invitation - Instructor";
+        //    emailBodyInstructor = " Cyber City Instructor! " +
+        //        " Please access the Cyber City system with the EventCode provided in this email. " +
+        //        " Event Code: " + instructorEventCode +
+        //        " At: " + CyberCityURL.ToString() +
+        //        " Once in the event use your Instructor Code to login." +
+        //        " This code is unique to you and should not be distributed." +
+        //        " This is an auto generated email. Please Do Not Reply.";
 
-            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
-        }
+        //    EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
+        //}
 
-        protected void instructorEmailTest()
-        {
-            string instructorEmailFound;
-            List<string> instructorEmailAddresses = new List<string>();
+        //protected void instructorEmailTest()
+        //{
+        //    string instructorEmailFound;
+        //    List<string> instructorEmailAddresses = new List<string>();
 
-            //Read in all instructor emails
-            SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
-            dbConnection.Open();
-            try
-            {
-                SqlCommand loginCommand = new SqlCommand();
-                loginCommand.Connection = dbConnection;
-                loginCommand.CommandText = "Select * from Instructor";
+        //    //Read in all instructor emails
+        //    SqlConnection dbConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+        //    dbConnection.Open();
+        //    try
+        //    {
+        //        SqlCommand loginCommand = new SqlCommand();
+        //        loginCommand.Connection = dbConnection;
+        //        loginCommand.CommandText = "Select * from Instructor";
 
-                SqlDataReader reader = loginCommand.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        instructorEmailFound = reader[4].ToString();
+        //        SqlDataReader reader = loginCommand.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                instructorEmailFound = reader[4].ToString();
 
-                        if (instructorEmailFound != null)
-                        {
-                            //Save instructor emails to list
-                            instructorEmailAddresses.Add(instructorEmailFound);
-                        }
-                    }
-                }
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                string msg = "Instructor email address not found";
-                msg += ex.Message;
-                throw new Exception(msg);
-            }
-            finally
-            {
-                dbConnection.Close();
-            }
+        //                if (instructorEmailFound != null)
+        //                {
+        //                    //Save instructor emails to list
+        //                    instructorEmailAddresses.Add(instructorEmailFound);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (System.Data.SqlClient.SqlException ex)
+        //    {
+        //        string msg = "Instructor email address not found";
+        //        msg += ex.Message;
+        //        throw new Exception(msg);
+        //    }
+        //    finally
+        //    {
+        //        dbConnection.Close();
+        //    }
 
-            //Loop through list and send emails
-            if (instructorEmailAddresses != null)
-            {
-                string subjectInstructor;
-                string emailBodyInstructor;
-                string instructorEventCode = "3333";
+        //    //Loop through list and send emails
+        //    if (instructorEmailAddresses != null)
+        //    {
+        //        string subjectInstructor;
+        //        string emailBodyInstructor;
+        //        string instructorEventCode = "3333";
 
-                subjectInstructor = "CyberCity Event invitation - Instructor";
-                emailBodyInstructor = " Cyber City Instructor! " +
-                    " Please access the Cyber City system with the EventCode provided in this email. " +
-                    " Event Code: " + instructorEventCode +
-                    " At: " + CyberCityURL.ToString() +
-                    " Once in the event use your Instructor Code to login." +
-                    " This code is unique to you and should not be distributed." +
-                    " This is an auto generated email. Please Do Not Reply.";
+        //        subjectInstructor = "CyberCity Event invitation - Instructor";
+        //        emailBodyInstructor = " Cyber City Instructor! " +
+        //            " Please access the Cyber City system with the EventCode provided in this email. " +
+        //            " Event Code: " + instructorEventCode +
+        //            " At: " + CyberCityURL.ToString() +
+        //            " Once in the event use your Instructor Code to login." +
+        //            " This code is unique to you and should not be distributed." +
+        //            " This is an auto generated email. Please Do Not Reply.";
 
-                EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
-            }
-        }
+        //        EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
+        //    }
+        //}
 
-        protected void volunteerEmail()
-        {
-            string subjectVolunteer;
-            string emailBodyVolunteer;
-            string volunteerEventCode = "3333";
+        //protected void volunteerEmail()
+        //{
+        //    string subjectVolunteer;
+        //    string emailBodyVolunteer;
+        //    string volunteerEventCode = "3333";
 
-            subjectVolunteer = "CyberCity Event invitation - Volunteer";
-            emailBodyVolunteer = " Cyber City Volunteer " +
-                " Please access the Cyber City system with the EventCode provided in this email. " +
-                " Event Code: " + volunteerEventCode +
-                " At: " + CyberCityURL.ToString() +
-                " Once in the event use your Volunteer Code to login. " +
-                " This code is unique to you and should not be distributed. " +
-                " This is an auto generated email. Please Do Not Reply. ";
+        //    subjectVolunteer = "CyberCity Event invitation - Volunteer";
+        //    emailBodyVolunteer = " Cyber City Volunteer " +
+        //        " Please access the Cyber City system with the EventCode provided in this email. " +
+        //        " Event Code: " + volunteerEventCode +
+        //        " At: " + CyberCityURL.ToString() +
+        //        " Once in the event use your Volunteer Code to login. " +
+        //        " This code is unique to you and should not be distributed. " +
+        //        " This is an auto generated email. Please Do Not Reply. ";
 
-            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectVolunteer, emailBodyVolunteer);
-        }
+        //    EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectVolunteer, emailBodyVolunteer);
+        //}
 
         protected void studentEmail()
         {
             string subjectStudent;
             string emailBodyStudent;
-            string studentEventCode = "7777";
+            string EventCode = GvEventdisplay.SelectedRow.Cells[6].Text;
+            string sendToEmailAddress = semail1.Text;
 
-            subjectStudent = "CyberCity Event invitation - Student";
+            subjectStudent = "CyberCity Event invitation";
             emailBodyStudent = "Cyber City Participant " +
                 "Please access the Cyber City system with the EventCode provided in this email. " +
-                "Event Code: " + studentEventCode +
+                "Event Code: " + EventCode +
                 " At: " + CyberCityURL.ToString() +
                 " Once in the event use your Student Code to login. " +
                 " This code is unique to you and should not be distributed. " +
@@ -1787,18 +1788,9 @@ namespace CapstoneProject2_CIS484
 
         protected void userSendEmail_Click(object sender, EventArgs e)
         {
-            if (emailCodeDDL.SelectedValue == "Instructors")
-            {
-                instructorEmail();
-            }
-            else if (emailCodeDDL.SelectedValue == "Volunteers")
-            {
-                volunteerEmail();
-            }
-            else if (emailCodeDDL.SelectedValue == "Students")
-            {
                 studentEmail();
-            }
+        
         }
+
     }
 }
