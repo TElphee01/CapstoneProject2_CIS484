@@ -362,13 +362,24 @@
                                     <div class="row">
                                         <div class="col">
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                                                ControlToValidate="ContactRequestNameText"
+                                                ControlToValidate="ContactRequestFNameText"
                                                 ValidationGroup="ContactRequestInput"
                                                 ErrorMessage="Enter the contact name!"
                                                 runat="Server" />
                                             <div class="form-group">
-                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Contact Name:"></asp:Label>
-                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestNameText" runat="server" required="false" />
+                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Contact FirstName:"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestFNameText" runat="server" required="false" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                                                ControlToValidate="ContactRequestLNameText"
+                                                ValidationGroup="ContactRequestInput"
+                                                ErrorMessage="Enter the contact name!"
+                                                runat="Server" />
+                                            <div class="form-group">
+                                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Contact LastName:"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestLNameText" runat="server" required="false" />
                                             </div>
                                         </div>
                                         <div class="col">
@@ -800,8 +811,14 @@
                         <div class="w-100"></div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="lblVolName" CssClass="label" runat="server" Text="Volunteer Name:"></asp:Label>
+                                <asp:Label ID="lblVolName" CssClass="label" runat="server" Text="Volunteer first Name:"></asp:Label>
                                 <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vname1" runat="server"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="Label7" CssClass="label" runat="server" Text="Volunteer Last Name:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="Vname2" runat="server"/>
                             </div>
                         </div>
                         <div class="col">
@@ -825,9 +842,12 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="Label21" CssClass="label" runat="server" Text="Sign up for Meal Ticket? (input Y/N):"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="MealTicket" runat="server" ValidateRequestMode="Inherit" />
-                            </div>
+                                <asp:Label ID="Label21" CssClass="label" runat="server" Text="Sign up for Meal Ticket?"></asp:Label>
+                                <asp:DropDownList ID="Vmealtickt" runat="server" Width="50%">
+                                    <asp:ListItem Value="Yes" />
+                                    <asp:ListItem Value="No" />
+                                </asp:DropDownList>
+                               
                         </div>
                         <div class="w-100"></div>
                     </div>
@@ -1284,12 +1304,25 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <asp:Label ID="CoordinatorName" CssClass="label" runat="server" Text="Name"></asp:Label>
-                            <asp:TextBox CssClass="input--style-4" ID="CoordinatorNameText" runat="server" CausesValidation="false" />
+                            <asp:Label ID="CoordinatorName" CssClass="label" runat="server" Text="First Name"></asp:Label>
+                            <asp:TextBox CssClass="input--style-4" ID="CoordinatorFNameText" runat="server" CausesValidation="false" />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                ControlToValidate="CoordinatorNameText"
+                                ControlToValidate="CoordinatorFNameText"
                                 ValidationGroup="SignUpGroup"
-                                ErrorMessage="Enter Name."
+                                ErrorMessage="Enter First Name."
+                                runat="Server">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <asp:Label ID="Label8" CssClass="label" runat="server" Text="Last Name"></asp:Label>
+                            <asp:TextBox CssClass="input--style-4" ID="CoordinatorLNameText" runat="server" CausesValidation="false" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                                ControlToValidate="CoordinatorLNameText"
+                                ValidationGroup="SignUpGroup"
+                                ErrorMessage="Enter Last Name."
                                 runat="Server">
                             </asp:RequiredFieldValidator>
                         </div>
