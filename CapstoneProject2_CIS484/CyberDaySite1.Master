@@ -261,7 +261,6 @@
                                 <Items>
                                     <asp:MenuItem Text="Home" Value="0" Selected="true"  />
                                     <asp:MenuItem Text="User" Value="1" />
-                                    <asp:MenuItem Text="Add Instructor" Enabled="false" />
                                     <%--<asp:MenuItem Text="User: None" Enabled="False"  />--%>
                                 </Items>
                             </asp:Menu>
@@ -294,6 +293,15 @@
                                 </asp:View>
                                 <asp:View runat="server">
                                     <div style="margin-top: 40px;">
+
+                                      
+                                        <asp:ContentPlaceHolder ID="Volunteeradd" runat="server">
+                                        </asp:ContentPlaceHolder>
+
+                                    </div>
+                                </asp:View>
+                                <asp:View runat="server">
+                                    <div style="margin-top: 40px">
                                         <asp:ContentPlaceHolder ID="Eventsignup" runat="server">
                                         </asp:ContentPlaceHolder>                                        
 <%--                                        <asp:ContentPlaceHolder ID="CoordinatorSubmissionViewPlaceholder" runat="server">
@@ -301,15 +309,19 @@
                                         <asp:ContentPlaceHolder ID="EventInfoPlaceHolder" runat="server">
                                         </asp:ContentPlaceHolder>
                                         <br />
-                                        <asp:ContentPlaceHolder ID="AddInstructorView" runat="server">
-                                        </asp:ContentPlaceHolder>
-                                        <br />
+                                    </div>
+                                </asp:View>
+                                <asp:View runat="server">
+                                     <div style="margin-top: 40px">
                                         <asp:ContentPlaceHolder ID="EventContactAddInstructorView" runat="server">
                                            </asp:ContentPlaceHolder>
-                                        <asp:ContentPlaceHolder ID="Volunteeradd" runat="server">
-                                        </asp:ContentPlaceHolder>
-
-                                    </div>
+                                     </div>
+                                </asp:View>
+                                <asp:View runat="server">
+                                     <div style="margin-top: 40px">
+                                        <asp:ContentPlaceHolder ID="EventContactAddVolunteerView" runat="server">
+                                           </asp:ContentPlaceHolder>
+                                     </div>
                                 </asp:View>
                             </asp:MultiView>
                         </div>

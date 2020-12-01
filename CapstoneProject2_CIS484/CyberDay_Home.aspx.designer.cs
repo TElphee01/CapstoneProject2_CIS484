@@ -447,6 +447,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcInstructor;
 
         /// <summary>
+        /// UpdatePanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+
+        /// <summary>
         /// lblVolSelect control.
         /// </summary>
         /// <remarks>

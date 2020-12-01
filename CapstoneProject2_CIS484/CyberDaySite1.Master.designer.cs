@@ -177,6 +177,15 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.ContentPlaceHolder StudentPage;
 
         /// <summary>
+        /// Volunteeradd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Volunteeradd;
+
+        /// <summary>
         /// Eventsignup control.
         /// </summary>
         /// <remarks>
@@ -195,15 +204,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.ContentPlaceHolder EventInfoPlaceHolder;
 
         /// <summary>
-        /// AddInstructorView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder AddInstructorView;
-
-        /// <summary>
         /// EventContactAddInstructorView control.
         /// </summary>
         /// <remarks>
@@ -213,12 +213,12 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.ContentPlaceHolder EventContactAddInstructorView;
 
         /// <summary>
-        /// Volunteeradd control.
+        /// EventContactAddVolunteerView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Volunteeradd;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder EventContactAddVolunteerView;
     }
 }

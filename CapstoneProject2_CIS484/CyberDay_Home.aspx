@@ -696,6 +696,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
+                                <legend>Add a Teacher:</legend>
                                 <asp:Label ID="lblInstructor_SchOrg" CssClass="label" runat="server" Text="Select School/Organization:" Font-Bold="true"></asp:Label>
                                 <asp:SqlDataSource ID="Orgview1" runat="server" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
                                      SelectCommand="select * from Organization"></asp:SqlDataSource>
@@ -773,8 +774,18 @@
                     ConnectionString="<%$ConnectionStrings:CyberCityDB%>"
                     SelectCommand="Select * from Instructor" />
                 </br> 
+                </ContentTemplate>
+        </asp:UpdatePanel>
+    </asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="EventContactAddVolunteerView" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+            <ContentTemplate>
+                <div style="margin-top: 40px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
                 <fieldset>
-                    <legend>Create a Volunteer:</legend>
+                    <legend>Add a Volunteer:</legend>
                     <div style="margin-top: 40px;">
                         <div class="row">
                         <div class="col">
