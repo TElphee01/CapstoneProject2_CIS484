@@ -1668,7 +1668,7 @@ namespace CapstoneProject2_CIS484
 
         private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
-        public static String sendToEmailAddress = "elpheeti@dukes.jmu.edu";
+        public static String sendToEmailAddress = "maxwell.vaughan.mv@gmail.com";
         public static String CyberCityURL = "www.CyberCity_Fake.com";
 
         protected void instructorEmail()

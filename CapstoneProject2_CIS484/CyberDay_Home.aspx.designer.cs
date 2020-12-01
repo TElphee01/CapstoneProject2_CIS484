@@ -213,24 +213,6 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Button SubmitButton;
 
         /// <summary>
-        /// emailCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button emailCode;
-
-        /// <summary>
-        /// emailCodeDDL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList emailCodeDDL;
-
-        /// <summary>
         /// ResetButton control.
         /// </summary>
         /// <remarks>
@@ -310,6 +292,24 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox StudentListBox;
+
+        /// <summary>
+        /// emailCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button emailCode;
+
+        /// <summary>
+        /// emailCodeDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList emailCodeDDL;
 
         /// <summary>
         /// UpdatePanel3 control.
