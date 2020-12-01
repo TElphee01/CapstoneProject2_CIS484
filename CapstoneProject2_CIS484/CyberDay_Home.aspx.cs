@@ -1186,7 +1186,7 @@ namespace CapstoneProject2_CIS484
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
         {
-            string ContactName = ContactRequestFNameText.Text + " " + ContactRequestLNameText;
+            string ContactName = ContactRequestFNameText.Text + " " + ContactRequestLNameText.Text;
             string OrgName = ContactRequestOrganizationNameText.Text;
             string OrgType = OrganizationTypeList.SelectedValue;
             string EventName = EventNameRequest.Text;
