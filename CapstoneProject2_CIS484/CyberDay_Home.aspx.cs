@@ -1192,7 +1192,8 @@ namespace CapstoneProject2_CIS484
             string EventName = EventNameRequest.Text;
             DateTime Date1 = EventRequestDate.SelectedDate;
             AccessCode contact = new AccessCode();
-            string code = contact.GenerateCode(true, true, true, true, 8);
+            string sub = OrgName.Substring(0, 3);
+            string code = sub + contact.GenerateCode(true, true, true, true, 4);
             //MessageBox.Show(code);
             //Inserting teacher query
             //Get connection string from web.config file
