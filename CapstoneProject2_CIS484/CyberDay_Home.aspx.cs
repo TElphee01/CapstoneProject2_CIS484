@@ -20,7 +20,7 @@ namespace CapstoneProject2_CIS484
     public partial class CyberDay_Home : System.Web.UI.Page
     {
         public static DateTime EventDateRequest;
-        private System.Data.DataTable submissionDataTable = new System.Data.DataTable();
+        private System.Data.DataTable submissionDataTable = new System.Data.DataTable(); 
         public static int count = 1;
         public static AccessCode MasterAccessCode = new AccessCode();
         public static int CoordinatorID = CyberDaySite1.CoordinatorID;
