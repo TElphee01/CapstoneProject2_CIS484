@@ -51,7 +51,7 @@
     </script>
     <div class="container" style="width: 100%; margin-left: 20px; margin-top: 20px; margin-right: 20px;">
         <div class="form-group">
-            <h2 style="text-align: center" >Welcome to Cyber Day 2021</h2>
+            <h2 style="text-align: center" >Welcome to CyberDay 2021</h2>
              <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
                 <asp:TableRow RowSpan="2">
                     <asp:TableCell>

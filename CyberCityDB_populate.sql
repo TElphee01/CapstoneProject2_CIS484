@@ -81,9 +81,30 @@ INSERT [dbo].[EventVolunteers] ([VolunteerID],[VolunteerCode], [EventCode]) VALU
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1111', N'Max Vaughan',12, 'yes',  N'efgh', N'Sharp Cookie', 1)
 GO
-
-
-
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1112', N'Ricky Losh',11, 'yes',  N'efgh', N'Sharp Arrow', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1113', N'Max Losh',12, 'yes',  N'efgh', N'Blah!', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1114', N'Rajeem Mohamoud',10, 'yes',  N'efgh', N'Loves popsickles', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1115', N'Jim Ziel',11, 'yes',  N'efgh', N'Screams loudly', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1116', N'Jackson Wicklevoss',12, 'yes',  N'efgh', N'Bitcoin billions', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1117', N'Brett Rhoads',12, 'yes',  N'efgh', N'Diabetic - No sugar!', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1118', N'Ron Charadin',12, 'yes',  N'efgh', N'', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1119', N'Ricky Rick',10, 'yes',  N'efgh', N'Slick Rick', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1120', N'Jimmy Hendricks',11, 'yes',  N'efgh', N'Purple Haze', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1121', N'Niki Paige',10, 'yes',  N'efgh', N'', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1122', N'Sara Conroy',12, 'yes',  N'efgh', N'Coding expert', 1)
+GO
+INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1123', N'Kate Sullivan',11, 'yes',  N'efgh', N'', 1)
+GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1010', N'Barry Allen', 11, 'yes', N'5678', N'Droppy', 2)
 GO
 INSERT [dbo].[Student] ([StudentCode], [Name], [AGE], [MealTicket], [InstructorCode], [Notes], [OrganizationID]) VALUES (N'1011', N'Ralph Nader', 10, 'yes', N'5678', N'Cant swin', 2)
