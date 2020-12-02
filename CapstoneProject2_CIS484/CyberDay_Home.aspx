@@ -659,16 +659,18 @@
             </div>
         </div>
     </div>
-                                                    <div class="align-content-center">
-                                                <asp:Button ID="emailCode" runat="server" OnClick="userSendEmail_Click" Text="Select type of user to send email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
-                                                <asp:Label ID="semail" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
-                                                <asp:TextBox ID="semail1"  CssClass="input--style-4" runat="server" required="false"></asp:TextBox>
+
+    <div class="align-content-center">
+    <asp:Label ID="semail" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
+    <asp:TextBox ID="semail1"  CssClass="input--style-4" runat="server" required="false"></asp:TextBox>
+    <asp:Button ID="emailCode" runat="server" OnClick="userSendEmail_Click" Text="Send EventCode to your email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+
 <%--                                                <asp:DropDownList ID="emailCodeDDL" runat="server">
                                                     <asp:ListItem>Instructors</asp:ListItem>
                                                     <asp:ListItem>Volunteers</asp:ListItem>
                                                     <asp:ListItem>Students</asp:ListItem>
                                                 </asp:DropDownList>--%>
-                                            </div>
+      </div>
     </fieldset>
 </asp:Content>
 
@@ -786,7 +788,7 @@
                 </fieldset>
                 <div class="col" />
                 <fieldset>
-                    <legend>View all registered instructors:</legend>
+                    <legend>View all registered Teacher:</legend>
                     <asp:GridView
                         runat="server"
                         ID="Instructor_GridView"
@@ -799,6 +801,15 @@
                     DataSourceMode="DataReader"
                     ConnectionString="<%$ConnectionStrings:CyberCityDB%>"
                     SelectCommand="Select * from Instructor" />
+
+                 <div class="align-content-center">
+                 <asp:Label ID="Label10" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
+                 <asp:TextBox ID="Inceamil"  runat="server" required="false"></asp:TextBox>
+                    <asp:DropDownList ID="InctrutoCodeDDL" DataSourceID="sqlsrcInstructor" DataTextField="Name" 
+                            DataValueField="InstructorCode" runat="server">
+                          </asp:DropDownList>
+                 <asp:Button ID="SentInsCode" runat="server" OnClick="SentInsCode_Click" Text="Send InstructorCode to your email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+                 </div>
                    
 
                 </br> 
@@ -902,6 +913,18 @@
                     SelectCommand="select V.Name, Role, Phone, Email, MealTicket,
                     T.Name as 'Event Name', E.EventCode, V.VolunteerCode from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode inner join Event T 
                     on E.EventCode = T.EventCode;"/>
+
+                 <div class="align-content-center">
+                 <asp:Label ID="SVolunemail" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
+                 <asp:TextBox ID="SVemail"  runat="server" required="false"></asp:TextBox>
+                    <asp:DropDownList ID="SVemailDDL" DataSourceID="Vvolunteer2" DataTextField="Name" 
+                            DataValueField="VolunteerCode" runat="server">
+                          </asp:DropDownList>
+                 <asp:Button ID="SVemailB" runat="server" OnClick="SVemail_Click" Text="Send Volunteer VolunteerCode to your email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+                 </div>
+
+
+
             </fieldset> 
             </ContentTemplate>
         </asp:UpdatePanel>

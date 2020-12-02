@@ -1669,26 +1669,27 @@ namespace CapstoneProject2_CIS484
 
         private static String coordinatorEmailAddress = "SamSmith25d@gmail.com";
         //SMTP information in WebConfig file MUST MATCH coordinator email address.
-        public static String CyberCityURL = "www.CyberCity_Fake.com";
+        public static String CyberCityURL = "http://lab2-test.us-east-1.elasticbeanstalk.com/CyberDay_Home.aspx";
 
-        //protected void instructorEmail()
-        //{
-        //    string subjectInstructor;
-        //    string emailBodyInstructor;
-        //    string instructorEventCode = "3333";
-            
+        protected void instructorEmail()
+        {
+            string subjectInstructor;
+            string emailBodyInstructor;
+            string instructorEventCode = InctrutoCodeDDL.SelectedValue;
+            string sendToEmailAddress = Inceamil.Text;
 
-        //    subjectInstructor = "CyberCity Event invitation - Instructor";
-        //    emailBodyInstructor = " Cyber City Instructor! " +
-        //        " Please access the Cyber City system with the EventCode provided in this email. " +
-        //        " Event Code: " + instructorEventCode +
-        //        " At: " + CyberCityURL.ToString() +
-        //        " Once in the event use your Instructor Code to login." +
-        //        " This code is unique to you and should not be distributed." +
-        //        " This is an auto generated email. Please Do Not Reply.";
 
-        //    EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
-        //}
+            subjectInstructor = "CyberCity Event invitation - Instructor";
+            emailBodyInstructor = " Cyber City Instructor! " +
+                " Please access the Cyber City system with the instructorCode provided in this email. " +
+                " InstructorCode: " + instructorEventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Instructor Code to login." +
+                " This code is unique to you and should not be distributed." +
+                " This is an auto generated email. Please Do Not Reply.";
+
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectInstructor, emailBodyInstructor);
+        }
 
         //protected void instructorEmailTest()
         //{
@@ -1750,23 +1751,24 @@ namespace CapstoneProject2_CIS484
         //    }
         //}
 
-        //protected void volunteerEmail()
-        //{
-        //    string subjectVolunteer;
-        //    string emailBodyVolunteer;
-        //    string volunteerEventCode = "3333";
+        protected void volunteerEmail()
+        {
+            string subjectVolunteer;
+            string emailBodyVolunteer;
+            string volunteerEventCode = SVemailDDL.SelectedValue;
+            string sendToEmailAddress = SVemail.Text;
 
-        //    subjectVolunteer = "CyberCity Event invitation - Volunteer";
-        //    emailBodyVolunteer = " Cyber City Volunteer " +
-        //        " Please access the Cyber City system with the EventCode provided in this email. " +
-        //        " Event Code: " + volunteerEventCode +
-        //        " At: " + CyberCityURL.ToString() +
-        //        " Once in the event use your Volunteer Code to login. " +
-        //        " This code is unique to you and should not be distributed. " +
-        //        " This is an auto generated email. Please Do Not Reply. ";
+            subjectVolunteer = "CyberCity Event invitation - Volunteer";
+            emailBodyVolunteer = " Cyber City Volunteer " +
+                " Please access the Cyber City system with the volunteerCode provided in this email. " +
+                " VolunteerCode: " + volunteerEventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Volunteer Code to login. " +
+                " This code is unique to you and should not be distributed. " +
+                " This is an auto generated email. Please Do Not Reply. ";
 
-        //    EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectVolunteer, emailBodyVolunteer);
-        //}
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectVolunteer, emailBodyVolunteer);
+        }
 
         protected void studentEmail()
         {
@@ -1886,6 +1888,16 @@ namespace CapstoneProject2_CIS484
             }
 
             sqlsrcEventActivities_grdview.SelectCommand = "Select EventID, ActivityName, Time, Room from EventActivities WHERE EventID = '" + eventID + "'";
+        }
+
+        protected void SentInsCode_Click(object sender, EventArgs e)
+        {
+            instructorEmail();
+        }
+
+        protected void SVemail_Click(object sender, EventArgs e)
+        {
+            volunteerEmail();
         }
     }
 }
