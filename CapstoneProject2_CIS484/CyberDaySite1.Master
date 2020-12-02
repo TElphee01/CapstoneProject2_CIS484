@@ -323,6 +323,12 @@
                                            </asp:ContentPlaceHolder>
                                      </div>
                                 </asp:View>
+                                <asp:View runat="server">
+                                     <div style="margin-top: 40px">
+                                        <asp:ContentPlaceHolder ID="AddActivity" runat="server">
+                                           </asp:ContentPlaceHolder>
+                                     </div>
+                                </asp:View>
                             </asp:MultiView>
                         </div>
                     </form>

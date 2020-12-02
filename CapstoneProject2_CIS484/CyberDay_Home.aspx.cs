@@ -266,7 +266,7 @@ namespace CapstoneProject2_CIS484
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
             // Generate Cluster and Instructor Codes
-            ClassCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
+            ClassCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 6);
             instructorCode5x = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 7);
             AccessCode newAccessxx = new AccessCode();
             //instructorCode5x = "349843";
@@ -962,7 +962,7 @@ namespace CapstoneProject2_CIS484
                 }
             }
             InstructorRepeater.DataSource = items;
-            InstructorRepeater.DataBind();
+            //InstructorRepeater.DataBind();
             //MessageBox.Show(items[0]);
 
             string sqlQuery3 = "select V.VolunteerCode, V.Name from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode where E.EventCode = '" + EventCode + "'";
@@ -1792,6 +1792,100 @@ namespace CapstoneProject2_CIS484
                 studentEmail();
         
         }
+        protected void btnCreateEventActivity_Click(object sender, EventArgs e)
+        {
+            string activityName = tbActivityName.Text;
+            string activityTime = tbActivityTime.Text;
+            DateTime conTime = DateTime.Parse(activityTime);
+            string activityRoom = tbActivityRoomNumber.Text;
+            string eventName = ddlEventName_CreateActivity.SelectedValue;
+            int eventID = 1;
 
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
+
+            // Find necessary information
+            string sqlQuery_FindEventID = "SELECT EventID FROM Event where Name = '" + eventName + "'";
+            SqlCommand cmd_FindEventID = new SqlCommand(sqlQuery_FindEventID, sqlconnect);
+            cmd_FindEventID.Parameters.Add(new SqlParameter("@Name", ddlEventName_CreateActivity.Text));
+
+            try
+            {
+                SqlDataReader reader = cmd_FindEventID.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    eventID = Convert.ToInt32(reader[0]);
+                }
+                reader.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Select Error in Instructor:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+
+            string sqlQuery_InsertEventActivity = "INSERT into EventActivities (EventID, ActivityName, Time, Room) VALUES (@EventID, @ActivityName, @Time, @Room)";
+            SqlCommand cmd_InsertEventActivity = new SqlCommand(sqlQuery_InsertEventActivity, sqlconnect);
+            cmd_InsertEventActivity.Parameters.Add(new SqlParameter("@EventID", eventID));
+            cmd_InsertEventActivity.Parameters.Add(new SqlParameter("@ActivityName", activityName));
+            cmd_InsertEventActivity.Parameters.Add(new SqlParameter("@Time", conTime));
+            cmd_InsertEventActivity.Parameters.Add(new SqlParameter("@Room", activityRoom));
+            try
+            {
+                cmd_InsertEventActivity.CommandType = CommandType.Text;
+                cmd_InsertEventActivity.ExecuteNonQuery();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Insert Activity Error into EventActivities";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            lblEventActivity_Success.Visible = true;
+            sqlsrcEventActivities_grdview.SelectCommand = "Select EventID, ActivityName, Time, Room from EventActivities where EventID = '" + eventID + "'"; 
+        }
+
+        protected void btnClearCreateEventActivity_Click(object sender, EventArgs e)
+        {
+            tbActivityName.Text = "";
+            tbActivityRoomNumber.Text = "";
+            tbActivityTime.Text = "";
+        }
+
+        protected void btnEventConfirm_ActivityCreation_Click(object sender, EventArgs e)
+        {
+            int eventID = 1;
+            string eventName = ddlEventName_CreateActivity.SelectedValue;
+
+            SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
+            sqlconnect.Open();
+
+            // Find necessary information
+            string sqlQuery_FindEventID = "SELECT EventID FROM Event where Name = '" + eventName + "'";
+            SqlCommand cmd_FindEventID = new SqlCommand(sqlQuery_FindEventID, sqlconnect);
+            cmd_FindEventID.Parameters.Add(new SqlParameter("@Name", ddlEventName_CreateActivity.Text));
+
+            try
+            {
+                SqlDataReader reader = cmd_FindEventID.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    eventID = Convert.ToInt32(reader[0]); 
+                }
+                reader.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                string msg = "Select Error in Instructor:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+
+            sqlsrcEventActivities_grdview.SelectCommand = "Select EventID, ActivityName, Time, Room from EventActivities WHERE EventID = '" + eventID + "'";
+        }
     }
 }

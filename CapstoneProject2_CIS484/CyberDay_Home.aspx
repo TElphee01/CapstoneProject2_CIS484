@@ -1594,3 +1594,80 @@
         </div>
     </div>
 </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="AddActivity" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+        <ContentTemplate>
+            <div style="margin-top: 40px;">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>Add an Event Activity:</legend>
+                                <div style="margin-top: 40px;">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <asp:Label ID="lblPromptEvent" CssClass="label" runat="server" Text="Select an event:" Font-Bold="true"></asp:Label>
+                                                <asp:SqlDataSource runat="server" ID="sqlsrcEventName_CreateActivity" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                                                    SelectCommand="select Name from Event"></asp:SqlDataSource>
+                                                <asp:DropDownList runat="server" ID="ddlEventName_CreateActivity"
+                                                    DataSourceID="sqlsrcEventName_CreateActivity"
+                                                    DataTextField="Name"
+                                                    AutoPostBack="true">
+                                                </asp:DropDownList>
+                                                <asp:Button ID="btnEventConfirm_ActivityCreation" runat="server" Text="Confirm your selection" OnClick="btnEventConfirm_ActivityCreation_Click"/>
+                                            </div>
+                                        </div>
+                                         <div class="w-100"></div>                              
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <asp:Label ID="lblPromptActivityName" CssClass="label" runat="server" Text="Activity Name:"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbActivityName" runat="server" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <asp:Label ID="lblPromptActivityTime" CssClass="label" runat="server" Text="Desired Activity Time (00:00:00): "></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbActivityTime" runat="server" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <asp:Label ID="lblPromptRoomNumber" CssClass="label" runat="server" Text="Activity Room Number:"></asp:Label>
+                                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbActivityRoomNumber" runat="server" />
+                                            </div>
+                                        </div>
+                                            <div class="w-100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm text-left">
+                                                <asp:Button ID="btnCreateEventActivity" runat="server" OnClick="btnCreateEventActivity_Click" Text="Create Event Activity" Style="margin-left: 0%;" CssClass="btn btn-primary" />
+                                            </div>
+                                            <div class="col-sm text-right">
+                                                <asp:Button ID="btnClearCreateEventActivity" OnClick="btnClearCreateEventActivity_Click" runat="server" ValidationGroup="StudentInput" CausesValidation="False" Text="Reset" UseSubmitBehavior="False" CssClass="btn btn-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <asp:Label ID="lblEventActivity_Success" runat="server" Text="Sucesss. The event activity has been created!" Font-Bold="true" Visible="false"></asp:Label>
+                            </fieldset>
+                            <div class="col" />
+                            <fieldset>
+                                <legend>View all event activities:</legend>
+                                <asp:GridView
+                                    runat="server"
+                                    ID="grdViewEventActivities"
+                                    DataSourceID="sqlsrcEventActivities_grdview" >
+                                </asp:GridView>
+                            </fieldset>
+                            <asp:SqlDataSource
+                                runat="server"
+                                ID="sqlsrcEventActivities_grdview"
+                                DataSourceMode="DataReader"
+                                ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                                SelectCommand="Select EventID, ActivityName, Time, Room from EventActivities where EventID = 1" />
+            </fieldset> 
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>

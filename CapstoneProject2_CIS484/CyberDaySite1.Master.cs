@@ -141,6 +141,8 @@ namespace CapstoneProject2_CIS484
             MasterMenu.Items.AddAt(2, myItem3);
             System.Web.UI.WebControls.MenuItem myItem4 = new System.Web.UI.WebControls.MenuItem("Add Volunteer", "5");
             MasterMenu.Items.AddAt(3, myItem4);
+            System.Web.UI.WebControls.MenuItem myItem5 = new System.Web.UI.WebControls.MenuItem("Add Event Activity", "6");
+            MasterMenu.Items.AddAt(4, myItem5);
             //ShowMessage("Heard! " + Username, MessageType.Info);
         }
 
@@ -157,5 +159,6 @@ namespace CapstoneProject2_CIS484
         //    MultiView multiTabs = this.FindControl("VolunteerView") as MultiView;
         //    multiTabs.ActiveViewIndex = Int32.Parse(MasterMenu.SelectedValue);
         //}
+
     }
 }
