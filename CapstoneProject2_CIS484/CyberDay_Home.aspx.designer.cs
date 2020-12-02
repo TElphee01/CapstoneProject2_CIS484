@@ -258,13 +258,22 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.GridView GvEventdisplay;
 
         /// <summary>
-        /// VolunteerRepeater control.
+        /// Voluteers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater VolunteerRepeater;
+        protected global::System.Web.UI.WebControls.GridView Voluteers;
+
+        /// <summary>
+        /// EVsql control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource EVsql;
 
         /// <summary>
         /// InstructorRepeater control.
@@ -535,6 +544,60 @@ namespace CapstoneProject2_CIS484
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SentInsCode;
+
+        /// <summary>
+        /// ClassCodeGV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ClassCodeGV;
+
+        /// <summary>
+        /// CCGVsource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource CCGVsource;
+
+        /// <summary>
+        /// ClassCodeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ClassCodeLabel;
+
+        /// <summary>
+        /// ClassCodeTB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ClassCodeTB;
+
+        /// <summary>
+        /// ClassCodeDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ClassCodeDDL;
+
+        /// <summary>
+        /// ClassCodeBT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ClassCodeBT;
 
         /// <summary>
         /// UpdatePanel4 control.
@@ -1284,22 +1347,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblMeal_Student;
 
         /// <summary>
-        /// rbtnMeal_Yes control.
+        /// SNLuch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_Yes;
-
-        /// <summary>
-        /// rbtnMeal_No control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_No;
+        protected global::System.Web.UI.WebControls.DropDownList SNLuch;
 
         /// <summary>
         /// btnUpdateStudent control.
@@ -1644,13 +1698,31 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblName_StudentSignup;
 
         /// <summary>
-        /// tbName_StudentSignup control.
+        /// tbFName_StudentSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbName_StudentSignup;
+        protected global::System.Web.UI.WebControls.TextBox tbFName_StudentSignup;
+
+        /// <summary>
+        /// lblName_StudentSignup2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName_StudentSignup2;
+
+        /// <summary>
+        /// tbLName_StudentSignup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbLName_StudentSignup;
 
         /// <summary>
         /// lblNotes_StudentSignup control.
@@ -1716,22 +1788,13 @@ namespace CapstoneProject2_CIS484
         protected global::System.Web.UI.WebControls.Label lblMealTicket_StudentSignup;
 
         /// <summary>
-        /// rbtnMeal_Yes_StudentSignup control.
+        /// SLunch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_Yes_StudentSignup;
-
-        /// <summary>
-        /// rbtnMeal_No_StudentSignup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnMeal_No_StudentSignup;
+        protected global::System.Web.UI.WebControls.DropDownList SLunch;
 
         /// <summary>
         /// btnStudentSignUp control.

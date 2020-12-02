@@ -500,17 +500,24 @@
                     </div>
                 </div>
 
-                <div class="active">
+
+                <div class="grid-item grid-item--width2 grid-item--height2">
                     <h4>Volunteers: </h4>
-                    <asp:Repeater ID="VolunteerRepeater" runat="server">
-                        <ItemTemplate>
-                            <table>
-                                <tr>
-                                    <td><%# Container.DataItem %></td>
-                                </tr>
-                            </table>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                   <asp:TableCell>
+                    <fieldset>
+                        <asp:GridView
+                            runat="server"
+                            ID="Voluteers"
+                            DataSourceID="EVsql">
+                        </asp:GridView>
+                    <asp:SqlDataSource
+                        ID="EVsql"
+                        runat="server"
+                        ConnectionString="<%$ ConnectionStrings:CyberCityDB%>"
+                        SelectCommand=""></asp:SqlDataSource>
+                    </fieldset>
+
+                </asp:TableCell>    
                     <!-- Repeater Displays all Instructors-->
                     <h4>Instructor: </h4>
                     <asp:Repeater ID="InstructorRepeater" runat="server">
@@ -523,8 +530,8 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
-                <div class="active">
-                    <div class="active">
+                <div class="grid-item grid-item--width2 grid-item--height2 ">
+                    <div class="form-group">
                         <asp:Label ID="Label9" CssClass="label" runat="server" Text="Students Attending Event"></asp:Label>
                         <asp:ListBox ID="StudentListBox" CssClass="custom-select" runat="server"></asp:ListBox>
                     </div>
@@ -809,6 +816,30 @@
                             DataValueField="InstructorCode" runat="server">
                           </asp:DropDownList>
                  <asp:Button ID="SentInsCode" runat="server" OnClick="SentInsCode_Click" Text="Send InstructorCode to your email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
+                 </div>
+                </br>
+                <fieldset>
+                    <legend>View all Class code and Teacher:</legend>
+                    <asp:GridView
+                        runat="server"
+                        ID="ClassCodeGV"
+                        DataSourceID="CCGVsource">
+                    </asp:GridView>
+                </fieldset>
+                <asp:SqlDataSource
+                    runat="server"
+                    ID="CCGVsource"
+                    DataSourceMode="DataReader"
+                    ConnectionString="<%$ConnectionStrings:CyberCityDB%>"
+                    SelectCommand="Select I.name, C.InstructorCode, ClassCode from Instructor I inner join ClassCode C on I.InstructorCode = C.InstructorCode;" />
+
+                 <div class="align-content-center">
+                 <asp:Label ID="ClassCodeLabel" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
+                 <asp:TextBox ID="ClassCodeTB"  runat="server" required="false"></asp:TextBox>
+                    <asp:DropDownList ID="ClassCodeDDL" DataSourceID="CCGVsource" DataTextField="Name" 
+                            DataValueField="ClassCode" runat="server">
+                          </asp:DropDownList>
+                 <asp:Button ID="ClassCodeBT" runat="server" OnClick="ClassCodeBT_Click" Text="Send ClassCode to your email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
                  </div>
                    
 
@@ -1215,8 +1246,11 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <asp:Label ID="lblMeal_Student" CssClass="label" runat="server" Text="Would you like to sign up for Lunch?"></asp:Label>
-                                            <asp:RadioButton ID="rbtnMeal_Yes" runat="server" Text="Yes" />
-                                            <asp:RadioButton ID="rbtnMeal_No" runat="server" Text="No" />
+                                            <asp:DropDownList ID="SNLuch" runat="server">
+                                                <asp:ListItem Value="Yes">
+                                                </asp:ListItem>
+                                                <asp:ListItem Value="No"></asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
@@ -1453,15 +1487,21 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="lblOrganization_StudentSignup" CssClass="label" runat="server" Text="School/Organization: " Font-Bold="true"></asp:Label>
+                                <asp:Label ID="lblOrganization_StudentSignup" CssClass="label" runat="server" Text="Student Sign up" Font-Bold="true"></asp:Label>
                                 <asp:Label ID="lblOrganization_StudentSignup_Show" CssClass="label" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col">
                             <div class="form-group">
-                                <asp:Label ID="lblName_StudentSignup" CssClass="label" runat="server" Text="Name:"></asp:Label>
-                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbName_StudentSignup" runat="server" required="true" />
+                                <asp:Label ID="lblName_StudentSignup" CssClass="label" runat="server" Text="Student First Name:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbFName_StudentSignup" runat="server" required="true" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <asp:Label ID="lblName_StudentSignup2" CssClass="label" runat="server" Text="Student Last Name:"></asp:Label>
+                                <asp:TextBox CssClass="input--style-4" ValidationGroup="StudentInput" ID="tbLName_StudentSignup" runat="server" required="true" />
                             </div>
                         </div>
                         <div class="col">
@@ -1494,8 +1534,11 @@
                         <div class="col">
                             <div class="form-group">
                                 <asp:Label ID="lblMealTicket_StudentSignup" CssClass="label" runat="server" Text="Would you like to sign up for Lunch?"></asp:Label>
-                                <asp:RadioButton ID="rbtnMeal_Yes_StudentSignup" runat="server" Text="Yes" />
-                                <asp:RadioButton ID="rbtnMeal_No_StudentSignup" runat="server" Text="No" />
+                                            <asp:DropDownList ID="SLunch" runat="server">
+                                                <asp:ListItem Value="Yes">
+                                                </asp:ListItem>
+                                                <asp:ListItem Value="No"></asp:ListItem>
+                                            </asp:DropDownList>
                             </div>
                         </div>
                         <div class="w-100"></div>

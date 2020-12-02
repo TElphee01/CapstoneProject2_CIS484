@@ -146,6 +146,11 @@ namespace CapstoneProject2_CIS484
             //ShowMessage("Heard! " + Username, MessageType.Info);
         }
 
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //protected void Instructor_MenuItemClick(object sender, MenuEventArgs e)
         //{
         //    System.Web.UI.WebControls.Menu Intructor = sender as System.Web.UI.WebControls.Menu;

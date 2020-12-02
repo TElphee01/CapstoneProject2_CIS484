@@ -207,7 +207,7 @@ namespace CapstoneProject2_CIS484
                         {
                             InstDiv.Attributes.Add("style", "margin-top: 40px; display = normal");
                             InstDiv.Visible = true;
-                            sqlsrcEventInfo.SelectCommand = "SELECT TOP(1000) Name, Date, ContactName as 'Event Contact' from EVENT where Event.EventCode ='" + code + "'";
+                            sqlsrcEventInfo.SelectCommand = "SELECT * from EVENT where Event.EventCode ='" + code + "'";
                             sqlsrcEventInfo.DataBind();
                             grdviewEventInfo.DataBind();
                             sqlsrcEventActivities.SelectCommand = "SELECT TOP(1000) ActivityName as 'Activity Name', Time, Room from EVENTACTIVITIES inner join Event on EventActivities.EventID = Event.EventID where Event.EventCode = '" + code + "'";
@@ -369,7 +369,7 @@ namespace CapstoneProject2_CIS484
             cmd101.Parameters.Add(new SqlParameter("@Name", Instructor_tbFirstName.Text + ' ' + Instructor_tbLastName.Text));
             cmd101.Parameters.Add(new SqlParameter("@OrganizationID", orgID));
             cmd101.Parameters.Add(new SqlParameter("@Email", Instructor_tbEmail.Text));
-            cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Instructor_tbPhone.Text)));
+            cmd101.Parameters.Add(new SqlParameter("@Phone", Instructor_tbPhone.Text));
             cmd101.Parameters.Add(new SqlParameter("@EventCode", EventCode));
             try
             {
@@ -449,7 +449,7 @@ namespace CapstoneProject2_CIS484
             int CoordinatorID = 1; // Need as Static Variable
             int organizationID=1;
             string instructorCode = "";
-            string mealConfirmation = ""; 
+            string mealConfirmation = SLunch.SelectedValue; 
 
             studentCode = MasterAccessCode.GenerateCode(lowercase: true, uppercase: true, numbers: true, otherChar: true, codeSize: 8);
 
@@ -515,18 +515,10 @@ namespace CapstoneProject2_CIS484
                 throw new Exception(msg);
             }
 
-            if (rbtnMeal_No_StudentSignup.Checked == true)
-            {
-                mealConfirmation = "no";
-            }
-            if (rbtnMeal_Yes_StudentSignup.Checked == true)
-            {
-                mealConfirmation = "yes";
-            }
 
             String sqlQuery_Update_StudentTable = "UPDATE Student SET Name = @Name, Age = @Age, MealTicket = @MealTicket, InstructorCode = @InstructorCode, Notes = @Notes,  OrganizationID = @OrganizationID WHERE StudentCode = @StudentCode";
             SqlCommand cmd_Update_StudentTable = new SqlCommand(sqlQuery_Update_StudentTable, sqlconnect);
-            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Name", tbName_StudentSignup.Text));
+            cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Name", tbFName_StudentSignup.Text + " " + tbLName_StudentSignup.Text));
             cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@Age", tbAge_StudentSignup.Text));
             cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@MealTicket", mealConfirmation));
             cmd_Update_StudentTable.Parameters.Add(new SqlParameter("@InstructorCode", instructorCode));
@@ -670,11 +662,10 @@ namespace CapstoneProject2_CIS484
 
         protected void btnStudentSignUpReset_Click(object sender, EventArgs e)
         {
-            tbName_StudentSignup.Text = "";
+            tbFName_StudentSignup.Text = "";
+            tbLName_StudentSignup.Text = "";
             tbNotes_StudentSignup.Text = "";
             tbAge_StudentSignup.Text = "";
-            rbtnMeal_No_StudentSignup.Checked = false;
-            rbtnMeal_Yes_StudentSignup.Checked = false; 
         }
 
         protected void SubmitCoordinator_Click(object sender, EventArgs e)
@@ -962,29 +953,16 @@ namespace CapstoneProject2_CIS484
                 }
             }
             InstructorRepeater.DataSource = items;
-            //InstructorRepeater.DataBind();
+            InstructorRepeater.DataBind();
             //MessageBox.Show(items[0]);
 
             string sqlQuery3 = "select V.VolunteerCode, V.Name from Volunteer V inner join EventVolunteers E on V.VolunteerCode = E.VolunteerCode where E.EventCode = '" + EventCode + "'";
-            var items1 = new List<string>();
+            EVsql.SelectCommand= sqlQuery3;
 
-            using (SqlCommand command = new SqlCommand(sqlQuery3, con))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        //Read info into List
-                        items1.Add(reader.GetString(1));
-                    }
-                }
-            }
-            VolunteerRepeater.DataSource = items1;
-            VolunteerRepeater.DataBind();
 
             con.Close();
 
-            string mag = "Row Info: " + EventID + " " + EventName + " " + " " + OrgName + " " + OrgName + " " + ContactName + " ";
+            string mag = "Row Info: " + EventID + " " + EventName + " " + " " + OrgName + " " + OrgName + " " + EventCode + " ";
             foreach (GridViewRow row in GvEventdisplay.Rows)
             {
                 if (row.RowIndex == GvEventdisplay.SelectedIndex)
@@ -1355,7 +1333,7 @@ namespace CapstoneProject2_CIS484
             cmd101.Parameters.Add(new SqlParameter("@VolunteerCode", VolunteerCode));
             cmd101.Parameters.Add(new SqlParameter("@Name", Vname1.Text + " " + Vname2.Text));
             cmd101.Parameters.Add(new SqlParameter("@Role", Role.Text));
-            cmd101.Parameters.Add(new SqlParameter("@Phone", int.Parse(Vphone1.Text)));
+            cmd101.Parameters.Add(new SqlParameter("@Phone", Vphone1.Text));
             cmd101.Parameters.Add(new SqlParameter("@Email", vemail1.Text));
             cmd101.Parameters.Add(new SqlParameter("@MealTicket", Vmealtickt.SelectedValue));
             try
@@ -1616,8 +1594,6 @@ namespace CapstoneProject2_CIS484
             tbName_Student.Text = "";
             tbNotes_Student.Text = "";
             tbAge_Student.Text = "";
-            rbtnMeal_No.Checked = false;
-            rbtnMeal_Yes.Checked = false;
         }
 
         protected void btnUpdateStudent_Click(object sender, EventArgs e)
@@ -1627,18 +1603,10 @@ namespace CapstoneProject2_CIS484
             SqlConnection sqlconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["CyberCityDB"].ConnectionString);
             sqlconnect.Open();
 
-            string mealConfirmation = "";
+            string mealConfirmation = SNLuch.SelectedValue;
 
             String sqlQuery_UpdateStudent= "UPDATE Student SET Name = @Name, Age = @Age, Notes = @Notes, MealTicket = @MealTicket WHERE StudentCode = @StudentCode";
 
-            if (rbtnMeal_No.Checked == true)
-            {
-                mealConfirmation = "no";
-            }
-            if (rbtnMeal_Yes.Checked == true)
-            {
-                mealConfirmation = "yes";
-            }
 
 
             SqlCommand cmd_UpdateStudent = new SqlCommand(sqlQuery_UpdateStudent, sqlconnect);
@@ -1898,6 +1866,30 @@ namespace CapstoneProject2_CIS484
         protected void SVemail_Click(object sender, EventArgs e)
         {
             volunteerEmail();
+        }
+
+        protected void ClassCodeEmail()
+        {
+            string subjectStudent;
+            string emailBodyStudent;
+            string EventCode = ClassCodeDDL.Text;
+            string sendToEmailAddress = ClassCodeTB.Text;
+
+            subjectStudent = "CyberCity Student invitation";
+            emailBodyStudent = "Cyber City Participant " +
+                "Please access the Cyber City system with the ClassCode provided in this email. " +
+                "Class Code: " + EventCode +
+                " At: " + CyberCityURL.ToString() +
+                " Once in the event use your Student Code to login. " +
+                " This code is unique to you and should not be distributed. " +
+                " This is an auto generated email. Please Do Not Reply. ";
+
+            EmailBLL.SendMailMessage(sendToEmailAddress, coordinatorEmailAddress, null, null, subjectStudent, emailBodyStudent);
+        }
+
+        protected void ClassCodeBT_Click(object sender, EventArgs e)
+        {
+            ClassCodeEmail();
         }
     }
 }
