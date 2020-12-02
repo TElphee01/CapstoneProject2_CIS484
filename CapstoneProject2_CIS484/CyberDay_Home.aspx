@@ -367,7 +367,7 @@
                                                 ErrorMessage="Enter the contact First name!"
                                                 runat="Server" />
                                             <div class="form-group">
-                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Contact FirstName:"></asp:Label>
+                                                <asp:Label ID="ContactRequestNameLabel" CssClass="label" runat="server" Text="Contact's First Name:"></asp:Label>
                                                 <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestFNameText" runat="server" required="false" />
                                             </div>
                                         </div>
@@ -378,7 +378,7 @@
                                                 ErrorMessage="Enter the contact Last name!"
                                                 runat="Server" />
                                             <div class="form-group">
-                                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Contact LastName:"></asp:Label>
+                                                <asp:Label ID="Label2" CssClass="label" runat="server" Text="Contact's Last Name:"></asp:Label>
                                                 <asp:TextBox CssClass="input--style-4" ValidationGroup="ContactRequestInput" ID="ContactRequestLNameText" runat="server" required="false" />
                                             </div>
                                         </div>
@@ -396,6 +396,7 @@
                                         <br />
                                         <div class="col">
                                             <div class="form-group">
+                                                <br/>
                                                 <asp:Label ID="Label5" CssClass="label" runat="server" Text="Organization Type:"></asp:Label>
                                                 <asp:DropDownList
                                                     ID="OrganizationTypeList"
@@ -660,7 +661,7 @@
     </div>
                                                     <div class="align-content-center">
                                                 <asp:Button ID="emailCode" runat="server" OnClick="userSendEmail_Click" Text="Select type of user to send email" Style="margin-left: 0%;" CssClass="btn btn-secondary" />
-                                                <asp:Label ID="semail" CssClass="label" runat="server" Text="Email your want to sent:"></asp:Label>
+                                                <asp:Label ID="semail" CssClass="label" runat="server" Text="Recipient's email address:"></asp:Label>
                                                 <asp:TextBox ID="semail1"  CssClass="input--style-4" runat="server" required="false"></asp:TextBox>
 <%--                                                <asp:DropDownList ID="emailCodeDDL" runat="server">
                                                     <asp:ListItem>Instructors</asp:ListItem>
@@ -729,6 +730,8 @@
                         </div>
                         <div class="col">
                         <div class="form-group">
+                            <br />
+                            <br />
                         <asp:Label ID="InstEvent" CssClass="label" runat="server" Text="Select an Event:" Font-Bold="true"></asp:Label>
                         <asp:SqlDataSource runat="server" ID="Eventview1" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:CyberCityDB%>" 
                             SelectCommand="select * from Event"></asp:SqlDataSource>
@@ -1615,8 +1618,9 @@
                                                     DataTextField="Name"
                                                     AutoPostBack="true">
                                                 </asp:DropDownList>
-                                                <asp:Button ID="btnEventConfirm_ActivityCreation" runat="server" Text="Confirm your selection" OnClick="btnEventConfirm_ActivityCreation_Click"/>
                                             </div>
+                                        <asp:Button ID="btnEventConfirm_ActivityCreation" runat="server" Text="Confirm your selection" OnClick="btnEventConfirm_ActivityCreation_Click"/>
+
                                         </div>
                                          <div class="w-100"></div>                              
                                         <div class="col">
