@@ -1,11 +1,11 @@
-The GitHubbies:
-Tanner Elpheem, Max Vaughn, Anu Rawat, XiYang, Hunter.
+CyberDay URL: http://lab2-test.us-east-1.elasticbeanstalk.com/CyberDay_Home.aspx
 
-Please start your public facing page: CyberDay_Home.aspx
+Coordinator: Jack1
+Pass: 1111
 
-Try logging as:
-OraB@edu.com
-1111
+Event code: Fla1)gmF86^
+Instructor Code: Fh)$1X^
+Volunteer Code: NKGM&&Ud
+Student Code: UUNou6mN
+Class Code: !AeURedl
 
-EventCode: efgh
-ClassCode: 1234
