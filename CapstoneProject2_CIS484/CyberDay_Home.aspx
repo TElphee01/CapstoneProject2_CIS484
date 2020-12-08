@@ -51,7 +51,7 @@
     </script>
     <div class="container" style="width: 100%; margin-left: 20px; margin-top: 20px; margin-right: 20px;">
         <div class="form-group">
-            <h2 style="text-align: center" >Welcome to Cyber Day 2021</h2>
+            <h2 style="text-align: center" >Welcome to CyberDay 2021</h2>
              <asp:Table runat="server" CellPadding="2" CssClass="m-5 p-5">
                 <asp:TableRow RowSpan="2">
                     <asp:TableCell>
@@ -137,7 +137,7 @@
             <h3>FAQ</h3>
             <button type="button" class="accordion">Who signs up the students?</button>
             <div class="panel">
-                <p class="answer">Teachers/Admins will send information out to the parents, Parents can then sign  their kid's up for Cyber Day</p>
+                <p class="answer">Teachers/Admins will send information out to the parents, Parents can then sign  their kid's up for CyberDay</p>
             </div>
 
             <button type="button" class="accordion">What does Cyberday consist of?</button>
@@ -1557,7 +1557,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <asp:Label ID="lblSucessStudentSignup" runat="server" Text="Success. Student is now signed up for Cyber Day!" Font-Bold="true" Visible="false"></asp:Label>
+                            <asp:Label ID="lblSucessStudentSignup" runat="server" Text="Success. Student is now signed up for CyberDay!" Font-Bold="true" Visible="false"></asp:Label>
                         </div>
                     </div>
                     <div class="w-100"></div>
