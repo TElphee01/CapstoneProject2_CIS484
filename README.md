@@ -1,5 +1,5 @@
-Cyber City is a educational assistance tool designed to help teachers and adminstrators coordinate with parents and students about field trips and other activities.
-Developed as our CIS 484 Capstone project, Cyber City is a C# web application with MySql backend and inludes secure account/password handling, content creation, and session aware links end via email.
+Cyber City is tool designed to help teachers and adminstrators coordinate with parents and students about field trips and other activities.
+Developed as our CIS 484 Capstone project, Cyber City is a C# web application with MS Sql Server backend and includes secure account/password handling, content creation, and session aware links distributed via email.
 
 ![CyberDay2](https://github.com/TElphee01/CyberCity_CIS484/assets/64053467/b5680bb8-f685-4156-8349-6c549ebf675a)
 ![CyberDay](https://github.com/TElphee01/CyberCity_CIS484/assets/64053467/ae4f05db-54ae-4988-a1a5-a7c344bd763e)
